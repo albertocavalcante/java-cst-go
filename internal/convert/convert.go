@@ -8,6 +8,7 @@ import (
 	cst "github.com/albertocavalcante/cst-go"
 
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend"
+	javasource "git.alberto.engineer/alberto/java-cst-go/source"
 	"git.alberto.engineer/alberto/java-cst-go/syntax"
 )
 
@@ -23,17 +24,86 @@ type Result struct {
 // Convert reconstructs an immutable cst-go tree from one detached backend
 // snapshot and the exact raw source parsed to produce it.
 func Convert(source string, snapshot backend.Result) (Result, error) {
+	return convert(conversionInput{
+		raw: source,
+		classifyTrivia: func(start, end uint32) ([]syntax.Trivia, error) {
+			return classifyTrivia(source, start, end), nil
+		},
+		logicalText: func(leaf *backend.Node) (string, error) {
+			return source[leaf.StartByte:leaf.EndByte], nil
+		},
+	}, snapshot)
+}
+
+// ConvertTranslation reconstructs a lossless raw CST from a backend snapshot
+// produced from translation.Logical().
+func ConvertTranslation(
+	translation *javasource.Translation,
+	snapshot backend.Result,
+) (Result, error) {
+	if translation == nil {
+		return Result{}, errors.New("convert backend snapshot: nil source translation")
+	}
+	if snapshot.RawBytes != uint32(len(translation.Raw())) {
+		return Result{}, fmt.Errorf(
+			"convert backend snapshot: snapshot raw length is %d, translation raw length is %d",
+			snapshot.RawBytes,
+			len(translation.Raw()),
+		)
+	}
+	if snapshot.LogicalBytes != uint32(len(translation.Logical())) {
+		return Result{}, fmt.Errorf(
+			"convert backend snapshot: snapshot logical length is %d, translation logical length is %d",
+			snapshot.LogicalBytes,
+			len(translation.Logical()),
+		)
+	}
+
+	return convert(conversionInput{
+		raw: translation.Raw(),
+		classifyTrivia: func(start, end uint32) ([]syntax.Trivia, error) {
+			return classifyTranslationTrivia(translation, start, end)
+		},
+		logicalText: func(leaf *backend.Node) (string, error) {
+			if leaf.LogicalEndByte > uint32(len(translation.Logical())) ||
+				leaf.LogicalStartByte > leaf.LogicalEndByte {
+				return "", fmt.Errorf(
+					"convert backend snapshot: token %q has invalid logical range [%d,%d)",
+					leaf.Kind,
+					leaf.LogicalStartByte,
+					leaf.LogicalEndByte,
+				)
+			}
+			return translation.Logical()[leaf.LogicalStartByte:leaf.LogicalEndByte], nil
+		},
+	}, snapshot)
+}
+
+type conversionInput struct {
+	raw            string
+	classifyTrivia func(start, end uint32) ([]syntax.Trivia, error)
+	logicalText    func(leaf *backend.Node) (string, error)
+}
+
+func convert(input conversionInput, snapshot backend.Result) (Result, error) {
 	if snapshot.Root == nil {
 		return Result{}, errors.New("convert backend snapshot: nil root")
 	}
-	if len(source) > math.MaxUint32 {
+	if len(input.raw) > math.MaxUint32 {
 		return Result{}, fmt.Errorf(
 			"convert backend snapshot: source is %d bytes, maximum is %d",
-			len(source),
+			len(input.raw),
 			uint64(math.MaxUint32),
 		)
 	}
-	if issues := snapshot.ValidateRanges(uint32(len(source))); len(issues) != 0 {
+	if snapshot.RawBytes != 0 && snapshot.RawBytes != uint32(len(input.raw)) {
+		return Result{}, fmt.Errorf(
+			"convert backend snapshot: snapshot raw length is %d, source length is %d",
+			snapshot.RawBytes,
+			len(input.raw),
+		)
+	}
+	if issues := snapshot.ValidateRanges(uint32(len(input.raw))); len(issues) != 0 {
 		return Result{}, fmt.Errorf(
 			"convert backend snapshot: invalid range at %s: %s",
 			issues[0].Path,
@@ -46,7 +116,7 @@ func Convert(source string, snapshot backend.Result) (Result, error) {
 		collectLeaves(snapshot.Root, &leaves)
 	}
 
-	models, triviaCount, err := buildTokenModels(source, leaves)
+	models, triviaCount, err := buildTokenModels(input, leaves)
 	if err != nil {
 		return Result{}, err
 	}
@@ -95,11 +165,11 @@ func Convert(source string, snapshot backend.Result) (Result, error) {
 		root = node
 	}
 
-	if got := root.FullText(); got != source {
+	if got := root.FullText(); got != input.raw {
 		return Result{}, fmt.Errorf(
 			"convert backend snapshot: round trip differs: got %d bytes, want %d",
 			len(got),
-			len(source),
+			len(input.raw),
 		)
 	}
 
@@ -127,6 +197,7 @@ type tokenModel struct {
 	text     string
 	leading  []syntax.Trivia
 	trailing []syntax.Trivia
+	data     syntax.TokenData
 	missing  bool
 }
 
@@ -151,7 +222,7 @@ func countSyntaxLeaves(leaves []*backend.Node) int {
 }
 
 func buildTokenModels(
-	source string,
+	input conversionInput,
 	leaves []*backend.Node,
 ) ([]tokenModel, int, error) {
 	syntaxLeaves := make([]*backend.Node, 0, len(leaves))
@@ -162,7 +233,10 @@ func buildTokenModels(
 	}
 
 	if len(syntaxLeaves) == 0 {
-		trivia := classifyTrivia(source, 0, uint32(len(source)))
+		trivia, err := input.classifyTrivia(0, uint32(len(input.raw)))
+		if err != nil {
+			return nil, 0, err
+		}
 		return []tokenModel{{
 			kind:    syntax.TokenKind("eof"),
 			leading: trivia,
@@ -197,7 +271,10 @@ func buildTokenModels(
 			)
 		}
 
-		gap := classifyTrivia(source, cursor, leaf.StartByte)
+		gap, err := input.classifyTrivia(cursor, leaf.StartByte)
+		if err != nil {
+			return nil, 0, err
+		}
 		triviaCount += len(gap)
 		if previousSourceToken < 0 {
 			models[index].leading = gap
@@ -207,7 +284,12 @@ func buildTokenModels(
 			models[index].leading = leading
 		}
 
-		models[index].text = source[leaf.StartByte:leaf.EndByte]
+		models[index].text = input.raw[leaf.StartByte:leaf.EndByte]
+		logicalText, err := input.logicalText(leaf)
+		if err != nil {
+			return nil, 0, err
+		}
+		models[index].data.LogicalText = logicalText
 		if leaf.EndByte > cursor {
 			cursor = leaf.EndByte
 		}
@@ -219,7 +301,10 @@ func buildTokenModels(
 			"convert backend snapshot: tree contains only missing syntax tokens",
 		)
 	}
-	finalTrivia := classifyTrivia(source, cursor, uint32(len(source)))
+	finalTrivia, err := input.classifyTrivia(cursor, uint32(len(input.raw)))
+	if err != nil {
+		return nil, 0, err
+	}
 	triviaCount += len(finalTrivia)
 	models[previousSourceToken].trailing = finalTrivia
 
@@ -254,6 +339,7 @@ func buildTokens(models []tokenModel) ([]*syntax.Token, error) {
 			Text:     model.text,
 			Leading:  model.leading,
 			Trailing: model.trailing,
+			Data:     model.data,
 		})
 		if err != nil {
 			return nil, fmt.Errorf("convert token %q: %w", model.kind, err)

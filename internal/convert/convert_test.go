@@ -4,12 +4,14 @@ import (
 	"context"
 	"os"
 	"path/filepath"
+	"slices"
 	"sync"
 	"testing"
 
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesitter"
 	"git.alberto.engineer/alberto/java-cst-go/internal/convert"
 	"git.alberto.engineer/alberto/java-cst-go/language"
+	"git.alberto.engineer/alberto/java-cst-go/source"
 	"git.alberto.engineer/alberto/java-cst-go/syntax"
 	"git.alberto.engineer/alberto/java-cst-go/testkit"
 )
@@ -156,6 +158,181 @@ func TestInterTokenTriviaOwnership(t *testing.T) {
 	}
 }
 
+func TestTranslatedTokensRetainRawAndLogicalSpellings(t *testing.T) {
+	t.Parallel()
+
+	raw := `class \u0041 { String value = \u0022hi\u0022\u003b }`
+	translation := source.Translate(raw)
+	if diagnostics := translation.Diagnostics(); len(diagnostics) != 0 {
+		t.Fatalf("translation diagnostics: %+v", diagnostics)
+	}
+	snapshot, err := treesitter.ParseTranslation(
+		context.Background(),
+		translation,
+		language.Level{Release: language.Release21},
+	)
+	if err != nil {
+		t.Fatalf("backend ParseTranslation: %v", err)
+	}
+	if snapshot.ErrorCount != 0 {
+		t.Fatalf("backend error count = %d, want 0", snapshot.ErrorCount)
+	}
+
+	result, err := convert.ConvertTranslation(translation, snapshot)
+	if err != nil {
+		t.Fatalf("ConvertTranslation: %v", err)
+	}
+	assertTreeInvariants(t, result.Tree, raw)
+
+	wantLogical := map[string]string{
+		`\u0041`: "A",
+		`\u0022`: `"`,
+		"hi":     "hi",
+		`\u003b`: ";",
+	}
+	wantCount := map[string]int{
+		`\u0041`: 1,
+		`\u0022`: 2,
+		"hi":     1,
+		`\u003b`: 1,
+	}
+	found := make(map[string]int, len(wantLogical))
+	observed := make(map[string]string)
+	for token := range result.Tree.Root().DescendantTokens() {
+		observed[token.Text()] = token.Data().LogicalText
+		logical, ok := wantLogical[token.Text()]
+		if !ok {
+			continue
+		}
+		found[token.Text()]++
+		if got := token.Data().LogicalText; got != logical {
+			t.Errorf(
+				"token %q logical text = %q, want %q",
+				token.Text(),
+				got,
+				logical,
+			)
+		}
+	}
+	for rawToken, count := range wantCount {
+		if found[rawToken] != count {
+			t.Errorf(
+				"raw token %q count = %d, want %d; observed=%v",
+				rawToken,
+				found[rawToken],
+				count,
+				observed,
+			)
+		}
+	}
+}
+
+func TestTranslatedTriviaRetainsRawEscapeSpellings(t *testing.T) {
+	t.Parallel()
+
+	raw := `class\u0020A { int a; \u002f\u002f comment\u000d\u000a    int b; }`
+	translation := source.Translate(raw)
+	if diagnostics := translation.Diagnostics(); len(diagnostics) != 0 {
+		t.Fatalf("translation diagnostics: %+v", diagnostics)
+	}
+	snapshot, err := treesitter.ParseTranslation(
+		context.Background(),
+		translation,
+		language.Level{Release: language.Release21},
+	)
+	if err != nil {
+		t.Fatalf("backend ParseTranslation: %v", err)
+	}
+	if snapshot.ErrorCount != 0 {
+		t.Fatalf("backend error count = %d, want 0", snapshot.ErrorCount)
+	}
+
+	result, err := convert.ConvertTranslation(translation, snapshot)
+	if err != nil {
+		t.Fatalf("ConvertTranslation: %v", err)
+	}
+	assertTreeInvariants(t, result.Tree, raw)
+
+	var classToken, firstSemicolon, secondInt *syntax.Token
+	intCount := 0
+	for token := range result.Tree.Root().DescendantTokens() {
+		switch token.Text() {
+		case "class":
+			classToken = token.Green()
+		case ";":
+			if firstSemicolon == nil {
+				firstSemicolon = token.Green()
+			}
+		case "int":
+			intCount++
+			if intCount == 2 {
+				secondInt = token.Green()
+			}
+		}
+	}
+	if classToken == nil || firstSemicolon == nil || secondInt == nil {
+		t.Fatalf(
+			"missing expected tokens: class=%v semicolon=%v secondInt=%v",
+			classToken,
+			firstSemicolon,
+			secondInt,
+		)
+	}
+
+	classTrailing := slices.Collect(classToken.TrailingTrivia())
+	if got, want := len(classTrailing), 1; got != want {
+		t.Fatalf("class trailing trivia count = %d, want %d", got, want)
+	}
+	if classTrailing[0].Kind() != syntax.TriviaWhitespace ||
+		classTrailing[0].Text() != `\u0020` {
+		t.Fatalf("class trailing trivia = %+v", classTrailing[0])
+	}
+
+	semicolonTrailing := slices.Collect(firstSemicolon.TrailingTrivia())
+	wantKinds := []syntax.TriviaKind{
+		syntax.TriviaWhitespace,
+		syntax.TriviaLineComment,
+		syntax.TriviaLineTerminator,
+	}
+	gotKinds := make([]syntax.TriviaKind, len(semicolonTrailing))
+	for index := range semicolonTrailing {
+		gotKinds[index] = semicolonTrailing[index].Kind()
+	}
+	if !slices.Equal(gotKinds, wantKinds) {
+		t.Fatalf("semicolon trailing kinds = %v, want %v", gotKinds, wantKinds)
+	}
+	if got, want := triviaText(firstSemicolon.TrailingTrivia()),
+		` \u002f\u002f comment\u000d\u000a`; got != want {
+		t.Fatalf("semicolon trailing trivia = %q, want %q", got, want)
+	}
+	if got, want := triviaText(secondInt.LeadingTrivia()), "    "; got != want {
+		t.Fatalf("second int leading trivia = %q, want %q", got, want)
+	}
+}
+
+func TestMalformedUnicodeEscapeStillRoundTrips(t *testing.T) {
+	t.Parallel()
+
+	raw := `class \u12 Broken {}`
+	translation := source.Translate(raw)
+	if got, want := len(translation.Diagnostics()), 1; got != want {
+		t.Fatalf("translation diagnostic count = %d, want %d", got, want)
+	}
+	snapshot, err := treesitter.ParseTranslation(
+		context.Background(),
+		translation,
+		language.Level{Release: language.Release21},
+	)
+	if err != nil {
+		t.Fatalf("backend ParseTranslation: %v", err)
+	}
+	result, err := convert.ConvertTranslation(translation, snapshot)
+	if err != nil {
+		t.Fatalf("ConvertTranslation: %v", err)
+	}
+	assertTreeInvariants(t, result.Tree, raw)
+}
+
 func TestConvertedTreeSupportsConcurrentReads(t *testing.T) {
 	t.Parallel()
 
@@ -217,6 +394,46 @@ func FuzzBackendConversionRoundTrip(f *testing.F) {
 		}
 		if got := result.Tree.Root().AppendText(); got != source {
 			t.Fatalf("round trip = %q, want %q", got, source)
+		}
+	})
+}
+
+func FuzzTranslatedBackendConversionRoundTrip(f *testing.F) {
+	for _, seed := range []string{
+		"",
+		"class A {}",
+		`class \u0041 {}`,
+		`class A { int value\u003b }`,
+		`class A { int a; \u002f\u002f comment\u000a int b; }`,
+		`class A { String value = \u0022text\u0022; }`,
+		`class \u12 Broken {}`,
+		`\\u2122`,
+		`\uD83D\uDE00`,
+		"\xff\\u000a",
+	} {
+		f.Add(seed)
+	}
+
+	f.Fuzz(func(t *testing.T, raw string) {
+		if len(raw) > 4096 {
+			t.Skip()
+		}
+
+		translation := source.Translate(raw)
+		snapshot, err := treesitter.ParseTranslation(
+			context.Background(),
+			translation,
+			language.Level{Release: language.Release21},
+		)
+		if err != nil {
+			t.Fatalf("backend ParseTranslation: %v", err)
+		}
+		result, err := convert.ConvertTranslation(translation, snapshot)
+		if err != nil {
+			t.Fatalf("ConvertTranslation: %v", err)
+		}
+		if got := result.Tree.Root().AppendText(); got != raw {
+			t.Fatalf("round trip = %q, want %q", got, raw)
 		}
 	})
 }

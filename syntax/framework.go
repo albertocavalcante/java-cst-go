@@ -27,7 +27,11 @@ type DiagnosticCode string
 
 // TokenData carries immutable Java lexical metadata. Its fields will be added
 // only when the M0 conversion demonstrates that they belong on green tokens.
-type TokenData struct{}
+type TokenData struct {
+	// LogicalText is the Java Unicode-translated token spelling. Token.Text()
+	// remains the exact raw spelling used for lossless emission.
+	LogicalText string
+}
 
 type (
 	Span         = cst.Span

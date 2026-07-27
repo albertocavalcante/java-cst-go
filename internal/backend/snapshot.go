@@ -10,6 +10,8 @@ import (
 type Result struct {
 	Level        language.Level `json:"level"`
 	Backend      string         `json:"backend"`
+	RawBytes     uint32         `json:"rawBytes"`
+	LogicalBytes uint32         `json:"logicalBytes"`
 	StopReason   string         `json:"stopReason"`
 	StoppedEarly bool           `json:"stoppedEarly"`
 	NodeCount    int            `json:"nodeCount"`
@@ -27,12 +29,16 @@ type Node struct {
 	Field     string `json:"field,omitempty"`
 	StartByte uint32 `json:"startByte"`
 	EndByte   uint32 `json:"endByte"`
-	Named     bool   `json:"named"`
-	Extra     bool   `json:"extra,omitempty"`
-	Missing   bool   `json:"missing,omitempty"`
-	Error     bool   `json:"error,omitempty"`
-	HasError  bool   `json:"hasError,omitempty"`
-	Children  []Node `json:"children,omitempty"`
+	// LogicalStartByte and LogicalEndByte preserve the backend's translated
+	// input coordinates. StartByte and EndByte are always raw coordinates.
+	LogicalStartByte uint32 `json:"logicalStartByte"`
+	LogicalEndByte   uint32 `json:"logicalEndByte"`
+	Named            bool   `json:"named"`
+	Extra            bool   `json:"extra,omitempty"`
+	Missing          bool   `json:"missing,omitempty"`
+	Error            bool   `json:"error,omitempty"`
+	HasError         bool   `json:"hasError,omitempty"`
+	Children         []Node `json:"children,omitempty"`
 }
 
 // RangeIssue describes one malformed backend node relationship.

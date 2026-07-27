@@ -12,20 +12,102 @@ import (
 
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend"
 	"git.alberto.engineer/alberto/java-cst-go/language"
+	"git.alberto.engineer/alberto/java-cst-go/source"
 )
 
 const (
-	backendName      = "gotreesitter/v0.47.0:token-source"
-	maxSnapshotDepth = 4096
-	maxSnapshotNodes = 2_000_000
+	rawBackendName        = "gotreesitter/v0.47.0:token-source:raw"
+	translatedBackendName = "gotreesitter/v0.47.0:token-source:logical"
+	maxSnapshotDepth      = 4096
+	maxSnapshotNodes      = 2_000_000
 )
 
 // Parse parses source with the pinned Java grammar and returns a detached,
 // repository-owned diagnostic snapshot.
 func Parse(
 	ctx context.Context,
-	source []byte,
+	input []byte,
 	level language.Level,
+) (backend.Result, error) {
+	if len(input) > math.MaxUint32 {
+		return backend.Result{}, fmt.Errorf(
+			"parse Java backend snapshot: source is %d bytes, maximum is %d",
+			len(input),
+			uint64(math.MaxUint32),
+		)
+	}
+
+	return parseSnapshot(
+		ctx,
+		input,
+		level,
+		rawBackendName,
+		uint32(len(input)),
+		identityProjector,
+	)
+}
+
+// ParseTranslation parses the logical Java Unicode-translated stream while
+// projecting every returned range back to the exact raw source.
+func ParseTranslation(
+	ctx context.Context,
+	translation *source.Translation,
+	level language.Level,
+) (backend.Result, error) {
+	if translation == nil {
+		return backend.Result{}, errors.New(
+			"parse Java backend snapshot: nil source translation",
+		)
+	}
+	if len(translation.Raw()) > math.MaxUint32 {
+		return backend.Result{}, fmt.Errorf(
+			"parse Java backend snapshot: raw source is %d bytes, maximum is %d",
+			len(translation.Raw()),
+			uint64(math.MaxUint32),
+		)
+	}
+	if len(translation.Logical()) > math.MaxUint32 {
+		return backend.Result{}, fmt.Errorf(
+			"parse Java backend snapshot: logical source is %d bytes, maximum is %d",
+			len(translation.Logical()),
+			uint64(math.MaxUint32),
+		)
+	}
+
+	project := func(start, end uint32) (uint32, uint32, bool) {
+		rawSpan, ok := translation.RawSpan(source.Span{
+			Start: int(start),
+			End:   int(end),
+		})
+		if !ok {
+			return 0, 0, false
+		}
+		return uint32(rawSpan.Start), uint32(rawSpan.End), true
+	}
+
+	return parseSnapshot(
+		ctx,
+		[]byte(translation.Logical()),
+		level,
+		translatedBackendName,
+		uint32(len(translation.Raw())),
+		project,
+	)
+}
+
+type rangeProjector func(start, end uint32) (rawStart, rawEnd uint32, ok bool)
+
+func identityProjector(start, end uint32) (uint32, uint32, bool) {
+	return start, end, true
+}
+
+func parseSnapshot(
+	ctx context.Context,
+	input []byte,
+	level language.Level,
+	name string,
+	rawBytes uint32,
+	project rangeProjector,
 ) (backend.Result, error) {
 	if !level.Valid() {
 		return backend.Result{}, errors.New("parse Java backend snapshot: invalid language level")
@@ -33,14 +115,6 @@ func Parse(
 	if err := ctx.Err(); err != nil {
 		return backend.Result{}, fmt.Errorf("parse Java backend snapshot: %w", err)
 	}
-	if len(source) > math.MaxUint32 {
-		return backend.Result{}, fmt.Errorf(
-			"parse Java backend snapshot: source is %d bytes, maximum is %d",
-			len(source),
-			uint64(math.MaxUint32),
-		)
-	}
-
 	java := grammars.JavaLanguage()
 	if java == nil {
 		return backend.Result{}, errors.New("parse Java backend snapshot: load Java grammar")
@@ -55,7 +129,7 @@ func Parse(
 	defer stopCancellation()
 
 	tree, err := parser.ParseWithTokenSourceFactory(
-		source,
+		input,
 		func(input []byte) (gotreesitter.TokenSource, error) {
 			return grammars.NewJavaTokenSource(input, java)
 		},
@@ -70,7 +144,9 @@ func Parse(
 
 	result := backend.Result{
 		Level:        level,
-		Backend:      backendName,
+		Backend:      name,
+		RawBytes:     rawBytes,
+		LogicalBytes: uint32(len(input)),
 		StopReason:   string(tree.ParseStopReason()),
 		StoppedEarly: tree.ParseStoppedEarly(),
 	}
@@ -81,7 +157,7 @@ func Parse(
 	}
 
 	counts := snapshotCounts{}
-	snapshot, err := snapshotNode(root, "", java, 0, &counts)
+	snapshot, err := snapshotNode(root, "", java, project, 0, &counts)
 	if err != nil {
 		return backend.Result{}, err
 	}
@@ -107,6 +183,7 @@ func snapshotNode(
 	node *gotreesitter.Node,
 	field string,
 	java *gotreesitter.Language,
+	project rangeProjector,
 	depth int,
 	counts *snapshotCounts,
 ) (backend.Node, error) {
@@ -131,16 +208,28 @@ func snapshotNode(
 		counts.missing++
 	}
 
+	rawStart, rawEnd, ok := project(node.StartByte(), node.EndByte())
+	if !ok {
+		return backend.Node{}, fmt.Errorf(
+			"parse Java backend snapshot: cannot project %s logical range [%d,%d)",
+			node.Type(java),
+			node.StartByte(),
+			node.EndByte(),
+		)
+	}
+
 	snapshot := backend.Node{
-		Kind:      node.Type(java),
-		Field:     field,
-		StartByte: node.StartByte(),
-		EndByte:   node.EndByte(),
-		Named:     node.IsNamed(),
-		Extra:     node.IsExtra(),
-		Missing:   node.IsMissing(),
-		Error:     node.IsError(),
-		HasError:  node.HasError(),
+		Kind:             node.Type(java),
+		Field:            field,
+		StartByte:        rawStart,
+		EndByte:          rawEnd,
+		LogicalStartByte: node.StartByte(),
+		LogicalEndByte:   node.EndByte(),
+		Named:            node.IsNamed(),
+		Extra:            node.IsExtra(),
+		Missing:          node.IsMissing(),
+		Error:            node.IsError(),
+		HasError:         node.HasError(),
 	}
 
 	childCount := node.ChildCount()
@@ -162,6 +251,7 @@ func snapshotNode(
 			child,
 			node.FieldNameForChild(index, java),
 			java,
+			project,
 			depth+1,
 			counts,
 		)
