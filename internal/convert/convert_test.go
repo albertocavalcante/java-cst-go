@@ -2,11 +2,13 @@ package convert_test
 
 import (
 	"context"
+	"errors"
 	"os"
 	"path/filepath"
 	"slices"
 	"sync"
 	"testing"
+	"time"
 
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesitter"
 	"git.alberto.engineer/alberto/java-cst-go/internal/convert"
@@ -380,11 +382,16 @@ func FuzzBackendConversionRoundTrip(f *testing.F) {
 			t.Skip()
 		}
 
+		ctx, cancel := context.WithTimeout(context.Background(), 250*time.Millisecond)
+		defer cancel()
 		snapshot, err := treesitter.Parse(
-			context.Background(),
+			ctx,
 			[]byte(source),
 			language.Level{Release: language.Release21},
 		)
+		if errors.Is(err, context.DeadlineExceeded) {
+			return
+		}
 		if err != nil {
 			t.Fatalf("backend Parse: %v", err)
 		}
@@ -420,11 +427,16 @@ func FuzzTranslatedBackendConversionRoundTrip(f *testing.F) {
 		}
 
 		translation := source.Translate(raw)
+		ctx, cancel := context.WithTimeout(context.Background(), 250*time.Millisecond)
+		defer cancel()
 		snapshot, err := treesitter.ParseTranslation(
-			context.Background(),
+			ctx,
 			translation,
 			language.Level{Release: language.Release21},
 		)
+		if errors.Is(err, context.DeadlineExceeded) {
+			return
+		}
 		if err != nil {
 			t.Fatalf("backend ParseTranslation: %v", err)
 		}

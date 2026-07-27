@@ -2,10 +2,12 @@ package treesitter_test
 
 import (
 	"context"
+	"errors"
 	"os"
 	"path/filepath"
 	"reflect"
 	"testing"
+	"time"
 
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend"
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesitter"
@@ -116,6 +118,25 @@ func TestParseHonorsPreCancelledContext(t *testing.T) {
 	)
 	if err == nil {
 		t.Fatal("Parse with cancelled context returned nil error")
+	}
+}
+
+func TestParseBoundsPathologicalRecoveryWithContext(t *testing.T) {
+	t.Parallel()
+
+	ctx, cancel := context.WithTimeout(context.Background(), 250*time.Millisecond)
+	defer cancel()
+	start := time.Now()
+	_, err := treesitter.Parse(
+		ctx,
+		[]byte("#0#.}"),
+		language.Level{Release: language.Release21},
+	)
+	if !errors.Is(err, context.DeadlineExceeded) {
+		t.Fatalf("Parse error = %v, want context deadline exceeded", err)
+	}
+	if elapsed := time.Since(start); elapsed > 2*time.Second {
+		t.Fatalf("Parse returned after %s, want at most 2s", elapsed)
 	}
 }
 
