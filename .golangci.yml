@@ -1,0 +1,21 @@
+version: "2"
+
+run:
+  go: "1.26"
+  timeout: 5m
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - misspell
+    - unconvert
+    - nolintlint
+
+formatters:
+  enable:
+    - gofmt
+    - goimports

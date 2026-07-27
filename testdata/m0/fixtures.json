@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "fixtures": [
+    {
+      "id": "java8/lambda/release-anchor",
+      "path": "java8/lambda.java",
+      "release": 8,
+      "preview": false,
+      "category": "release-anchor",
+      "expectedBackend": "measure",
+      "expectedRoundTrip": true
+    },
+    {
+      "id": "java11/var-lambda/release-anchor",
+      "path": "java11/var_lambda.java",
+      "release": 11,
+      "preview": false,
+      "category": "release-anchor",
+      "expectedBackend": "measure",
+      "expectedRoundTrip": true
+    },
+    {
+      "id": "java17/record/release-anchor",
+      "path": "java17/record.java",
+      "release": 17,
+      "preview": false,
+      "category": "release-anchor",
+      "expectedBackend": "measure",
+      "expectedRoundTrip": true
+    },
+    {
+      "id": "java21/pattern-switch/release-anchor",
+      "path": "java21/pattern_switch.java",
+      "release": 21,
+      "preview": false,
+      "category": "release-anchor",
+      "expectedBackend": "measure",
+      "expectedRoundTrip": true
+    },
+    {
+      "id": "java25/module-import/final",
+      "path": "java25/module_import.java",
+      "release": 25,
+      "preview": false,
+      "category": "feature-boundary",
+      "expectedBackend": "measure",
+      "expectedRoundTrip": true
+    },
+    {
+      "id": "java26/primitive-pattern/preview-p4",
+      "path": "java26/primitive_pattern.java",
+      "release": 26,
+      "preview": true,
+      "category": "feature-boundary",
+      "expectedBackend": "measure",
+      "expectedRoundTrip": true
+    }
+  ]
+}

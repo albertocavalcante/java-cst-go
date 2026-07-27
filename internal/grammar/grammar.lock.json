@@ -1,0 +1,13 @@
+{
+  "runtime": {
+    "module": "github.com/odvcencio/gotreesitter",
+    "version": "v0.47.0",
+    "commit": "000ae6c6e921c02ab8c183fb31f3f16429b0a95d",
+    "moduleSum": "h1:M4n0d9JPqHUGeZubI8Rzd21cxKqCwA33ULSqoFFznGc="
+  },
+  "grammar": {
+    "repository": "https://github.com/tree-sitter/tree-sitter-java",
+    "commit": "e10607b45ff745f5f876bfa3e94fbcc6b44bdc11",
+    "blobSHA256": "530c7257b13e1ce356edd251cac347b5e41f04f74343473c72f43bf1177ffa9c"
+  }
+}

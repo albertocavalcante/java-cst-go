@@ -1,0 +1,7 @@
+.DS_Store
+bin/
+coverage/
+dist/
+reports/m0/results.local.json
+*.out
+*.test
