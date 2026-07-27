@@ -1,5 +1,7 @@
 package language
 
+import "fmt"
+
 // FeatureID identifies a parser-visible Java language feature.
 //
 // Numeric values are stable. New features must be appended so persisted
@@ -173,6 +175,17 @@ func (id FeatureID) String() string {
 	}
 
 	return featureDefinitions[id].name
+}
+
+// ParseFeatureID parses a stable feature manifest spelling.
+func ParseFeatureID(text string) (FeatureID, error) {
+	for id := FeatureLambdaExpressions; id < featureIDLimit; id++ {
+		if featureDefinitions[id].name == text {
+			return id, nil
+		}
+	}
+
+	return 0, fmt.Errorf("unknown Java feature %q", text)
 }
 
 // AllFeatures returns all registered feature IDs in stable numeric order.

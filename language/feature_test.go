@@ -191,11 +191,28 @@ func TestFeatureRegistryIsStableAndComplete(t *testing.T) {
 			t.Errorf("duplicate feature name %q for %d and %d", name, previous, feature)
 		}
 		names[name] = feature
+
+		parsed, err := language.ParseFeatureID(name)
+		if err != nil {
+			t.Errorf("ParseFeatureID(%q): %v", name, err)
+		} else if parsed != feature {
+			t.Errorf("ParseFeatureID(%q) = %d, want %d", name, parsed, feature)
+		}
 	}
 
 	features[0] = 0
 	if got := language.AllFeatures()[0]; got != language.FeatureLambdaExpressions {
 		t.Fatalf("caller mutation changed registry: first feature = %d", got)
+	}
+}
+
+func TestParseFeatureIDRejectsUnknownNames(t *testing.T) {
+	t.Parallel()
+
+	for _, name := range []string{"", "records ", "Records", "not-a-feature"} {
+		if got, err := language.ParseFeatureID(name); err == nil {
+			t.Errorf("ParseFeatureID(%q) = %d, nil; want error", name, got)
+		}
 	}
 }
 

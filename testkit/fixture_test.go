@@ -11,7 +11,7 @@ func TestDecodeManifest(t *testing.T) {
 	t.Parallel()
 
 	manifest, err := testkit.DecodeManifest(strings.NewReader(`{
-	  "schemaVersion": 1,
+	  "schemaVersion": 2,
 	  "fixtures": [{
 	    "id": "java8/lambda",
 	    "path": "java8/lambda.java",
@@ -34,7 +34,7 @@ func TestDecodeManifestRejectsDuplicateIDs(t *testing.T) {
 	t.Parallel()
 
 	_, err := testkit.DecodeManifest(strings.NewReader(`{
-	  "schemaVersion": 1,
+	  "schemaVersion": 2,
 	  "fixtures": [
 	    {
 	      "id": "duplicate",
@@ -52,5 +52,56 @@ func TestDecodeManifestRejectsDuplicateIDs(t *testing.T) {
 	}`))
 	if err == nil {
 		t.Fatal("DecodeManifest with duplicate IDs returned nil error")
+	}
+}
+
+func TestDecodeManifestValidatesFeatureBoundary(t *testing.T) {
+	t.Parallel()
+
+	manifest, err := testkit.DecodeManifest(strings.NewReader(`{
+	  "schemaVersion": 2,
+	  "fixtures": [{
+	    "id": "java23/module-import/preview-p1",
+	    "path": "features/module-imports/basic.java",
+	    "release": 23,
+	    "preview": true,
+	    "category": "feature-boundary",
+	    "feature": "module-imports",
+	    "expectedFeatureState": "preview",
+	    "expectedFeatureVariant": 1,
+	    "expectedFeatureEnabled": true,
+	    "expectedBackend": "measure",
+	    "expectedRoundTrip": true
+	  }]
+	}`))
+	if err != nil {
+		t.Fatalf("DecodeManifest: %v", err)
+	}
+	if got, want := manifest.Fixtures[0].Feature, "module-imports"; got != want {
+		t.Fatalf("feature = %q, want %q", got, want)
+	}
+}
+
+func TestDecodeManifestRejectsFeatureRegistryMismatch(t *testing.T) {
+	t.Parallel()
+
+	_, err := testkit.DecodeManifest(strings.NewReader(`{
+	  "schemaVersion": 2,
+	  "fixtures": [{
+	    "id": "java23/module-import/wrong",
+	    "path": "features/module-imports/basic.java",
+	    "release": 23,
+	    "preview": false,
+	    "category": "feature-boundary",
+	    "feature": "module-imports",
+	    "expectedFeatureState": "final",
+	    "expectedFeatureVariant": 1,
+	    "expectedFeatureEnabled": true,
+	    "expectedBackend": "measure",
+	    "expectedRoundTrip": true
+	  }]
+	}`))
+	if err == nil {
+		t.Fatal("DecodeManifest with mismatched feature state returned nil error")
 	}
 }
