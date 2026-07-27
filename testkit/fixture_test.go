@@ -105,3 +105,23 @@ func TestDecodeManifestRejectsFeatureRegistryMismatch(t *testing.T) {
 		t.Fatal("DecodeManifest with mismatched feature state returned nil error")
 	}
 }
+
+func TestDecodeManifestRejectsUnsafePath(t *testing.T) {
+	t.Parallel()
+
+	_, err := testkit.DecodeManifest(strings.NewReader(`{
+	  "schemaVersion": 2,
+	  "fixtures": [{
+	    "id": "escape",
+	    "path": "../outside.java",
+	    "release": 21,
+	    "preview": false,
+	    "category": "release-anchor",
+	    "expectedBackend": "measure",
+	    "expectedRoundTrip": true
+	  }]
+	}`))
+	if err == nil {
+		t.Fatal("DecodeManifest with parent traversal returned nil error")
+	}
+}

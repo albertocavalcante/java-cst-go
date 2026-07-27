@@ -23,6 +23,10 @@ type CaseResult struct {
 	ID                string   `json:"id"`
 	Release           uint8    `json:"release"`
 	Preview           bool     `json:"preview"`
+	Feature           string   `json:"feature,omitempty"`
+	FeatureState      string   `json:"featureState,omitempty"`
+	FeatureVariant    uint8    `json:"featureVariant,omitempty"`
+	FeatureEnabled    bool     `json:"featureEnabled,omitempty"`
 	Bytes             int      `json:"bytes"`
 	BackendNodes      int      `json:"backendNodes"`
 	BackendErrors     int      `json:"backendErrors"`

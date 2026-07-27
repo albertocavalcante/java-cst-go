@@ -16,8 +16,16 @@ var lockFiles embed.FS
 
 // Lock records immutable parser runtime and Java grammar provenance.
 type Lock struct {
-	Runtime RuntimeLock `json:"runtime"`
-	Grammar GrammarLock `json:"grammar"`
+	SharedCST DependencyLock `json:"sharedCST"`
+	Runtime   RuntimeLock    `json:"runtime"`
+	Grammar   GrammarLock    `json:"grammar"`
+}
+
+// DependencyLock identifies a pinned Go module and its source commit.
+type DependencyLock struct {
+	Module  string `json:"module"`
+	Version string `json:"version"`
+	Commit  string `json:"commit"`
 }
 
 // RuntimeLock identifies the pure-Go tree-sitter runtime module.
@@ -56,6 +64,12 @@ func Load() (Lock, error) {
 // Validate checks that all required provenance and integrity fields exist.
 func (l Lock) Validate() error {
 	switch {
+	case l.SharedCST.Module == "":
+		return errors.New("grammar lock: shared CST module is empty")
+	case l.SharedCST.Version == "":
+		return errors.New("grammar lock: shared CST version is empty")
+	case len(l.SharedCST.Commit) != 40:
+		return errors.New("grammar lock: shared CST commit is not a 40-character hash")
 	case l.Runtime.Module == "":
 		return errors.New("grammar lock: runtime module is empty")
 	case l.Runtime.Version == "":

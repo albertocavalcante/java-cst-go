@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"path"
+	"strings"
 
 	"git.alberto.engineer/alberto/java-cst-go/language"
 )
@@ -57,6 +59,17 @@ func DecodeManifest(reader io.Reader) (Manifest, error) {
 
 		if fixture.Path == "" {
 			return Manifest{}, fmt.Errorf("M0 fixture %q has an empty path", fixture.ID)
+		}
+		cleanPath := path.Clean(fixture.Path)
+		if path.IsAbs(fixture.Path) ||
+			cleanPath != fixture.Path ||
+			cleanPath == ".." ||
+			strings.HasPrefix(cleanPath, "../") {
+			return Manifest{}, fmt.Errorf(
+				"M0 fixture %q has unsafe path %q",
+				fixture.ID,
+				fixture.Path,
+			)
 		}
 		if !fixture.Release.Valid() {
 			return Manifest{}, fmt.Errorf(
