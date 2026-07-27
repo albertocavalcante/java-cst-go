@@ -38,6 +38,11 @@ func run() error {
 		"reports/m0/results.json",
 		"path for the generated JSON report",
 	)
+	shapesPath := flag.String(
+		"shapes-out",
+		"reports/m0/backend-shapes.json",
+		"path for deduplicated backend shape snapshots",
+	)
 	runs := flag.Int("runs", 5, "measured pipeline repetitions per fixture")
 	flag.Parse()
 
@@ -50,7 +55,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	report, err := m0report.Run(context.Background(), manifest, m0report.Options{
+	evidence, err := m0report.Run(context.Background(), manifest, m0report.Options{
 		FixtureRoot: *fixtureRoot,
 		Runs:        *runs,
 	})
@@ -58,7 +63,11 @@ func run() error {
 		return err
 	}
 
-	return writeJSON(*outputPath, report)
+	if err := writeJSON(*shapesPath, evidence.Shapes); err != nil {
+		return err
+	}
+
+	return writeJSON(*outputPath, evidence.Report)
 }
 
 func writeJSON(path string, value any) error {

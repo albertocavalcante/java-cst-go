@@ -43,13 +43,14 @@ func TestRunMeasuresLosslessVersionDiscrepancy(t *testing.T) {
 		}},
 	}
 
-	report, err := m0report.Run(context.Background(), manifest, m0report.Options{
+	evidence, err := m0report.Run(context.Background(), manifest, m0report.Options{
 		FixtureRoot: root,
 		Runs:        2,
 	})
 	if err != nil {
 		t.Fatalf("Run: %v", err)
 	}
+	report := evidence.Report
 	if got, want := len(report.Cases), 1; got != want {
 		t.Fatalf("case count = %d, want %d", got, want)
 	}
@@ -74,6 +75,15 @@ func TestRunMeasuresLosslessVersionDiscrepancy(t *testing.T) {
 		len(report.Run.RuntimeCommit) != 40 ||
 		len(report.Run.GrammarCommit) != 40 {
 		t.Fatalf("incomplete provenance: %+v", report.Run)
+	}
+	if len(result.BackendShapeSHA256) != 64 {
+		t.Fatalf("backend shape digest = %q", result.BackendShapeSHA256)
+	}
+	if got, want := len(evidence.Shapes.Shapes), 1; got != want {
+		t.Fatalf("shape count = %d, want %d", got, want)
+	}
+	if evidence.Shapes.Shapes[0].SHA256 != result.BackendShapeSHA256 {
+		t.Fatalf("case and golden shape digests differ")
 	}
 }
 

@@ -20,23 +20,24 @@ type RunMetadata struct {
 
 // CaseResult records one fixture at one explicit Java level.
 type CaseResult struct {
-	ID                string   `json:"id"`
-	Release           uint8    `json:"release"`
-	Preview           bool     `json:"preview"`
-	Feature           string   `json:"feature,omitempty"`
-	FeatureState      string   `json:"featureState,omitempty"`
-	FeatureVariant    uint8    `json:"featureVariant,omitempty"`
-	FeatureEnabled    bool     `json:"featureEnabled,omitempty"`
-	Bytes             int      `json:"bytes"`
-	BackendNodes      int      `json:"backendNodes"`
-	BackendErrors     int      `json:"backendErrors"`
-	MissingNodes      int      `json:"missingNodes"`
-	ConvertedElements int      `json:"convertedElements"`
-	RoundTrip         bool     `json:"roundTrip"`
-	SpanInvariants    bool     `json:"spanInvariants"`
-	Panic             bool     `json:"panic"`
-	ElapsedNS         int64    `json:"elapsedNs"`
-	AllocatedBytes    uint64   `json:"allocatedBytes"`
-	Classification    string   `json:"classification"`
-	Notes             []string `json:"notes"`
+	ID                 string   `json:"id"`
+	Release            uint8    `json:"release"`
+	Preview            bool     `json:"preview"`
+	Feature            string   `json:"feature,omitempty"`
+	FeatureState       string   `json:"featureState,omitempty"`
+	FeatureVariant     uint8    `json:"featureVariant,omitempty"`
+	FeatureEnabled     bool     `json:"featureEnabled,omitempty"`
+	Bytes              int      `json:"bytes"`
+	BackendNodes       int      `json:"backendNodes"`
+	BackendErrors      int      `json:"backendErrors"`
+	MissingNodes       int      `json:"missingNodes"`
+	BackendShapeSHA256 string   `json:"backendShapeSHA256"`
+	ConvertedElements  int      `json:"convertedElements"`
+	RoundTrip          bool     `json:"roundTrip"`
+	SpanInvariants     bool     `json:"spanInvariants"`
+	Panic              bool     `json:"panic"`
+	ElapsedNS          int64    `json:"elapsedNs"`
+	AllocatedBytes     uint64   `json:"allocatedBytes"`
+	Classification     string   `json:"classification"`
+	Notes              []string `json:"notes"`
 }

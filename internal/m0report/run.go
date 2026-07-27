@@ -3,6 +3,9 @@ package m0report
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -25,22 +28,41 @@ type Options struct {
 	Runs        int
 }
 
+// Evidence contains scalar case results and deduplicated backend shapes.
+type Evidence struct {
+	Report testkit.Report
+	Shapes ShapeReport
+}
+
+// ShapeReport stores one reviewable snapshot per unique fixture source.
+type ShapeReport struct {
+	SchemaVersion int             `json:"schemaVersion"`
+	Shapes        []ShapeSnapshot `json:"shapes"`
+}
+
+// ShapeSnapshot is a canonical backend-neutral tree and its digest.
+type ShapeSnapshot struct {
+	Path     string         `json:"path"`
+	SHA256   string         `json:"sha256"`
+	Snapshot backend.Result `json:"snapshot"`
+}
+
 // Run executes manifest serially in manifest order.
 func Run(
 	ctx context.Context,
 	manifest testkit.Manifest,
 	options Options,
-) (testkit.Report, error) {
+) (Evidence, error) {
 	if options.FixtureRoot == "" {
-		return testkit.Report{}, fmt.Errorf("run M0 report: fixture root is empty")
+		return Evidence{}, fmt.Errorf("run M0 report: fixture root is empty")
 	}
 	if options.Runs < 1 {
-		return testkit.Report{}, fmt.Errorf("run M0 report: runs = %d, want at least 1", options.Runs)
+		return Evidence{}, fmt.Errorf("run M0 report: runs = %d, want at least 1", options.Runs)
 	}
 
 	lock, err := grammar.Load()
 	if err != nil {
-		return testkit.Report{}, fmt.Errorf("run M0 report: %w", err)
+		return Evidence{}, fmt.Errorf("run M0 report: %w", err)
 	}
 	report := testkit.Report{
 		SchemaVersion: 1,
@@ -55,23 +77,50 @@ func Run(
 		},
 		Cases: make([]testkit.CaseResult, 0, len(manifest.Fixtures)),
 	}
+	shapes := ShapeReport{
+		SchemaVersion: 1,
+		Shapes:        make([]ShapeSnapshot, 0),
+	}
+	shapeDigests := make(map[string]string)
 
 	for _, fixture := range manifest.Fixtures {
 		if err := ctx.Err(); err != nil {
-			return testkit.Report{}, fmt.Errorf("run M0 report: %w", err)
+			return Evidence{}, fmt.Errorf("run M0 report: %w", err)
 		}
 		raw, err := os.ReadFile(filepath.Join(options.FixtureRoot, filepath.FromSlash(fixture.Path)))
 		if err != nil {
-			return testkit.Report{}, fmt.Errorf("read fixture %q: %w", fixture.ID, err)
+			return Evidence{}, fmt.Errorf("read fixture %q: %w", fixture.ID, err)
 		}
-		result, err := measureCase(ctx, fixture, string(raw), options.Runs)
+		result, snapshot, err := measureCase(ctx, fixture, string(raw), options.Runs)
 		if err != nil {
-			return testkit.Report{}, fmt.Errorf("measure fixture %q: %w", fixture.ID, err)
+			return Evidence{}, fmt.Errorf("measure fixture %q: %w", fixture.ID, err)
 		}
+		canonical, digest, err := canonicalShape(snapshot)
+		if err != nil {
+			return Evidence{}, fmt.Errorf("snapshot fixture %q: %w", fixture.ID, err)
+		}
+		result.BackendShapeSHA256 = digest
 		report.Cases = append(report.Cases, result)
+		previousDigest, exists := shapeDigests[fixture.Path]
+		if exists && previousDigest != digest {
+			return Evidence{}, fmt.Errorf(
+				"fixture source %q produced level-dependent backend shapes: %s and %s",
+				fixture.Path,
+				previousDigest,
+				digest,
+			)
+		}
+		if !exists {
+			shapeDigests[fixture.Path] = digest
+			shapes.Shapes = append(shapes.Shapes, ShapeSnapshot{
+				Path:     fixture.Path,
+				SHA256:   digest,
+				Snapshot: canonical,
+			})
+		}
 	}
 
-	return report, nil
+	return Evidence{Report: report, Shapes: shapes}, nil
 }
 
 type pipelineResult struct {
@@ -85,7 +134,7 @@ func measureCase(
 	fixture testkit.Fixture,
 	raw string,
 	runs int,
-) (result testkit.CaseResult, err error) {
+) (result testkit.CaseResult, snapshot backend.Result, err error) {
 	result = testkit.CaseResult{
 		ID:      fixture.ID,
 		Release: uint8(fixture.Release),
@@ -107,7 +156,7 @@ func measureCase(
 	if fixture.Feature != "" {
 		feature, parseErr := language.ParseFeatureID(fixture.Feature)
 		if parseErr != nil {
-			return result, parseErr
+			return result, backend.Result{}, parseErr
 		}
 		support := level.Feature(feature)
 		result.FeatureState = support.State.String()
@@ -116,7 +165,7 @@ func measureCase(
 	}
 
 	if _, err := runPipeline(ctx, raw, level); err != nil {
-		return result, err
+		return result, backend.Result{}, err
 	}
 
 	runtime.GC()
@@ -127,7 +176,7 @@ func measureCase(
 	for range runs {
 		pipeline, err = runPipeline(ctx, raw, level)
 		if err != nil {
-			return result, err
+			return result, backend.Result{}, err
 		}
 	}
 	elapsed := time.Since(start)
@@ -154,7 +203,18 @@ func measureCase(
 	}
 	classify(&result)
 
-	return result, nil
+	return result, pipeline.snapshot, nil
+}
+
+func canonicalShape(snapshot backend.Result) (backend.Result, string, error) {
+	snapshot.Level = language.Level{}
+	data, err := json.Marshal(snapshot)
+	if err != nil {
+		return backend.Result{}, "", fmt.Errorf("encode canonical backend shape: %w", err)
+	}
+	digest := sha256.Sum256(data)
+
+	return snapshot, hex.EncodeToString(digest[:]), nil
 }
 
 func runPipeline(
