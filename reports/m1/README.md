@@ -69,3 +69,22 @@ needed for parsing, lexical fidelity, diagnostics, and later generated views.
 - Runtime parsing and snapshot publication observe the caller's context.
 - Limit failures publish no partial public tree and expose both
   `ErrLimitExceeded` and a typed `LimitError`.
+
+## Release and preview validation
+
+- A repository-owned validator consumes only the backend-neutral snapshot,
+  resolved `language.Level`, and Unicode-translated token text.
+- Distinct diagnostics cover unavailable, preview-disabled, withdrawn, and
+  feature-generation restriction failures; all spans remain raw byte spans.
+- The exact 17 Java 21-26 cases classified by M0 as post-parse validation
+  requirements now produce the expected feature and diagnostic family.
+- The initial restriction recognizers deliberately cover only the three
+  demonstrated compiler cases: Java 22 early `this` before constructor
+  invocation, Java 23 `java.base` module-import ambiguity with
+  `java.sql.Date`, and Java 26 primitive-pattern dominance for the locked
+  fixture.
+- Tests also prove logical Unicode-escaped syntax maps diagnostics back to
+  raw source and contextual identifiers are not stolen from older Java.
+
+This slice validates the measured acceptance set. It does not claim complete
+Java name resolution, type checking, or dominance analysis.

@@ -34,6 +34,9 @@ const (
 	CodeFeatureWithdrawn Code = "JAV3003"
 	// CodeBackendLimit reports a known grammar or backend limitation.
 	CodeBackendLimit Code = "JAV3004"
+	// CodeFeatureRestriction reports syntax that uses an enabled feature but
+	// violates a release-specific restriction of that feature generation.
+	CodeFeatureRestriction Code = "JAV3005"
 
 	// CodeResourceLimit reports a configured source, node, or depth limit.
 	CodeResourceLimit Code = "JAV9001"

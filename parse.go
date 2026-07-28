@@ -12,6 +12,7 @@ import (
 	"git.alberto.engineer/alberto/java-cst-go/internal/convert"
 	"git.alberto.engineer/alberto/java-cst-go/internal/diagnose"
 	"git.alberto.engineer/alberto/java-cst-go/internal/grammar/java25"
+	"git.alberto.engineer/alberto/java-cst-go/internal/validate"
 	"git.alberto.engineer/alberto/java-cst-go/source"
 	"git.alberto.engineer/alberto/java-cst-go/syntax"
 )
@@ -80,6 +81,7 @@ func ParseContext(
 	diagnostics := diagnostic.Normalize(
 		translation.Diagnostics(),
 		diagnose.Backend(snapshot),
+		validate.Features(translation, snapshot),
 	)
 	tree, err := syntax.NewTree(
 		converted.Tree,

@@ -68,6 +68,7 @@ func TestRequiredCodesAreUnique(t *testing.T) {
 		diagnostic.CodePreviewDisabled,
 		diagnostic.CodeFeatureWithdrawn,
 		diagnostic.CodeBackendLimit,
+		diagnostic.CodeFeatureRestriction,
 		diagnostic.CodeResourceLimit,
 	}
 	seen := make(map[diagnostic.Code]struct{}, len(codes))

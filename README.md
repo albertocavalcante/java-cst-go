@@ -34,9 +34,10 @@ root := tree.Root()
 diagnostics := tree.Diagnostics()
 ```
 
-Java syntax and lexical errors are attached to a usable tree. They do not
-become operational Go errors. A zero `Options` value selects stable Java 25
-and bounded defaults of 16 MiB of raw source, 2,000,000 snapshot nodes, and
+Java syntax, lexical, and release/preview feature errors are attached to a
+usable tree. They do not become operational Go errors. A zero `Options` value
+selects stable Java 25 and bounded defaults of 16 MiB of raw source,
+2,000,000 snapshot nodes, and
 a maximum snapshot depth of 4,096 (the root is depth zero). Source size is
 checked before translation and runtime parsing;
 node/depth bounds apply while publishing the detached CST. Use
