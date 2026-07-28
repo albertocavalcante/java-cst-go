@@ -23,3 +23,15 @@ historical baseline lock.
 Typed Java declaration, statement, expression, pattern, and type wrappers are
 an M2 deliverable. M1 establishes only the backend-neutral syntax/tree seams
 needed for parsing, lexical fidelity, diagnostics, and later generated views.
+
+## Stable diagnostic foundation
+
+- Public diagnostic codes cover the required configuration, lexical, parser,
+  feature, backend-limit, and resource-limit families.
+- Diagnostics carry raw byte spans, severity, optional feature identity, and
+  defensively owned notes.
+- Java Unicode translation now emits the public `diagnostic.Diagnostic` value
+  rather than its temporary M0-only structure.
+- Translation diagnostics remain in deterministic raw-source order, and
+  returned slices do not expose stored diagnostic or note slices.
+- The syntax substrate uses `diagnostic.Code` as its generic stable code type.

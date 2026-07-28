@@ -8,20 +8,12 @@ import (
 	"unicode/utf8"
 
 	cst "github.com/albertocavalcante/cst-go"
+
+	"git.alberto.engineer/alberto/java-cst-go/diagnostic"
 )
 
 // Span is a half-open UTF-8 byte range.
 type Span = cst.Span
-
-// TranslationDiagnostic is an M0 lexical-translation diagnostic.
-//
-// It remains local to this package until the stable diagnostic package is
-// introduced.
-type TranslationDiagnostic struct {
-	Code    string
-	Span    Span
-	Message string
-}
 
 // Segment maps one contiguous raw region to its logical UTF-8 representation.
 type Segment struct {
@@ -34,7 +26,7 @@ type Translation struct {
 	raw         string
 	logical     string
 	segments    []Segment
-	diagnostics []TranslationDiagnostic
+	diagnostics []diagnostic.Diagnostic
 }
 
 // Translate applies the Java Unicode-escape eligibility rules to raw.
@@ -84,11 +76,15 @@ func (t *Translation) Segments() iter.Seq[Segment] {
 }
 
 // Diagnostics returns a defensive copy of translation diagnostics.
-func (t *Translation) Diagnostics() []TranslationDiagnostic {
+func (t *Translation) Diagnostics() []diagnostic.Diagnostic {
 	if t == nil {
 		return nil
 	}
-	return append([]TranslationDiagnostic(nil), t.diagnostics...)
+	result := make([]diagnostic.Diagnostic, len(t.diagnostics))
+	for index := range t.diagnostics {
+		result[index] = t.diagnostics[index].Clone()
+	}
+	return result
 }
 
 // RawSpan maps a bounded logical span to the smallest covering raw span.
@@ -111,7 +107,7 @@ type translationBuilder struct {
 	raw                   string
 	logical               strings.Builder
 	segments              []Segment
-	diagnostics           []TranslationDiagnostic
+	diagnostics           []diagnostic.Diagnostic
 	trailingBackslashes   int
 	lastFromUnicodeEscape bool
 }
@@ -136,11 +132,12 @@ func (b *translationBuilder) translate() {
 							continue
 						}
 					}
-					b.diagnostics = append(b.diagnostics, TranslationDiagnostic{
-						Code:    "JAV1002",
-						Span:    Span{Start: rawOffset, End: end},
-						Message: "isolated UTF-16 surrogate in Unicode escape",
-					})
+					b.diagnostics = append(b.diagnostics, diagnostic.NewSource(
+						diagnostic.CodeInvalidUnicodeEscape,
+						diagnostic.SeverityError,
+						Span{Start: rawOffset, End: end},
+						"isolated UTF-16 surrogate in Unicode escape",
+					))
 					b.appendTranslated(rawOffset, end, string(utf8.RuneError))
 					rawOffset = end
 					continue
@@ -150,11 +147,12 @@ func (b *translationBuilder) translate() {
 				rawOffset = end
 				continue
 			case escapeMalformed:
-				b.diagnostics = append(b.diagnostics, TranslationDiagnostic{
-					Code:    "JAV1002",
-					Span:    Span{Start: rawOffset, End: end},
-					Message: "invalid Java Unicode escape",
-				})
+				b.diagnostics = append(b.diagnostics, diagnostic.NewSource(
+					diagnostic.CodeInvalidUnicodeEscape,
+					diagnostic.SeverityError,
+					Span{Start: rawOffset, End: end},
+					"invalid Java Unicode escape",
+				))
 			case escapeAbsent:
 			}
 		}
@@ -165,11 +163,12 @@ func (b *translationBuilder) translate() {
 			if decodedWidth > 1 {
 				width = decodedWidth
 			} else {
-				b.diagnostics = append(b.diagnostics, TranslationDiagnostic{
-					Code:    "JAV1001",
-					Span:    Span{Start: rawOffset, End: rawOffset + 1},
-					Message: "invalid UTF-8 byte in Java source",
-				})
+				b.diagnostics = append(b.diagnostics, diagnostic.NewSource(
+					diagnostic.CodeInvalidUTF8,
+					diagnostic.SeverityError,
+					Span{Start: rawOffset, End: rawOffset + 1},
+					"invalid UTF-8 byte in Java source",
+				))
 			}
 		}
 		b.appendRaw(rawOffset, rawOffset+width)

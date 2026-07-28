@@ -4,6 +4,7 @@ import (
 	"slices"
 	"testing"
 
+	"git.alberto.engineer/alberto/java-cst-go/diagnostic"
 	"git.alberto.engineer/alberto/java-cst-go/source"
 )
 
@@ -54,8 +55,9 @@ func TestTranslateDiagnosesMalformedEligibleEscape(t *testing.T) {
 	if got, want := len(diagnostics), 1; got != want {
 		t.Fatalf("diagnostic count = %d, want %d: %+v", got, want, diagnostics)
 	}
-	if diagnostics[0].Code != "JAV1002" {
-		t.Fatalf("diagnostic code = %q, want JAV1002", diagnostics[0].Code)
+	if diagnostics[0].Code != diagnostic.CodeInvalidUnicodeEscape ||
+		diagnostics[0].Severity != diagnostic.SeverityError {
+		t.Fatalf("diagnostic = %+v, want invalid-Unicode error", diagnostics[0])
 	}
 }
 
@@ -80,8 +82,9 @@ func TestTranslatePreservesAndDiagnosesInvalidUTF8(t *testing.T) {
 	if got, want := len(diagnostics), 1; got != want {
 		t.Fatalf("diagnostic count = %d, want %d", got, want)
 	}
-	if diagnostics[0].Code != "JAV1001" {
-		t.Fatalf("diagnostic code = %q, want JAV1001", diagnostics[0].Code)
+	if diagnostics[0].Code != diagnostic.CodeInvalidUTF8 ||
+		diagnostics[0].Severity != diagnostic.SeverityError {
+		t.Fatalf("diagnostic = %+v, want invalid-UTF-8 error", diagnostics[0])
 	}
 }
 
@@ -115,8 +118,8 @@ func TestTranslationSegmentsAreStableAndDiagnosticsAreDefensive(t *testing.T) {
 
 	diagnostics := translation.Diagnostics()
 	diagnostics[0].Code = "changed"
-	if got := translation.Diagnostics()[0].Code; got != "JAV1001" {
-		t.Fatalf("stored diagnostic code = %q, want JAV1001", got)
+	if got := translation.Diagnostics()[0].Code; got != diagnostic.CodeInvalidUTF8 {
+		t.Fatalf("stored diagnostic code = %q, want %s", got, diagnostic.CodeInvalidUTF8)
 	}
 }
 
@@ -131,8 +134,39 @@ func TestTranslateIsolatedSurrogate(t *testing.T) {
 	if got, want := len(diagnostics), 1; got != want {
 		t.Fatalf("diagnostic count = %d, want %d", got, want)
 	}
-	if diagnostics[0].Code != "JAV1002" {
-		t.Fatalf("diagnostic code = %q, want JAV1002", diagnostics[0].Code)
+	if diagnostics[0].Code != diagnostic.CodeInvalidUnicodeEscape ||
+		diagnostics[0].Severity != diagnostic.SeverityError {
+		t.Fatalf("diagnostic = %+v, want invalid-Unicode error", diagnostics[0])
+	}
+}
+
+func TestTranslationDiagnosticsFollowRawSourceOrder(t *testing.T) {
+	t.Parallel()
+
+	translation := source.Translate("\xff\\u12\xfe")
+	diagnostics := translation.Diagnostics()
+	if got, want := len(diagnostics), 3; got != want {
+		t.Fatalf("diagnostic count = %d, want %d: %+v", got, want, diagnostics)
+	}
+	wantCodes := []diagnostic.Code{
+		diagnostic.CodeInvalidUTF8,
+		diagnostic.CodeInvalidUnicodeEscape,
+		diagnostic.CodeInvalidUTF8,
+	}
+	previousStart := 0
+	for index, value := range diagnostics {
+		if value.Code != wantCodes[index] {
+			t.Errorf("diagnostic %d code = %q, want %q", index, value.Code, wantCodes[index])
+		}
+		if value.Span.Start < previousStart {
+			t.Errorf(
+				"diagnostic %d span = %+v, starts before byte %d",
+				index,
+				value.Span,
+				previousStart,
+			)
+		}
+		previousStart = value.Span.Start
 	}
 }
 

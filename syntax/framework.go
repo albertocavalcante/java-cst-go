@@ -1,6 +1,10 @@
 package syntax
 
-import cst "github.com/albertocavalcante/cst-go"
+import (
+	cst "github.com/albertocavalcante/cst-go"
+
+	"git.alberto.engineer/alberto/java-cst-go/diagnostic"
+)
 
 // Kind is a repository-owned Java syntax kind.
 //
@@ -23,7 +27,7 @@ const (
 )
 
 // DiagnosticCode is a stable Java diagnostic identifier.
-type DiagnosticCode string
+type DiagnosticCode = diagnostic.Code
 
 // TokenData carries immutable Java lexical metadata. Its fields will be added
 // only when the M0 conversion demonstrates that they belong on green tokens.
