@@ -25,8 +25,9 @@ No release-support claim is implied by a backend accepting a fixture.
 
 `GRAMMAR-RUNTIME-AUDIT.md` sizes the two confirmed Java grammar gaps and
 compares the pathological malformed-input reproducer against native
-Tree-sitter, the pinned pure-Go runtime, and its post-release HEAD. The
-candidate grammar delta is evidence, not yet a production dependency.
+Tree-sitter, the pinned pure-Go runtime, its post-release HEAD, and the
+alternative pure-Go runtime adapter. The candidate grammar delta is evidence,
+not yet a production dependency.
 
 ## Compiler oracle toolchains
 

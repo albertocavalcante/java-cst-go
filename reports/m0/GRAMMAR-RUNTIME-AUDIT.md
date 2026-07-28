@@ -1,6 +1,6 @@
 # M0 grammar-gap and runtime audit
 
-Status: **grammar patches bounded; runtime decision blocked**
+Status: **alternative runtime passes initial gate; patched grammar integration pending**
 Date: 2026-07-27
 
 ## Outcome
@@ -11,16 +11,29 @@ explicit constructor invocation after a non-empty statement prologue. The
 generated parser accepts both Java 25 probes and all 108 upstream corpus and
 highlight tests.
 
-The pure-Go runtime remains the backend-decision blocker. The five-byte
-malformed input `#0#.}` takes about 0.11 ms in native Tree-sitter, but
-`gotreesitter` v0.47.0 spends about 1.76 seconds and cumulatively allocates
+The pinned pure-Go runtime is not viable for malformed editor buffers. The
+five-byte malformed input `#0#.}` takes about 0.11 ms in native Tree-sitter,
+but `gotreesitter` v0.47.0 spends about 1.76 seconds and cumulatively allocates
 about 1.71 GB before returning a partial `memory_budget` tree. Current
 `gotreesitter` HEAD does not improve this reproducer.
 
-The evidence therefore does not support a grammar-only fork decision yet.
-The next runtime experiment must either establish a bounded, parser-local fix
-that still returns useful recovery structure or replace the runtime while
-retaining the backend-neutral adapter and grammar work.
+An adapter for `github.com/dcosson/treesitter-go` v0.1.0 now passes the initial
+replacement gate. Behind the same repository-owned snapshot contract it
+returns a complete error tree for the reproducer in about 0.113 ms with about
+605 KB allocated. All 69 M0 fixtures have valid ranges and byte-exact converted
+CSTs. Forty-one clean non-template fixture cases have byte-for-byte identical
+backend snapshots; all 21 existing recovery cases remain recovery cases.
+
+The remaining seven clean cases are the same string-template source at
+different language levels. Their structural difference is an improvement:
+the alternative runtime and native Tree-sitter produce
+`string_interpolation`, while the pinned runtime's handwritten Java token
+source produces an ordinary `escape_sequence`.
+
+A 30-second translated parse-and-convert fuzz lane completed 121,367
+executions without a panic, conversion failure, range failure, or round-trip
+failure. Each fuzz parse retained the 250 ms operational deadline; this lane
+does not prove that every malformed input completes without cancellation.
 
 ## Provenance
 
@@ -30,6 +43,9 @@ retaining the backend-neutral adapter and grammar work.
   `000ae6c6e921c02ab8c183fb31f3f16429b0a95d`
 - `gotreesitter` post-release comparison:
   `f639fbaa2fab31246e2b99996817837ba90bd91d`
+- alternative runtime: `github.com/dcosson/treesitter-go` v0.1.0,
+  commit `cf63d32385984f5accbd17557c0e26fcd281f61a`, module sum
+  `h1:E+tXGxZTJT7wPlAAANLMbejaNhreemIKiZgxj4oXV5I=`
 - grammar generator/native comparison: Tree-sitter CLI v0.26.8,
   macOS/arm64 archive SHA-256
   `9dc0dc3415a1cd30499750579defbf3f8e000a98f12a65cda8e25981f07e7b0f`
@@ -95,6 +111,7 @@ Apple M4, darwin/arm64, Go 1.26.3:
 | `gotreesitter` v0.47.0, default, five iterations | 1,758.2 ms | 1,736,476,054 | 12,588,221 | partial `memory_budget` tree |
 | `gotreesitter` post-release HEAD, five iterations | 1,851.3 ms | 1,736,482,073 | 12,588,289 | partial `memory_budget` tree |
 | `gotreesitter` v0.47.0, 8 MB global budget | 26.6 ms | 35,045,664 | 146,947 | partial `memory_budget` tree |
+| `treesitter-go` v0.1.0 through M0 snapshot adapter, 20 iterations | 0.113 ms | 605,162 | 378 | complete error tree |
 
 The release profile attributes most allocation volume to GLR reduction
 candidate construction, GSS nodes, raw shapes, and raw-shape children. The
@@ -123,16 +140,19 @@ product recovery requirement.
 
 - `cst-go`: no blocker or enhancement was exposed by this audit.
 - Java grammar: a small pinned fork is technically reasonable.
-- `gotreesitter`: not yet acceptable as the production editor-facing runtime.
-- M0 strategy: do not select **fork** on grammar evidence alone.
+- `gotreesitter`: reject as the production editor-facing runtime.
+- `treesitter-go`: leading replacement candidate; full-file M0 behavior is
+  compatible with the backend-neutral adapter.
+- M0 strategy: likely **replace** the runtime while retaining and patching the
+  Java grammar, pending generated-table and sustained-fuzz evidence.
 
 The next decision tranche is:
 
-1. reduce the runtime reproducer to a runtime-owned regression and determine
-   whether a parser-local node/reduction budget can return a complete error
-   tree without global configuration;
-2. in parallel, benchmark one pure-Go alternative execution strategy for the
-   same generated grammar, preserving the backend-neutral snapshot boundary;
-3. select **hybridize** only if the fallback boundary is precise and does not
-   duplicate the Java parser; otherwise select **replace** for production and
-   retain `gotreesitter` only as spike/oracle code.
+1. generate repository-owned Java tables from the bounded grammar delta with
+   a locked generator and verify their digest;
+2. rerun all fixture, conversion, exact-compiler, fuzz, and benchmark gates
+   through the alternative adapter;
+3. audit the v0.1.0 dependency surface and incremental claims without exposing
+   its types publicly;
+4. write the M0 decision, expected to select **replace** for the runtime and a
+   small pinned Java grammar fork unless the patched-table gate fails.
