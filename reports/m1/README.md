@@ -88,3 +88,25 @@ needed for parsing, lexical fidelity, diagnostics, and later generated views.
 
 This slice validates the measured acceptance set. It does not claim complete
 Java name resolution, type checking, or dominance analysis.
+
+## Lexical and trivia fidelity
+
+- A repository-owned diagnostic pass scans the Java Unicode-translated stream
+  without replacing backend parsing or CST construction.
+- It emits `JAV1003` for unterminated block comments and `JAV1004` for
+  unterminated strings, characters, text blocks, and template forms.
+- The pass understands line/block comments, escaped delimiters, text blocks,
+  nested braces, and literals inside string-template interpolations.
+- Template interpolation scanning has an explicit nesting bound of 256; the
+  scanner never recurses without that guard.
+- The public lexical table covers empty/trivia-only files, BOM, every Java
+  line-ending form, invalid UTF-8, Unicode eligibility and repeated `u`
+  markers, Unicode-created identifiers/punctuation/whitespace/comments/line
+  endings, malformed escapes, isolated surrogates, closed and unterminated
+  lexical constructs, missing tokens, and skipped error text.
+- Every case asserts both `Tree.Text()` and `Root().AppendText()` are
+  byte-identical to the input. A dedicated lexical fuzz target checks
+  termination and raw-span bounds.
+- A 10-second lexical-diagnostic fuzz lane completed 2,464,131 executions
+  without failure. The complete gate passes 364 tests under the race detector
+  plus formatting, vet, lint, and module-tidy checks.

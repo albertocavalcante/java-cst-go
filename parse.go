@@ -80,6 +80,7 @@ func ParseContext(
 	}
 	diagnostics := diagnostic.Normalize(
 		translation.Diagnostics(),
+		diagnose.Lexical(translation),
 		diagnose.Backend(snapshot),
 		validate.Features(translation, snapshot),
 	)

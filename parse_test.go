@@ -81,27 +81,115 @@ func TestParseReturnsLexicalAndRecoveryDiagnosticsWithTree(t *testing.T) {
 func TestParseLexicalInputsRoundTrip(t *testing.T) {
 	t.Parallel()
 
-	inputs := map[string]string{
-		"empty":         "",
-		"trivia-only":   " \t// comment\r\n/** doc */",
-		"bom-crlf":      "\xef\xbb\xbfclass A {\r\n\tint value;\r\n}\r\n",
-		"mixed-newline": "class A {\rint a;\nint b;\r\n}\n",
-		"unicode":       `class \u0041 { int value\u003b }`,
-		"invalid-utf8":  "class A { int \xffvalue; }\n",
+	tests := []struct {
+		name      string
+		raw       string
+		wantCodes []diagnostic.Code
+	}{
+		{name: "empty"},
+		{name: "trivia-only", raw: " \t// comment\r\n/** doc */"},
+		{
+			name: "bom-crlf",
+			raw:  "\xef\xbb\xbfclass A {\r\n\tint value;\r\n}\r\n",
+		},
+		{
+			name: "mixed-line-terminators",
+			raw:  "class A {\rint a;\nint b;\r\n}\n",
+		},
+		{
+			name: "unicode-created-identifier-and-punctuation",
+			raw:  `class \uuuu0041 \u007b int value\u003b \u007d`,
+		},
+		{
+			name: "unicode-created-whitespace-comment-and-line-end",
+			raw:  `class\u0020A { int a; \u002f\u002f comment\u000a int b; }`,
+		},
+		{
+			name: "ineligible-unicode-spelling",
+			raw:  `class A { String value = "\\u0041"; }`,
+		},
+		{
+			name:      "malformed-unicode-escape",
+			raw:       `class \u12 Broken {}`,
+			wantCodes: []diagnostic.Code{diagnostic.CodeInvalidUnicodeEscape},
+		},
+		{
+			name:      "isolated-surrogate",
+			raw:       `class A { String value = "\uD800"; }`,
+			wantCodes: []diagnostic.Code{diagnostic.CodeInvalidUnicodeEscape},
+		},
+		{
+			name:      "invalid-utf8",
+			raw:       "class A { int \xffvalue; }\n",
+			wantCodes: []diagnostic.Code{diagnostic.CodeInvalidUTF8},
+		},
+		{
+			name: "closed-literals-and-comments",
+			raw: "class A {\n" +
+				"  char quote = '\\'';\n" +
+				"  String text = \"/* text */\";\n" +
+				"  String block = \"\"\"\ntext\n\"\"\";\n" +
+				"  // \" comment\n" +
+				"  /* ' comment */\n" +
+				"}\n",
+		},
+		{
+			name:      "unterminated-block-comment",
+			raw:       "class A { /* unterminated",
+			wantCodes: []diagnostic.Code{diagnostic.CodeUnterminatedComment},
+		},
+		{
+			name:      "unterminated-string",
+			raw:       `class A { String value = "unterminated`,
+			wantCodes: []diagnostic.Code{diagnostic.CodeUnterminatedLiteral},
+		},
+		{
+			name:      "unterminated-character",
+			raw:       `class A { char value = 'x`,
+			wantCodes: []diagnostic.Code{diagnostic.CodeUnterminatedLiteral},
+		},
+		{
+			name:      "unterminated-text-block",
+			raw:       "class A { String value = \"\"\"\nunterminated",
+			wantCodes: []diagnostic.Code{diagnostic.CodeUnterminatedLiteral},
+		},
+		{
+			name:      "missing-token",
+			raw:       "class A { int value }",
+			wantCodes: []diagnostic.Code{diagnostic.CodeMissingToken},
+		},
+		{
+			name:      "skipped-error-text",
+			raw:       "#0#.}",
+			wantCodes: []diagnostic.Code{diagnostic.CodeUnexpectedToken},
+		},
 	}
-	for name, raw := range inputs {
-		t.Run(name, func(t *testing.T) {
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
 			t.Parallel()
 
-			tree, err := javacst.Parse(raw, javacst.Options{})
+			tree, err := javacst.Parse(test.raw, javacst.Options{})
 			if err != nil {
 				t.Fatalf("Parse: %v", err)
 			}
-			if got := tree.Text(); got != raw {
-				t.Fatalf("Text() = %q, want %q", got, raw)
+			if got := tree.Text(); got != test.raw {
+				t.Fatalf("Text() = %q, want %q", got, test.raw)
 			}
-			if got := tree.Root().AppendText(); got != raw {
-				t.Fatalf("Root().AppendText() = %q, want %q", got, raw)
+			if got := tree.Root().AppendText(); got != test.raw {
+				t.Fatalf("Root().AppendText() = %q, want %q", got, test.raw)
+			}
+			diagnostics := tree.Diagnostics()
+			for _, code := range test.wantCodes {
+				if !hasCode(diagnostics, code) {
+					t.Errorf("Diagnostics() = %+v, want %s", diagnostics, code)
+				}
+			}
+			if len(test.wantCodes) == 0 {
+				for _, value := range diagnostics {
+					if value.Code >= "JAV1001" && value.Code <= "JAV1004" {
+						t.Errorf("unexpected lexical diagnostic: %+v", value)
+					}
+				}
 			}
 		})
 	}
@@ -246,6 +334,10 @@ func FuzzParseRoundTrip(f *testing.F) {
 		`class \u0041 {}`,
 		" \t// comment\r\n",
 		"class A { String value = \"unterminated",
+		"class A { /* unterminated",
+		"class A { char value = 'x",
+		"class A { String value = \"\"\"\nunterminated",
+		`class A { String value = STR."\{call("x", '}')}"; }`,
 		"class A { int \xffvalue; }",
 	} {
 		f.Add(seed)
