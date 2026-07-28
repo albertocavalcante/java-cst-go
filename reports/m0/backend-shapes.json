@@ -5056,6 +5056,1385 @@
           ]
         }
       }
+    },
+    {
+      "path": "features/flexible-constructor-bodies/field-before-super.java",
+      "sha256": "67ef3f41a42da0c55aa523713665031efdd2e71e6bec9a757e34373570553b84",
+      "snapshot": {
+        "level": {
+          "Release": 0,
+          "Preview": false
+        },
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
+        "rawBytes": 186,
+        "logicalBytes": 186,
+        "stopReason": "accepted",
+        "stoppedEarly": false,
+        "nodeCount": 52,
+        "errorCount": 1,
+        "missingCount": 0,
+        "root": {
+          "kind": "program",
+          "startByte": 0,
+          "endByte": 186,
+          "logicalStartByte": 0,
+          "logicalEndByte": 186,
+          "named": true,
+          "hasError": true,
+          "children": [
+            {
+              "kind": "class_declaration",
+              "startByte": 0,
+              "endByte": 185,
+              "logicalStartByte": 0,
+              "logicalEndByte": 185,
+              "named": true,
+              "hasError": true,
+              "children": [
+                {
+                  "kind": "class",
+                  "startByte": 0,
+                  "endByte": 5,
+                  "logicalStartByte": 0,
+                  "logicalEndByte": 5,
+                  "named": false
+                },
+                {
+                  "kind": "identifier",
+                  "field": "name",
+                  "startByte": 6,
+                  "endByte": 27,
+                  "logicalStartByte": 6,
+                  "logicalEndByte": 27,
+                  "named": true
+                },
+                {
+                  "kind": "superclass",
+                  "field": "superclass",
+                  "startByte": 28,
+                  "endByte": 52,
+                  "logicalStartByte": 28,
+                  "logicalEndByte": 52,
+                  "named": true,
+                  "children": [
+                    {
+                      "kind": "extends",
+                      "startByte": 28,
+                      "endByte": 35,
+                      "logicalStartByte": 28,
+                      "logicalEndByte": 35,
+                      "named": false
+                    },
+                    {
+                      "kind": "type_identifier",
+                      "startByte": 36,
+                      "endByte": 52,
+                      "logicalStartByte": 36,
+                      "logicalEndByte": 52,
+                      "named": true
+                    }
+                  ]
+                },
+                {
+                  "kind": "class_body",
+                  "field": "body",
+                  "startByte": 53,
+                  "endByte": 185,
+                  "logicalStartByte": 53,
+                  "logicalEndByte": 185,
+                  "named": true,
+                  "hasError": true,
+                  "children": [
+                    {
+                      "kind": "{",
+                      "startByte": 53,
+                      "endByte": 54,
+                      "logicalStartByte": 53,
+                      "logicalEndByte": 54,
+                      "named": false
+                    },
+                    {
+                      "kind": "field_declaration",
+                      "startByte": 59,
+                      "endByte": 69,
+                      "logicalStartByte": 59,
+                      "logicalEndByte": 69,
+                      "named": true,
+                      "children": [
+                        {
+                          "kind": "integral_type",
+                          "field": "type",
+                          "startByte": 59,
+                          "endByte": 62,
+                          "logicalStartByte": 59,
+                          "logicalEndByte": 62,
+                          "named": true,
+                          "children": [
+                            {
+                              "kind": "int",
+                              "startByte": 59,
+                              "endByte": 62,
+                              "logicalStartByte": 59,
+                              "logicalEndByte": 62,
+                              "named": false
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "variable_declarator",
+                          "field": "declarator",
+                          "startByte": 63,
+                          "endByte": 68,
+                          "logicalStartByte": 63,
+                          "logicalEndByte": 68,
+                          "named": true,
+                          "children": [
+                            {
+                              "kind": "identifier",
+                              "field": "name",
+                              "startByte": 63,
+                              "endByte": 68,
+                              "logicalStartByte": 63,
+                              "logicalEndByte": 68,
+                              "named": true
+                            }
+                          ]
+                        },
+                        {
+                          "kind": ";",
+                          "startByte": 68,
+                          "endByte": 69,
+                          "logicalStartByte": 68,
+                          "logicalEndByte": 69,
+                          "named": false
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "constructor_declaration",
+                      "startByte": 75,
+                      "endByte": 183,
+                      "logicalStartByte": 75,
+                      "logicalEndByte": 183,
+                      "named": true,
+                      "hasError": true,
+                      "children": [
+                        {
+                          "kind": "identifier",
+                          "field": "name",
+                          "startByte": 75,
+                          "endByte": 96,
+                          "logicalStartByte": 75,
+                          "logicalEndByte": 96,
+                          "named": true
+                        },
+                        {
+                          "kind": "formal_parameters",
+                          "field": "parameters",
+                          "startByte": 96,
+                          "endByte": 107,
+                          "logicalStartByte": 96,
+                          "logicalEndByte": 107,
+                          "named": true,
+                          "children": [
+                            {
+                              "kind": "(",
+                              "startByte": 96,
+                              "endByte": 97,
+                              "logicalStartByte": 96,
+                              "logicalEndByte": 97,
+                              "named": false
+                            },
+                            {
+                              "kind": "formal_parameter",
+                              "startByte": 97,
+                              "endByte": 106,
+                              "logicalStartByte": 97,
+                              "logicalEndByte": 106,
+                              "named": true,
+                              "children": [
+                                {
+                                  "kind": "integral_type",
+                                  "field": "type",
+                                  "startByte": 97,
+                                  "endByte": 100,
+                                  "logicalStartByte": 97,
+                                  "logicalEndByte": 100,
+                                  "named": true,
+                                  "children": [
+                                    {
+                                      "kind": "int",
+                                      "startByte": 97,
+                                      "endByte": 100,
+                                      "logicalStartByte": 97,
+                                      "logicalEndByte": 100,
+                                      "named": false
+                                    }
+                                  ]
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "field": "name",
+                                  "startByte": 101,
+                                  "endByte": 106,
+                                  "logicalStartByte": 101,
+                                  "logicalEndByte": 106,
+                                  "named": true
+                                }
+                              ]
+                            },
+                            {
+                              "kind": ")",
+                              "startByte": 106,
+                              "endByte": 107,
+                              "logicalStartByte": 106,
+                              "logicalEndByte": 107,
+                              "named": false
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "constructor_body",
+                          "field": "body",
+                          "startByte": 108,
+                          "endByte": 183,
+                          "logicalStartByte": 108,
+                          "logicalEndByte": 183,
+                          "named": true,
+                          "hasError": true,
+                          "children": [
+                            {
+                              "kind": "{",
+                              "startByte": 108,
+                              "endByte": 109,
+                              "logicalStartByte": 108,
+                              "logicalEndByte": 109,
+                              "named": false
+                            },
+                            {
+                              "kind": "expression_statement",
+                              "startByte": 118,
+                              "endByte": 137,
+                              "logicalStartByte": 118,
+                              "logicalEndByte": 137,
+                              "named": true,
+                              "children": [
+                                {
+                                  "kind": "assignment_expression",
+                                  "startByte": 118,
+                                  "endByte": 136,
+                                  "logicalStartByte": 118,
+                                  "logicalEndByte": 136,
+                                  "named": true,
+                                  "children": [
+                                    {
+                                      "kind": "field_access",
+                                      "field": "left",
+                                      "startByte": 118,
+                                      "endByte": 128,
+                                      "logicalStartByte": 118,
+                                      "logicalEndByte": 128,
+                                      "named": true,
+                                      "children": [
+                                        {
+                                          "kind": "this",
+                                          "field": "object",
+                                          "startByte": 118,
+                                          "endByte": 122,
+                                          "logicalStartByte": 118,
+                                          "logicalEndByte": 122,
+                                          "named": true
+                                        },
+                                        {
+                                          "kind": ".",
+                                          "startByte": 122,
+                                          "endByte": 123,
+                                          "logicalStartByte": 122,
+                                          "logicalEndByte": 123,
+                                          "named": false
+                                        },
+                                        {
+                                          "kind": "identifier",
+                                          "field": "field",
+                                          "startByte": 123,
+                                          "endByte": 128,
+                                          "logicalStartByte": 123,
+                                          "logicalEndByte": 128,
+                                          "named": true
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "kind": "=",
+                                      "field": "operator",
+                                      "startByte": 129,
+                                      "endByte": 130,
+                                      "logicalStartByte": 129,
+                                      "logicalEndByte": 130,
+                                      "named": false
+                                    },
+                                    {
+                                      "kind": "identifier",
+                                      "field": "right",
+                                      "startByte": 131,
+                                      "endByte": 136,
+                                      "logicalStartByte": 131,
+                                      "logicalEndByte": 136,
+                                      "named": true
+                                    }
+                                  ]
+                                },
+                                {
+                                  "kind": ";",
+                                  "startByte": 136,
+                                  "endByte": 137,
+                                  "logicalStartByte": 136,
+                                  "logicalEndByte": 137,
+                                  "named": false
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "ERROR",
+                              "startByte": 146,
+                              "endByte": 151,
+                              "logicalStartByte": 146,
+                              "logicalEndByte": 151,
+                              "named": true,
+                              "extra": true,
+                              "error": true,
+                              "hasError": true,
+                              "children": [
+                                {
+                                  "kind": "super",
+                                  "startByte": 146,
+                                  "endByte": 151,
+                                  "logicalStartByte": 146,
+                                  "logicalEndByte": 151,
+                                  "named": true
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "expression_statement",
+                              "startByte": 151,
+                              "endByte": 177,
+                              "logicalStartByte": 151,
+                              "logicalEndByte": 177,
+                              "named": true,
+                              "children": [
+                                {
+                                  "kind": "parenthesized_expression",
+                                  "startByte": 151,
+                                  "endByte": 176,
+                                  "logicalStartByte": 151,
+                                  "logicalEndByte": 176,
+                                  "named": true,
+                                  "children": [
+                                    {
+                                      "kind": "(",
+                                      "startByte": 151,
+                                      "endByte": 152,
+                                      "logicalStartByte": 151,
+                                      "logicalEndByte": 152,
+                                      "named": false
+                                    },
+                                    {
+                                      "kind": "method_invocation",
+                                      "startByte": 152,
+                                      "endByte": 175,
+                                      "logicalStartByte": 152,
+                                      "logicalEndByte": 175,
+                                      "named": true,
+                                      "children": [
+                                        {
+                                          "kind": "identifier",
+                                          "field": "object",
+                                          "startByte": 152,
+                                          "endByte": 159,
+                                          "logicalStartByte": 152,
+                                          "logicalEndByte": 159,
+                                          "named": true
+                                        },
+                                        {
+                                          "kind": ".",
+                                          "startByte": 159,
+                                          "endByte": 160,
+                                          "logicalStartByte": 159,
+                                          "logicalEndByte": 160,
+                                          "named": false
+                                        },
+                                        {
+                                          "kind": "identifier",
+                                          "field": "name",
+                                          "startByte": 160,
+                                          "endByte": 168,
+                                          "logicalStartByte": 160,
+                                          "logicalEndByte": 168,
+                                          "named": true
+                                        },
+                                        {
+                                          "kind": "argument_list",
+                                          "field": "arguments",
+                                          "startByte": 168,
+                                          "endByte": 175,
+                                          "logicalStartByte": 168,
+                                          "logicalEndByte": 175,
+                                          "named": true,
+                                          "children": [
+                                            {
+                                              "kind": "(",
+                                              "startByte": 168,
+                                              "endByte": 169,
+                                              "logicalStartByte": 168,
+                                              "logicalEndByte": 169,
+                                              "named": false
+                                            },
+                                            {
+                                              "kind": "identifier",
+                                              "startByte": 169,
+                                              "endByte": 174,
+                                              "logicalStartByte": 169,
+                                              "logicalEndByte": 174,
+                                              "named": true
+                                            },
+                                            {
+                                              "kind": ")",
+                                              "startByte": 174,
+                                              "endByte": 175,
+                                              "logicalStartByte": 174,
+                                              "logicalEndByte": 175,
+                                              "named": false
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "kind": ")",
+                                      "startByte": 175,
+                                      "endByte": 176,
+                                      "logicalStartByte": 175,
+                                      "logicalEndByte": 176,
+                                      "named": false
+                                    }
+                                  ]
+                                },
+                                {
+                                  "kind": ";",
+                                  "startByte": 176,
+                                  "endByte": 177,
+                                  "logicalStartByte": 176,
+                                  "logicalEndByte": 177,
+                                  "named": false
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "}",
+                              "startByte": 182,
+                              "endByte": 183,
+                              "logicalStartByte": 182,
+                              "logicalEndByte": 183,
+                              "named": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "}",
+                      "startByte": 184,
+                      "endByte": 185,
+                      "logicalStartByte": 184,
+                      "logicalEndByte": 185,
+                      "named": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "features/module-imports/on-demand-shadow.java",
+      "sha256": "b44f96e4aecc729af43365f9c022b7ae584f49574f674e2db13d5c4174b55577",
+      "snapshot": {
+        "level": {
+          "Release": 0,
+          "Preview": false
+        },
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
+        "rawBytes": 104,
+        "logicalBytes": 104,
+        "stopReason": "accepted",
+        "stoppedEarly": false,
+        "nodeCount": 33,
+        "errorCount": 1,
+        "missingCount": 0,
+        "root": {
+          "kind": "program",
+          "startByte": 0,
+          "endByte": 104,
+          "logicalStartByte": 0,
+          "logicalEndByte": 104,
+          "named": true,
+          "hasError": true,
+          "children": [
+            {
+              "kind": "import_declaration",
+              "startByte": 0,
+              "endByte": 24,
+              "logicalStartByte": 0,
+              "logicalEndByte": 24,
+              "named": true,
+              "hasError": true,
+              "children": [
+                {
+                  "kind": "import",
+                  "startByte": 0,
+                  "endByte": 6,
+                  "logicalStartByte": 0,
+                  "logicalEndByte": 6,
+                  "named": false
+                },
+                {
+                  "kind": "ERROR",
+                  "startByte": 7,
+                  "endByte": 13,
+                  "logicalStartByte": 7,
+                  "logicalEndByte": 13,
+                  "named": true,
+                  "extra": true,
+                  "error": true,
+                  "hasError": true,
+                  "children": [
+                    {
+                      "kind": "identifier",
+                      "startByte": 7,
+                      "endByte": 13,
+                      "logicalStartByte": 7,
+                      "logicalEndByte": 13,
+                      "named": true
+                    }
+                  ]
+                },
+                {
+                  "kind": "scoped_identifier",
+                  "startByte": 14,
+                  "endByte": 23,
+                  "logicalStartByte": 14,
+                  "logicalEndByte": 23,
+                  "named": true,
+                  "children": [
+                    {
+                      "kind": "identifier",
+                      "field": "scope",
+                      "startByte": 14,
+                      "endByte": 18,
+                      "logicalStartByte": 14,
+                      "logicalEndByte": 18,
+                      "named": true
+                    },
+                    {
+                      "kind": ".",
+                      "startByte": 18,
+                      "endByte": 19,
+                      "logicalStartByte": 18,
+                      "logicalEndByte": 19,
+                      "named": false
+                    },
+                    {
+                      "kind": "identifier",
+                      "field": "name",
+                      "startByte": 19,
+                      "endByte": 23,
+                      "logicalStartByte": 19,
+                      "logicalEndByte": 23,
+                      "named": true
+                    }
+                  ]
+                },
+                {
+                  "kind": ";",
+                  "startByte": 23,
+                  "endByte": 24,
+                  "logicalStartByte": 23,
+                  "logicalEndByte": 24,
+                  "named": false
+                }
+              ]
+            },
+            {
+              "kind": "import_declaration",
+              "startByte": 25,
+              "endByte": 43,
+              "logicalStartByte": 25,
+              "logicalEndByte": 43,
+              "named": true,
+              "children": [
+                {
+                  "kind": "import",
+                  "startByte": 25,
+                  "endByte": 31,
+                  "logicalStartByte": 25,
+                  "logicalEndByte": 31,
+                  "named": false
+                },
+                {
+                  "kind": "scoped_identifier",
+                  "startByte": 32,
+                  "endByte": 40,
+                  "logicalStartByte": 32,
+                  "logicalEndByte": 40,
+                  "named": true,
+                  "children": [
+                    {
+                      "kind": "identifier",
+                      "field": "scope",
+                      "startByte": 32,
+                      "endByte": 36,
+                      "logicalStartByte": 32,
+                      "logicalEndByte": 36,
+                      "named": true
+                    },
+                    {
+                      "kind": ".",
+                      "startByte": 36,
+                      "endByte": 37,
+                      "logicalStartByte": 36,
+                      "logicalEndByte": 37,
+                      "named": false
+                    },
+                    {
+                      "kind": "identifier",
+                      "field": "name",
+                      "startByte": 37,
+                      "endByte": 40,
+                      "logicalStartByte": 37,
+                      "logicalEndByte": 40,
+                      "named": true
+                    }
+                  ]
+                },
+                {
+                  "kind": ".",
+                  "startByte": 40,
+                  "endByte": 41,
+                  "logicalStartByte": 40,
+                  "logicalEndByte": 41,
+                  "named": false
+                },
+                {
+                  "kind": "asterisk",
+                  "startByte": 41,
+                  "endByte": 42,
+                  "logicalStartByte": 41,
+                  "logicalEndByte": 42,
+                  "named": true,
+                  "children": [
+                    {
+                      "kind": "*",
+                      "startByte": 41,
+                      "endByte": 42,
+                      "logicalStartByte": 41,
+                      "logicalEndByte": 42,
+                      "named": false
+                    }
+                  ]
+                },
+                {
+                  "kind": ";",
+                  "startByte": 42,
+                  "endByte": 43,
+                  "logicalStartByte": 42,
+                  "logicalEndByte": 43,
+                  "named": false
+                }
+              ]
+            },
+            {
+              "kind": "class_declaration",
+              "startByte": 45,
+              "endByte": 103,
+              "logicalStartByte": 45,
+              "logicalEndByte": 103,
+              "named": true,
+              "children": [
+                {
+                  "kind": "modifiers",
+                  "startByte": 45,
+                  "endByte": 50,
+                  "logicalStartByte": 45,
+                  "logicalEndByte": 50,
+                  "named": true,
+                  "children": [
+                    {
+                      "kind": "final",
+                      "startByte": 45,
+                      "endByte": 50,
+                      "logicalStartByte": 45,
+                      "logicalEndByte": 50,
+                      "named": false
+                    }
+                  ]
+                },
+                {
+                  "kind": "class",
+                  "startByte": 51,
+                  "endByte": 56,
+                  "logicalStartByte": 51,
+                  "logicalEndByte": 56,
+                  "named": false
+                },
+                {
+                  "kind": "identifier",
+                  "field": "name",
+                  "startByte": 57,
+                  "endByte": 83,
+                  "logicalStartByte": 57,
+                  "logicalEndByte": 83,
+                  "named": true
+                },
+                {
+                  "kind": "class_body",
+                  "field": "body",
+                  "startByte": 84,
+                  "endByte": 103,
+                  "logicalStartByte": 84,
+                  "logicalEndByte": 103,
+                  "named": true,
+                  "children": [
+                    {
+                      "kind": "{",
+                      "startByte": 84,
+                      "endByte": 85,
+                      "logicalStartByte": 84,
+                      "logicalEndByte": 85,
+                      "named": false
+                    },
+                    {
+                      "kind": "field_declaration",
+                      "startByte": 90,
+                      "endByte": 101,
+                      "logicalStartByte": 90,
+                      "logicalEndByte": 101,
+                      "named": true,
+                      "children": [
+                        {
+                          "kind": "type_identifier",
+                          "field": "type",
+                          "startByte": 90,
+                          "endByte": 94,
+                          "logicalStartByte": 90,
+                          "logicalEndByte": 94,
+                          "named": true
+                        },
+                        {
+                          "kind": "variable_declarator",
+                          "field": "declarator",
+                          "startByte": 95,
+                          "endByte": 100,
+                          "logicalStartByte": 95,
+                          "logicalEndByte": 100,
+                          "named": true,
+                          "children": [
+                            {
+                              "kind": "identifier",
+                              "field": "name",
+                              "startByte": 95,
+                              "endByte": 100,
+                              "logicalStartByte": 95,
+                              "logicalEndByte": 100,
+                              "named": true
+                            }
+                          ]
+                        },
+                        {
+                          "kind": ";",
+                          "startByte": 100,
+                          "endByte": 101,
+                          "logicalStartByte": 100,
+                          "logicalEndByte": 101,
+                          "named": false
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "}",
+                      "startByte": 102,
+                      "endByte": 103,
+                      "logicalStartByte": 102,
+                      "logicalEndByte": 103,
+                      "named": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "features/primitive-patterns/p4-dominance.java",
+      "sha256": "c61cfeead35b9c5d5a75d10bf10830562b9b46c4dfcd806e68601d66abefca70",
+      "snapshot": {
+        "level": {
+          "Release": 0,
+          "Preview": false
+        },
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
+        "rawBytes": 217,
+        "logicalBytes": 217,
+        "stopReason": "accepted",
+        "stoppedEarly": false,
+        "nodeCount": 60,
+        "errorCount": 0,
+        "missingCount": 0,
+        "root": {
+          "kind": "program",
+          "startByte": 0,
+          "endByte": 217,
+          "logicalStartByte": 0,
+          "logicalEndByte": 217,
+          "named": true,
+          "children": [
+            {
+              "kind": "class_declaration",
+              "startByte": 0,
+              "endByte": 216,
+              "logicalStartByte": 0,
+              "logicalEndByte": 216,
+              "named": true,
+              "children": [
+                {
+                  "kind": "modifiers",
+                  "startByte": 0,
+                  "endByte": 5,
+                  "logicalStartByte": 0,
+                  "logicalEndByte": 5,
+                  "named": true,
+                  "children": [
+                    {
+                      "kind": "final",
+                      "startByte": 0,
+                      "endByte": 5,
+                      "logicalStartByte": 0,
+                      "logicalEndByte": 5,
+                      "named": false
+                    }
+                  ]
+                },
+                {
+                  "kind": "class",
+                  "startByte": 6,
+                  "endByte": 11,
+                  "logicalStartByte": 6,
+                  "logicalEndByte": 11,
+                  "named": false
+                },
+                {
+                  "kind": "identifier",
+                  "field": "name",
+                  "startByte": 12,
+                  "endByte": 38,
+                  "logicalStartByte": 12,
+                  "logicalEndByte": 38,
+                  "named": true
+                },
+                {
+                  "kind": "class_body",
+                  "field": "body",
+                  "startByte": 39,
+                  "endByte": 216,
+                  "logicalStartByte": 39,
+                  "logicalEndByte": 216,
+                  "named": true,
+                  "children": [
+                    {
+                      "kind": "{",
+                      "startByte": 39,
+                      "endByte": 40,
+                      "logicalStartByte": 39,
+                      "logicalEndByte": 40,
+                      "named": false
+                    },
+                    {
+                      "kind": "method_declaration",
+                      "startByte": 45,
+                      "endByte": 214,
+                      "logicalStartByte": 45,
+                      "logicalEndByte": 214,
+                      "named": true,
+                      "children": [
+                        {
+                          "kind": "modifiers",
+                          "startByte": 45,
+                          "endByte": 51,
+                          "logicalStartByte": 45,
+                          "logicalEndByte": 51,
+                          "named": true,
+                          "children": [
+                            {
+                              "kind": "static",
+                              "startByte": 45,
+                              "endByte": 51,
+                              "logicalStartByte": 45,
+                              "logicalEndByte": 51,
+                              "named": false
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "void_type",
+                          "field": "type",
+                          "startByte": 52,
+                          "endByte": 56,
+                          "logicalStartByte": 52,
+                          "logicalEndByte": 56,
+                          "named": true
+                        },
+                        {
+                          "kind": "identifier",
+                          "field": "name",
+                          "startByte": 57,
+                          "endByte": 65,
+                          "logicalStartByte": 57,
+                          "logicalEndByte": 65,
+                          "named": true
+                        },
+                        {
+                          "kind": "formal_parameters",
+                          "field": "parameters",
+                          "startByte": 65,
+                          "endByte": 76,
+                          "logicalStartByte": 65,
+                          "logicalEndByte": 76,
+                          "named": true,
+                          "children": [
+                            {
+                              "kind": "(",
+                              "startByte": 65,
+                              "endByte": 66,
+                              "logicalStartByte": 65,
+                              "logicalEndByte": 66,
+                              "named": false
+                            },
+                            {
+                              "kind": "formal_parameter",
+                              "startByte": 66,
+                              "endByte": 75,
+                              "logicalStartByte": 66,
+                              "logicalEndByte": 75,
+                              "named": true,
+                              "children": [
+                                {
+                                  "kind": "integral_type",
+                                  "field": "type",
+                                  "startByte": 66,
+                                  "endByte": 69,
+                                  "logicalStartByte": 66,
+                                  "logicalEndByte": 69,
+                                  "named": true,
+                                  "children": [
+                                    {
+                                      "kind": "int",
+                                      "startByte": 66,
+                                      "endByte": 69,
+                                      "logicalStartByte": 66,
+                                      "logicalEndByte": 69,
+                                      "named": false
+                                    }
+                                  ]
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "field": "name",
+                                  "startByte": 70,
+                                  "endByte": 75,
+                                  "logicalStartByte": 70,
+                                  "logicalEndByte": 75,
+                                  "named": true
+                                }
+                              ]
+                            },
+                            {
+                              "kind": ")",
+                              "startByte": 75,
+                              "endByte": 76,
+                              "logicalStartByte": 75,
+                              "logicalEndByte": 76,
+                              "named": false
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "block",
+                          "field": "body",
+                          "startByte": 77,
+                          "endByte": 214,
+                          "logicalStartByte": 77,
+                          "logicalEndByte": 214,
+                          "named": true,
+                          "children": [
+                            {
+                              "kind": "{",
+                              "startByte": 77,
+                              "endByte": 78,
+                              "logicalStartByte": 77,
+                              "logicalEndByte": 78,
+                              "named": false
+                            },
+                            {
+                              "kind": "switch_expression",
+                              "startByte": 87,
+                              "endByte": 208,
+                              "logicalStartByte": 87,
+                              "logicalEndByte": 208,
+                              "named": true,
+                              "children": [
+                                {
+                                  "kind": "switch",
+                                  "startByte": 87,
+                                  "endByte": 93,
+                                  "logicalStartByte": 87,
+                                  "logicalEndByte": 93,
+                                  "named": false
+                                },
+                                {
+                                  "kind": "parenthesized_expression",
+                                  "field": "condition",
+                                  "startByte": 94,
+                                  "endByte": 101,
+                                  "logicalStartByte": 94,
+                                  "logicalEndByte": 101,
+                                  "named": true,
+                                  "children": [
+                                    {
+                                      "kind": "(",
+                                      "startByte": 94,
+                                      "endByte": 95,
+                                      "logicalStartByte": 94,
+                                      "logicalEndByte": 95,
+                                      "named": false
+                                    },
+                                    {
+                                      "kind": "identifier",
+                                      "startByte": 95,
+                                      "endByte": 100,
+                                      "logicalStartByte": 95,
+                                      "logicalEndByte": 100,
+                                      "named": true
+                                    },
+                                    {
+                                      "kind": ")",
+                                      "startByte": 100,
+                                      "endByte": 101,
+                                      "logicalStartByte": 100,
+                                      "logicalEndByte": 101,
+                                      "named": false
+                                    }
+                                  ]
+                                },
+                                {
+                                  "kind": "switch_block",
+                                  "field": "body",
+                                  "startByte": 102,
+                                  "endByte": 208,
+                                  "logicalStartByte": 102,
+                                  "logicalEndByte": 208,
+                                  "named": true,
+                                  "children": [
+                                    {
+                                      "kind": "{",
+                                      "startByte": 102,
+                                      "endByte": 103,
+                                      "logicalStartByte": 102,
+                                      "logicalEndByte": 103,
+                                      "named": false
+                                    },
+                                    {
+                                      "kind": "switch_rule",
+                                      "startByte": 116,
+                                      "endByte": 140,
+                                      "logicalStartByte": 116,
+                                      "logicalEndByte": 140,
+                                      "named": true,
+                                      "children": [
+                                        {
+                                          "kind": "switch_label",
+                                          "startByte": 116,
+                                          "endByte": 134,
+                                          "logicalStartByte": 116,
+                                          "logicalEndByte": 134,
+                                          "named": true,
+                                          "children": [
+                                            {
+                                              "kind": "case",
+                                              "startByte": 116,
+                                              "endByte": 120,
+                                              "logicalStartByte": 116,
+                                              "logicalEndByte": 120,
+                                              "named": false
+                                            },
+                                            {
+                                              "kind": "pattern",
+                                              "startByte": 121,
+                                              "endByte": 134,
+                                              "logicalStartByte": 121,
+                                              "logicalEndByte": 134,
+                                              "named": true,
+                                              "children": [
+                                                {
+                                                  "kind": "type_pattern",
+                                                  "startByte": 121,
+                                                  "endByte": 134,
+                                                  "logicalStartByte": 121,
+                                                  "logicalEndByte": 134,
+                                                  "named": true,
+                                                  "children": [
+                                                    {
+                                                      "kind": "floating_point_type",
+                                                      "startByte": 121,
+                                                      "endByte": 126,
+                                                      "logicalStartByte": 121,
+                                                      "logicalEndByte": 126,
+                                                      "named": true,
+                                                      "children": [
+                                                        {
+                                                          "kind": "float",
+                                                          "startByte": 121,
+                                                          "endByte": 126,
+                                                          "logicalStartByte": 121,
+                                                          "logicalEndByte": 126,
+                                                          "named": false
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "kind": "identifier",
+                                                      "startByte": 127,
+                                                      "endByte": 134,
+                                                      "logicalStartByte": 127,
+                                                      "logicalEndByte": 134,
+                                                      "named": true
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "kind": "->",
+                                          "startByte": 135,
+                                          "endByte": 137,
+                                          "logicalStartByte": 135,
+                                          "logicalEndByte": 137,
+                                          "named": false
+                                        },
+                                        {
+                                          "kind": "block",
+                                          "startByte": 138,
+                                          "endByte": 140,
+                                          "logicalStartByte": 138,
+                                          "logicalEndByte": 140,
+                                          "named": true,
+                                          "children": [
+                                            {
+                                              "kind": "{",
+                                              "startByte": 138,
+                                              "endByte": 139,
+                                              "logicalStartByte": 138,
+                                              "logicalEndByte": 139,
+                                              "named": false
+                                            },
+                                            {
+                                              "kind": "}",
+                                              "startByte": 139,
+                                              "endByte": 140,
+                                              "logicalStartByte": 139,
+                                              "logicalEndByte": 140,
+                                              "named": false
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "kind": "switch_rule",
+                                      "startByte": 153,
+                                      "endByte": 172,
+                                      "logicalStartByte": 153,
+                                      "logicalEndByte": 172,
+                                      "named": true,
+                                      "children": [
+                                        {
+                                          "kind": "switch_label",
+                                          "startByte": 153,
+                                          "endByte": 166,
+                                          "logicalStartByte": 153,
+                                          "logicalEndByte": 166,
+                                          "named": true,
+                                          "children": [
+                                            {
+                                              "kind": "case",
+                                              "startByte": 153,
+                                              "endByte": 157,
+                                              "logicalStartByte": 153,
+                                              "logicalEndByte": 157,
+                                              "named": false
+                                            },
+                                            {
+                                              "kind": "decimal_integer_literal",
+                                              "startByte": 158,
+                                              "endByte": 166,
+                                              "logicalStartByte": 158,
+                                              "logicalEndByte": 166,
+                                              "named": true
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "kind": "->",
+                                          "startByte": 167,
+                                          "endByte": 169,
+                                          "logicalStartByte": 167,
+                                          "logicalEndByte": 169,
+                                          "named": false
+                                        },
+                                        {
+                                          "kind": "block",
+                                          "startByte": 170,
+                                          "endByte": 172,
+                                          "logicalStartByte": 170,
+                                          "logicalEndByte": 172,
+                                          "named": true,
+                                          "children": [
+                                            {
+                                              "kind": "{",
+                                              "startByte": 170,
+                                              "endByte": 171,
+                                              "logicalStartByte": 170,
+                                              "logicalEndByte": 171,
+                                              "named": false
+                                            },
+                                            {
+                                              "kind": "}",
+                                              "startByte": 171,
+                                              "endByte": 172,
+                                              "logicalStartByte": 171,
+                                              "logicalEndByte": 172,
+                                              "named": false
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "kind": "switch_rule",
+                                      "startByte": 185,
+                                      "endByte": 198,
+                                      "logicalStartByte": 185,
+                                      "logicalEndByte": 198,
+                                      "named": true,
+                                      "children": [
+                                        {
+                                          "kind": "switch_label",
+                                          "startByte": 185,
+                                          "endByte": 192,
+                                          "logicalStartByte": 185,
+                                          "logicalEndByte": 192,
+                                          "named": true,
+                                          "children": [
+                                            {
+                                              "kind": "default",
+                                              "startByte": 185,
+                                              "endByte": 192,
+                                              "logicalStartByte": 185,
+                                              "logicalEndByte": 192,
+                                              "named": false
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "kind": "->",
+                                          "startByte": 193,
+                                          "endByte": 195,
+                                          "logicalStartByte": 193,
+                                          "logicalEndByte": 195,
+                                          "named": false
+                                        },
+                                        {
+                                          "kind": "block",
+                                          "startByte": 196,
+                                          "endByte": 198,
+                                          "logicalStartByte": 196,
+                                          "logicalEndByte": 198,
+                                          "named": true,
+                                          "children": [
+                                            {
+                                              "kind": "{",
+                                              "startByte": 196,
+                                              "endByte": 197,
+                                              "logicalStartByte": 196,
+                                              "logicalEndByte": 197,
+                                              "named": false
+                                            },
+                                            {
+                                              "kind": "}",
+                                              "startByte": 197,
+                                              "endByte": 198,
+                                              "logicalStartByte": 197,
+                                              "logicalEndByte": 198,
+                                              "named": false
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "kind": "}",
+                                      "startByte": 207,
+                                      "endByte": 208,
+                                      "logicalStartByte": 207,
+                                      "logicalEndByte": 208,
+                                      "named": false
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "}",
+                              "startByte": 213,
+                              "endByte": 214,
+                              "logicalStartByte": 213,
+                              "logicalEndByte": 214,
+                              "named": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "}",
+                      "startByte": 215,
+                      "endByte": 216,
+                      "logicalStartByte": 215,
+                      "logicalEndByte": 216,
+                      "named": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }

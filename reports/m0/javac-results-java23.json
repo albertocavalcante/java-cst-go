@@ -21,7 +21,7 @@
         "basic.java:1:8: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.module.imports)",
         "1 error"
       ],
-      "elapsedNs": 1696628000,
+      "elapsedNs": 721786000,
       "matches": true,
       "backendMeasured": true,
       "backendErrors": 1,
@@ -40,7 +40,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 308033791,
+      "elapsedNs": 445333292,
       "matches": true,
       "backendMeasured": true,
       "backendErrors": 1,
@@ -59,7 +59,7 @@
         "basic.java:3:28: compiler.err.illegal.esc.char",
         "1 error"
       ],
-      "elapsedNs": 202108709,
+      "elapsedNs": 382116500,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -77,7 +77,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 247839833,
+      "elapsedNs": 465405708,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -94,7 +94,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 280220833,
+      "elapsedNs": 492597458,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -111,7 +111,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 228285125,
+      "elapsedNs": 482061375,
       "matches": true,
       "backendMeasured": true,
       "backendErrors": 1,
@@ -130,7 +130,7 @@
         "basic.java:4:18: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.primitive.patterns)",
         "1 error"
       ],
-      "elapsedNs": 219857292,
+      "elapsedNs": 440739750,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -148,10 +148,50 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 244575167,
+      "elapsedNs": 422701125,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
+    },
+    {
+      "id": "java23/flexible-constructor/field-before-super-p2",
+      "release": 23,
+      "preview": true,
+      "feature": "flexible-constructor-bodies",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: field-before-super.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 437025709,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
+    },
+    {
+      "id": "java23/module-import/on-demand-shadow-rejected-p1",
+      "release": 23,
+      "preview": true,
+      "feature": "module-imports",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "on-demand-shadow.java:5:5: compiler.err.ref.ambiguous: Date, kindname.class, java.sql.Date, java.sql, kindname.class, java.util.Date, java.util",
+        "- compiler.note.preview.filename: on-demand-shadow.java, DEFAULT",
+        "- compiler.note.preview.recompile",
+        "1 error"
+      ],
+      "elapsedNs": 420381958,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "post-parse feature-validation requirement"
     }
   ]
 }

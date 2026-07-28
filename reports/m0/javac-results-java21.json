@@ -17,7 +17,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 1717109958,
+      "elapsedNs": 761813583,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -34,7 +34,7 @@
         "basic.java:3:20: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.string.templates)",
         "1 error"
       ],
-      "elapsedNs": 197302042,
+      "elapsedNs": 243589792,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -52,7 +52,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 239751042,
+      "elapsedNs": 319288625,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -69,7 +69,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 242860417,
+      "elapsedNs": 290970041,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -86,7 +86,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 236272333,
+      "elapsedNs": 312847917,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -103,7 +103,7 @@
         "basic.java:6:14: compiler.err.call.must.be.first.stmt.in.ctor: super",
         "1 error"
       ],
-      "elapsedNs": 247682958,
+      "elapsedNs": 1563168583,
       "matches": true,
       "backendMeasured": true,
       "backendErrors": 1,
@@ -119,7 +119,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 258796834,
+      "elapsedNs": 437693958,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"

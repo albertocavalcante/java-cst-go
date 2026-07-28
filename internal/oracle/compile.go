@@ -183,8 +183,10 @@ func Run(
 		if err != nil {
 			return Report{}, fmt.Errorf("compile fixture %q: %w", fixture.ID, err)
 		}
-		expected := fixture.Category == "release-anchor" ||
-			fixture.ExpectedFeatureEnabled
+		expected, err := fixture.ExpectsJavacAcceptance()
+		if err != nil {
+			return Report{}, fmt.Errorf("fixture %q: %w", fixture.ID, err)
+		}
 		report.Cases = append(report.Cases, CaseResult{
 			ID:               fixture.ID,
 			Release:          uint8(fixture.Release),

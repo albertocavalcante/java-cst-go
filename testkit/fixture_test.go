@@ -125,3 +125,20 @@ func TestDecodeManifestRejectsUnsafePath(t *testing.T) {
 		t.Fatal("DecodeManifest with parent traversal returned nil error")
 	}
 }
+
+func TestFixtureJavacExpectationCanOverrideEnabledFeature(t *testing.T) {
+	t.Parallel()
+
+	fixture := testkit.Fixture{
+		Category:               "feature-boundary",
+		ExpectedFeatureEnabled: true,
+		ExpectedJavac:          "reject",
+	}
+	got, err := fixture.ExpectsJavacAcceptance()
+	if err != nil {
+		t.Fatalf("ExpectsJavacAcceptance: %v", err)
+	}
+	if got {
+		t.Fatal("ExpectsJavacAcceptance() = true, want false")
+	}
+}

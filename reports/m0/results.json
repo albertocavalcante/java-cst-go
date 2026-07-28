@@ -23,8 +23,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1352891,
-      "allocatedBytes": 1625022,
+      "elapsedNs": 1436558,
+      "allocatedBytes": 793868,
       "classification": "",
       "notes": []
     },
@@ -41,8 +41,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1291466,
-      "allocatedBytes": 1629262,
+      "elapsedNs": 1299650,
+      "allocatedBytes": 1629272,
       "classification": "",
       "notes": []
     },
@@ -59,7 +59,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1191658,
+      "elapsedNs": 1594825,
       "allocatedBytes": 1615971,
       "classification": "",
       "notes": []
@@ -77,8 +77,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1294975,
-      "allocatedBytes": 1645216,
+      "elapsedNs": 1355991,
+      "allocatedBytes": 813966,
       "classification": "",
       "notes": []
     },
@@ -99,7 +99,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1378125,
+      "elapsedNs": 1424058,
       "allocatedBytes": 2164324,
       "classification": "upstream Java grammar gap",
       "notes": [
@@ -123,7 +123,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1247125,
+      "elapsedNs": 1363258,
       "allocatedBytes": 1632014,
       "classification": "",
       "notes": []
@@ -143,7 +143,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1379541,
+      "elapsedNs": 1390758,
       "allocatedBytes": 2164324,
       "classification": "post-parse feature-validation requirement",
       "notes": []
@@ -164,8 +164,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1341825,
-      "allocatedBytes": 1324900,
+      "elapsedNs": 1567775,
+      "allocatedBytes": 2164334,
       "classification": "post-parse feature-validation requirement",
       "notes": []
     },
@@ -186,8 +186,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1358833,
-      "allocatedBytes": 2164324,
+      "elapsedNs": 1310750,
+      "allocatedBytes": 1324891,
       "classification": "upstream Java grammar gap",
       "notes": [
         "backend produced 1 error nodes"
@@ -209,8 +209,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1310683,
-      "allocatedBytes": 1324891,
+      "elapsedNs": 1381850,
+      "allocatedBytes": 2164324,
       "classification": "post-parse feature-validation requirement",
       "notes": []
     },
@@ -231,8 +231,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1288583,
-      "allocatedBytes": 2164328,
+      "elapsedNs": 1487658,
+      "allocatedBytes": 2164324,
       "classification": "upstream Java grammar gap",
       "notes": [
         "backend produced 1 error nodes"
@@ -255,7 +255,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1322891,
+      "elapsedNs": 1403783,
       "allocatedBytes": 1324891,
       "classification": "upstream Java grammar gap",
       "notes": [
@@ -277,8 +277,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1230125,
-      "allocatedBytes": 793947,
+      "elapsedNs": 1266566,
+      "allocatedBytes": 1624547,
       "classification": "post-parse feature-validation requirement",
       "notes": [
         "release-agnostic backend accepted syntax disabled at this level"
@@ -300,7 +300,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1233066,
+      "elapsedNs": 1385083,
       "allocatedBytes": 1625187,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -324,7 +324,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1230325,
+      "elapsedNs": 1200491,
       "allocatedBytes": 1625187,
       "classification": "",
       "notes": []
@@ -345,7 +345,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1245550,
+      "elapsedNs": 1371641,
       "allocatedBytes": 1625187,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -369,7 +369,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1203900,
+      "elapsedNs": 1292333,
       "allocatedBytes": 1625187,
       "classification": "",
       "notes": []
@@ -389,8 +389,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1235450,
-      "allocatedBytes": 1625187,
+      "elapsedNs": 1224650,
+      "allocatedBytes": 793947,
       "classification": "post-parse feature-validation requirement",
       "notes": [
         "release-agnostic backend accepted syntax disabled at this level"
@@ -411,8 +411,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1231825,
-      "allocatedBytes": 793947,
+      "elapsedNs": 1287041,
+      "allocatedBytes": 1625187,
       "classification": "post-parse feature-validation requirement",
       "notes": [
         "release-agnostic backend accepted syntax disabled at this level"
@@ -433,7 +433,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1287425,
+      "elapsedNs": 1261000,
       "allocatedBytes": 1619206,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -457,8 +457,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1218841,
-      "allocatedBytes": 788008,
+      "elapsedNs": 1224108,
+      "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
     },
@@ -479,7 +479,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1236600,
+      "elapsedNs": 1222483,
       "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
@@ -501,7 +501,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1216291,
+      "elapsedNs": 1209275,
       "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
@@ -523,7 +523,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1201041,
+      "elapsedNs": 1221783,
       "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
@@ -545,7 +545,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1217808,
+      "elapsedNs": 1297258,
       "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
@@ -567,7 +567,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1191866,
+      "elapsedNs": 1479833,
       "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
@@ -587,8 +587,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1182916,
-      "allocatedBytes": 788008,
+      "elapsedNs": 1253641,
+      "allocatedBytes": 1619206,
       "classification": "post-parse feature-validation requirement",
       "notes": [
         "release-agnostic backend accepted syntax disabled at this level"
@@ -611,8 +611,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1245366,
-      "allocatedBytes": 1619209,
+      "elapsedNs": 1349466,
+      "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
     },
@@ -633,8 +633,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1206083,
-      "allocatedBytes": 788008,
+      "elapsedNs": 1197633,
+      "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
     },
@@ -655,7 +655,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1229508,
+      "elapsedNs": 1237291,
       "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
@@ -677,7 +677,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1247916,
+      "elapsedNs": 1228941,
       "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
@@ -699,7 +699,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1219208,
+      "elapsedNs": 1180950,
       "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
@@ -721,7 +721,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1254566,
+      "elapsedNs": 1250725,
       "allocatedBytes": 1619206,
       "classification": "",
       "notes": []
@@ -741,8 +741,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1320025,
-      "allocatedBytes": 2172752,
+      "elapsedNs": 1350316,
+      "allocatedBytes": 2172742,
       "classification": "post-parse feature-validation requirement",
       "notes": []
     },
@@ -762,8 +762,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1273233,
-      "allocatedBytes": 1332670,
+      "elapsedNs": 1284033,
+      "allocatedBytes": 2172742,
       "classification": "post-parse feature-validation requirement",
       "notes": []
     },
@@ -784,7 +784,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1341766,
+      "elapsedNs": 1370816,
       "allocatedBytes": 1332670,
       "classification": "upstream Java grammar gap",
       "notes": [
@@ -808,7 +808,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1320625,
+      "elapsedNs": 1391941,
       "allocatedBytes": 2172742,
       "classification": "upstream Java grammar gap",
       "notes": [
@@ -832,7 +832,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1288425,
+      "elapsedNs": 1357425,
       "allocatedBytes": 2172742,
       "classification": "upstream Java grammar gap",
       "notes": [
@@ -856,8 +856,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1286425,
-      "allocatedBytes": 1332670,
+      "elapsedNs": 1326858,
+      "allocatedBytes": 2172742,
       "classification": "upstream Java grammar gap",
       "notes": [
         "backend produced 1 error nodes"
@@ -880,8 +880,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1396133,
-      "allocatedBytes": 2172742,
+      "elapsedNs": 1367725,
+      "allocatedBytes": 1332670,
       "classification": "upstream Java grammar gap",
       "notes": [
         "backend produced 1 error nodes"
@@ -902,7 +902,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1249058,
+      "elapsedNs": 1309733,
       "allocatedBytes": 1632004,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -925,7 +925,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1269125,
+      "elapsedNs": 1241116,
       "allocatedBytes": 1632644,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -949,7 +949,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1257891,
+      "elapsedNs": 1220975,
       "allocatedBytes": 1632644,
       "classification": "",
       "notes": []
@@ -970,7 +970,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1259575,
+      "elapsedNs": 1294800,
       "allocatedBytes": 1632644,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -994,7 +994,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1220600,
+      "elapsedNs": 1259366,
       "allocatedBytes": 1632644,
       "classification": "",
       "notes": []
@@ -1015,7 +1015,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1254025,
+      "elapsedNs": 1277241,
       "allocatedBytes": 1632644,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -1039,8 +1039,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1226100,
-      "allocatedBytes": 805507,
+      "elapsedNs": 1272208,
+      "allocatedBytes": 1632644,
       "classification": "",
       "notes": []
     },
@@ -1060,7 +1060,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1244675,
+      "elapsedNs": 1222725,
       "allocatedBytes": 1632644,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -1082,7 +1082,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1240316,
+      "elapsedNs": 1388591,
       "allocatedBytes": 1630628,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -1105,8 +1105,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1238091,
-      "allocatedBytes": 1630628,
+      "elapsedNs": 1235816,
+      "allocatedBytes": 803491,
       "classification": "post-parse feature-validation requirement",
       "notes": [
         "release-agnostic backend accepted syntax disabled at this level"
@@ -1129,8 +1129,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1225475,
-      "allocatedBytes": 803491,
+      "elapsedNs": 1285683,
+      "allocatedBytes": 1630632,
       "classification": "",
       "notes": []
     },
@@ -1151,7 +1151,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1278783,
+      "elapsedNs": 1264216,
       "allocatedBytes": 1630628,
       "classification": "",
       "notes": []
@@ -1173,7 +1173,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1252591,
+      "elapsedNs": 1250516,
       "allocatedBytes": 1630628,
       "classification": "",
       "notes": []
@@ -1193,7 +1193,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1235550,
+      "elapsedNs": 1246816,
       "allocatedBytes": 1630281,
       "classification": "post-parse feature-validation requirement",
       "notes": [
@@ -1216,8 +1216,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1241133,
-      "allocatedBytes": 1630281,
+      "elapsedNs": 1185350,
+      "allocatedBytes": 803144,
       "classification": "post-parse feature-validation requirement",
       "notes": [
         "release-agnostic backend accepted syntax disabled at this level"
@@ -1240,7 +1240,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1297666,
+      "elapsedNs": 1277716,
       "allocatedBytes": 1630281,
       "classification": "",
       "notes": []
@@ -1262,7 +1262,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1222141,
+      "elapsedNs": 1226541,
       "allocatedBytes": 1630281,
       "classification": "",
       "notes": []
@@ -1284,7 +1284,7 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1236508,
+      "elapsedNs": 1250741,
       "allocatedBytes": 1630281,
       "classification": "",
       "notes": []
@@ -1306,8 +1306,8 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1233100,
-      "allocatedBytes": 803144,
+      "elapsedNs": 1281775,
+      "allocatedBytes": 1630281,
       "classification": "",
       "notes": []
     },
@@ -1328,8 +1328,220 @@
       "roundTrip": true,
       "spanInvariants": true,
       "panic": false,
-      "elapsedNs": 1289108,
+      "elapsedNs": 1253883,
       "allocatedBytes": 1630281,
+      "classification": "",
+      "notes": []
+    },
+    {
+      "id": "java22/flexible-constructor/field-before-super-rejected-p1",
+      "release": 22,
+      "preview": true,
+      "feature": "flexible-constructor-bodies",
+      "featureState": "preview",
+      "featureVariant": 1,
+      "featureEnabled": true,
+      "bytes": 186,
+      "backendNodes": 52,
+      "backendErrors": 1,
+      "missingNodes": 0,
+      "backendShapeSHA256": "67ef3f41a42da0c55aa523713665031efdd2e71e6bec9a757e34373570553b84",
+      "convertedElements": 52,
+      "roundTrip": true,
+      "spanInvariants": true,
+      "panic": false,
+      "elapsedNs": 1309491,
+      "allocatedBytes": 2170664,
+      "classification": "upstream Java grammar gap",
+      "notes": [
+        "backend produced 1 error nodes"
+      ]
+    },
+    {
+      "id": "java23/flexible-constructor/field-before-super-p2",
+      "release": 23,
+      "preview": true,
+      "feature": "flexible-constructor-bodies",
+      "featureState": "preview",
+      "featureVariant": 2,
+      "featureEnabled": true,
+      "bytes": 186,
+      "backendNodes": 52,
+      "backendErrors": 1,
+      "missingNodes": 0,
+      "backendShapeSHA256": "67ef3f41a42da0c55aa523713665031efdd2e71e6bec9a757e34373570553b84",
+      "convertedElements": 52,
+      "roundTrip": true,
+      "spanInvariants": true,
+      "panic": false,
+      "elapsedNs": 1417991,
+      "allocatedBytes": 2170664,
+      "classification": "upstream Java grammar gap",
+      "notes": [
+        "backend produced 1 error nodes"
+      ]
+    },
+    {
+      "id": "java24/flexible-constructor/field-before-super-p3",
+      "release": 24,
+      "preview": true,
+      "feature": "flexible-constructor-bodies",
+      "featureState": "preview",
+      "featureVariant": 3,
+      "featureEnabled": true,
+      "bytes": 186,
+      "backendNodes": 52,
+      "backendErrors": 1,
+      "missingNodes": 0,
+      "backendShapeSHA256": "67ef3f41a42da0c55aa523713665031efdd2e71e6bec9a757e34373570553b84",
+      "convertedElements": 52,
+      "roundTrip": true,
+      "spanInvariants": true,
+      "panic": false,
+      "elapsedNs": 1282141,
+      "allocatedBytes": 2170664,
+      "classification": "upstream Java grammar gap",
+      "notes": [
+        "backend produced 1 error nodes"
+      ]
+    },
+    {
+      "id": "java25/flexible-constructor/field-before-super-final",
+      "release": 25,
+      "preview": false,
+      "feature": "flexible-constructor-bodies",
+      "featureState": "final",
+      "featureVariant": 4,
+      "featureEnabled": true,
+      "bytes": 186,
+      "backendNodes": 52,
+      "backendErrors": 1,
+      "missingNodes": 0,
+      "backendShapeSHA256": "67ef3f41a42da0c55aa523713665031efdd2e71e6bec9a757e34373570553b84",
+      "convertedElements": 52,
+      "roundTrip": true,
+      "spanInvariants": true,
+      "panic": false,
+      "elapsedNs": 1335350,
+      "allocatedBytes": 2170664,
+      "classification": "upstream Java grammar gap",
+      "notes": [
+        "backend produced 1 error nodes"
+      ]
+    },
+    {
+      "id": "java23/module-import/on-demand-shadow-rejected-p1",
+      "release": 23,
+      "preview": true,
+      "feature": "module-imports",
+      "featureState": "preview",
+      "featureVariant": 1,
+      "featureEnabled": true,
+      "bytes": 104,
+      "backendNodes": 33,
+      "backendErrors": 1,
+      "missingNodes": 0,
+      "backendShapeSHA256": "b44f96e4aecc729af43365f9c022b7ae584f49574f674e2db13d5c4174b55577",
+      "convertedElements": 33,
+      "roundTrip": true,
+      "spanInvariants": true,
+      "panic": false,
+      "elapsedNs": 1315558,
+      "allocatedBytes": 2155542,
+      "classification": "upstream Java grammar gap",
+      "notes": [
+        "backend produced 1 error nodes"
+      ]
+    },
+    {
+      "id": "java24/module-import/on-demand-shadow-p2",
+      "release": 24,
+      "preview": true,
+      "feature": "module-imports",
+      "featureState": "preview",
+      "featureVariant": 2,
+      "featureEnabled": true,
+      "bytes": 104,
+      "backendNodes": 33,
+      "backendErrors": 1,
+      "missingNodes": 0,
+      "backendShapeSHA256": "b44f96e4aecc729af43365f9c022b7ae584f49574f674e2db13d5c4174b55577",
+      "convertedElements": 33,
+      "roundTrip": true,
+      "spanInvariants": true,
+      "panic": false,
+      "elapsedNs": 1310125,
+      "allocatedBytes": 2155542,
+      "classification": "upstream Java grammar gap",
+      "notes": [
+        "backend produced 1 error nodes"
+      ]
+    },
+    {
+      "id": "java25/module-import/on-demand-shadow-final",
+      "release": 25,
+      "preview": false,
+      "feature": "module-imports",
+      "featureState": "final",
+      "featureVariant": 3,
+      "featureEnabled": true,
+      "bytes": 104,
+      "backendNodes": 33,
+      "backendErrors": 1,
+      "missingNodes": 0,
+      "backendShapeSHA256": "b44f96e4aecc729af43365f9c022b7ae584f49574f674e2db13d5c4174b55577",
+      "convertedElements": 33,
+      "roundTrip": true,
+      "spanInvariants": true,
+      "panic": false,
+      "elapsedNs": 1251016,
+      "allocatedBytes": 2155542,
+      "classification": "upstream Java grammar gap",
+      "notes": [
+        "backend produced 1 error nodes"
+      ]
+    },
+    {
+      "id": "java25/primitive-pattern/pre-p4-dominance-accepted-p3",
+      "release": 25,
+      "preview": true,
+      "feature": "primitive-patterns",
+      "featureState": "preview",
+      "featureVariant": 3,
+      "featureEnabled": true,
+      "bytes": 217,
+      "backendNodes": 60,
+      "backendErrors": 0,
+      "missingNodes": 0,
+      "backendShapeSHA256": "c61cfeead35b9c5d5a75d10bf10830562b9b46c4dfcd806e68601d66abefca70",
+      "convertedElements": 60,
+      "roundTrip": true,
+      "spanInvariants": true,
+      "panic": false,
+      "elapsedNs": 1240058,
+      "allocatedBytes": 1634780,
+      "classification": "",
+      "notes": []
+    },
+    {
+      "id": "java26/primitive-pattern/p4-dominance-rejected",
+      "release": 26,
+      "preview": true,
+      "feature": "primitive-patterns",
+      "featureState": "preview",
+      "featureVariant": 4,
+      "featureEnabled": true,
+      "bytes": 217,
+      "backendNodes": 60,
+      "backendErrors": 0,
+      "missingNodes": 0,
+      "backendShapeSHA256": "c61cfeead35b9c5d5a75d10bf10830562b9b46c4dfcd806e68601d66abefca70",
+      "convertedElements": 60,
+      "roundTrip": true,
+      "spanInvariants": true,
+      "panic": false,
+      "elapsedNs": 1224000,
+      "allocatedBytes": 1635420,
       "classification": "",
       "notes": []
     }

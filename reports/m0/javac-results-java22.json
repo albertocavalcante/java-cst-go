@@ -21,7 +21,7 @@
         "basic.java:1:14: compiler.err.expected: '.'",
         "1 error"
       ],
-      "elapsedNs": 1701138333,
+      "elapsedNs": 724188250,
       "matches": true,
       "backendMeasured": true,
       "backendErrors": 1,
@@ -40,7 +40,7 @@
         "basic.java:3:20: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.string.templates)",
         "1 error"
       ],
-      "elapsedNs": 198784208,
+      "elapsedNs": 391623959,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -58,7 +58,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 245181667,
+      "elapsedNs": 472161000,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -75,7 +75,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 238267042,
+      "elapsedNs": 479134542,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -92,7 +92,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 230042125,
+      "elapsedNs": 492155708,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -109,7 +109,7 @@
         "basic.java:6:14: compiler.err.preview.feature.disabled: (compiler.misc.feature.super.init)",
         "1 error"
       ],
-      "elapsedNs": 229747000,
+      "elapsedNs": 382139750,
       "matches": true,
       "backendMeasured": true,
       "backendErrors": 1,
@@ -128,7 +128,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 234754000,
+      "elapsedNs": 295933333,
       "matches": true,
       "backendMeasured": true,
       "backendErrors": 1,
@@ -147,10 +147,31 @@
         "basic.java:4:18: compiler.err.type.found.req: int, (compiler.misc.type.req.class.array)",
         "1 error"
       ],
-      "elapsedNs": 227803583,
+      "elapsedNs": 259569166,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java22/flexible-constructor/field-before-super-rejected-p1",
+      "release": 22,
+      "preview": true,
+      "feature": "flexible-constructor-bodies",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "field-before-super.java:5:9: compiler.err.cant.ref.before.ctor.called: this",
+        "- compiler.note.preview.filename: field-before-super.java, DEFAULT",
+        "- compiler.note.preview.recompile",
+        "1 error"
+      ],
+      "elapsedNs": 261653416,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
       "differentialClassification": "post-parse feature-validation requirement"
     }
   ]

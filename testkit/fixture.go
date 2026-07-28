@@ -21,6 +21,7 @@ type Fixture struct {
 	ExpectedFeatureState   string           `json:"expectedFeatureState,omitempty"`
 	ExpectedFeatureVariant uint8            `json:"expectedFeatureVariant,omitempty"`
 	ExpectedFeatureEnabled bool             `json:"expectedFeatureEnabled,omitempty"`
+	ExpectedJavac          string           `json:"expectedJavac,omitempty"`
 	ExpectedBackend        string           `json:"expectedBackend"`
 	ExpectedRoundTrip      bool             `json:"expectedRoundTrip"`
 }
@@ -106,9 +107,31 @@ func DecodeManifest(reader io.Reader) (Manifest, error) {
 				"measure",
 			)
 		}
+		if _, err := fixture.ExpectsJavacAcceptance(); err != nil {
+			return Manifest{}, fmt.Errorf("M0 fixture %q: %w", fixture.ID, err)
+		}
 	}
 
 	return manifest, nil
+}
+
+// ExpectsJavacAcceptance returns the explicit compiler expectation, or derives
+// it from the release anchor/feature-enabled contract when no override exists.
+func (fixture Fixture) ExpectsJavacAcceptance() (bool, error) {
+	switch fixture.ExpectedJavac {
+	case "":
+		return fixture.Category == "release-anchor" ||
+			fixture.ExpectedFeatureEnabled, nil
+	case "accept":
+		return true, nil
+	case "reject":
+		return false, nil
+	default:
+		return false, fmt.Errorf(
+			"expectedJavac = %q, want accept or reject",
+			fixture.ExpectedJavac,
+		)
+	}
 }
 
 func validateFeatureBoundary(fixture Fixture) error {

@@ -21,7 +21,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 465074792,
+      "elapsedNs": 502725833,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -35,7 +35,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 247134625,
+      "elapsedNs": 259611459,
       "matches": true,
       "backendMeasured": true,
       "backendErrors": 1,
@@ -54,7 +54,7 @@
         "basic.java:3:28: compiler.err.illegal.esc.char",
         "1 error"
       ],
-      "elapsedNs": 210136875,
+      "elapsedNs": 210054250,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -69,7 +69,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 249314083,
+      "elapsedNs": 250507375,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -83,7 +83,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 244195708,
+      "elapsedNs": 248822708,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -97,7 +97,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 243298042,
+      "elapsedNs": 239729041,
       "matches": true,
       "backendMeasured": true,
       "backendErrors": 1,
@@ -116,10 +116,29 @@
         "basic.java:4:18: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.primitive.patterns)",
         "1 error"
       ],
-      "elapsedNs": 224848000,
+      "elapsedNs": 232595042,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java26/primitive-pattern/p4-dominance-rejected",
+      "release": 26,
+      "preview": true,
+      "feature": "primitive-patterns",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "p4-dominance.java:5:18: compiler.err.pattern.dominated",
+        "- compiler.note.preview.filename: p4-dominance.java, DEFAULT",
+        "- compiler.note.preview.recompile",
+        "1 error"
+      ],
+      "elapsedNs": 225084666,
+      "matches": true,
+      "backendMeasured": true,
       "differentialClassification": "post-parse feature-validation requirement"
     }
   ]
