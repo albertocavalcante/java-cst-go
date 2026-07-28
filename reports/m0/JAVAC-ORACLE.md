@@ -1,6 +1,6 @@
 # M0 `javac` oracle evidence
 
-Status: **Java 21-26 minimum matrix complete**
+Status: **Java 21-26 minimum matrix complete for baseline and patched backend**
 Compiler platform: macOS/AArch64
 
 The exact OpenJDK archives, sizes, builds, and SHA-256 values are locked in
@@ -17,7 +17,25 @@ before extraction into a non-system cache.
 | 26 | 8 | 8 | 3 | 2 | 3 |
 | **Total** | **52** | **52** | **21** | **14** | **17** |
 
-## Confirmed backend grammar gaps
+The repository-owned patched Java 25 grammar resolves both feature-level
+grammar gaps:
+
+| Release | Compiler cases | Expected results matched | Aligned | Confirmed grammar gaps | Validation required |
+|---:|---:|---:|---:|---:|---:|
+| 21 | 7 | 7 | 5 | 0 | 2 |
+| 22 | 9 | 9 | 4 | 0 | 5 |
+| 23 | 10 | 10 | 6 | 0 | 4 |
+| 24 | 9 | 9 | 7 | 0 | 2 |
+| 25 | 9 | 9 | 8 | 0 | 1 |
+| 26 | 8 | 8 | 5 | 0 | 3 |
+| **Total** | **52** | **52** | **35** | **0** | **17** |
+
+The second matrix was generated from `results-java25.json`, using the same
+verified compiler installations and fixture expectations as the baseline.
+The 14 former fixture-level grammar gaps become aligned without changing the
+17 cases that intentionally require release-aware validation.
+
+## Baseline backend grammar gaps
 
 The matching compiler accepts these enabled features while the pinned backend
 produces an error node:

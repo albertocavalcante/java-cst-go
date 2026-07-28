@@ -1,6 +1,6 @@
 # M0 grammar-gap and runtime audit
 
-Status: **alternative runtime passes initial gate; patched grammar integration pending**
+Status: **complete; replacement runtime and patched grammar pass M0**
 Date: 2026-07-27
 
 ## Outcome
@@ -17,18 +17,14 @@ but `gotreesitter` v0.47.0 spends about 1.76 seconds and cumulatively allocates
 about 1.71 GB before returning a partial `memory_budget` tree. Current
 `gotreesitter` HEAD does not improve this reproducer.
 
-An adapter for `github.com/dcosson/treesitter-go` v0.1.0 now passes the initial
-replacement gate. Behind the same repository-owned snapshot contract it
-returns a complete error tree for the reproducer in about 0.113 ms with about
-605 KB allocated. All 69 M0 fixtures have valid ranges and byte-exact converted
-CSTs. Forty-one clean non-template fixture cases have byte-for-byte identical
-backend snapshots; all 21 existing recovery cases remain recovery cases.
-
-The remaining seven clean cases are the same string-template source at
-different language levels. Their structural difference is an improvement:
-the alternative runtime and native Tree-sitter produce
-`string_interpolation`, while the pinned runtime's handwritten Java token
-source produces an ordinary `escape_sequence`.
+An adapter for `github.com/dcosson/treesitter-go` v0.1.0 passes the replacement
+gate. Behind the same repository-owned snapshot contract it returns a complete
+error tree for the reproducer in about 0.113 ms with about 605 KB allocated.
+With repository-owned tables generated from the patched Java grammar, all 69
+M0 fixtures have valid ranges, byte-exact converted CSTs, and zero backend
+error nodes. The exact Java 21-26 compiler matrix classifies 35 cases as
+aligned, 17 as release-aware validation requirements, and zero as grammar
+gaps.
 
 A 30-second translated parse-and-convert fuzz lane completed 121,367
 executions without a panic, conversion failure, range failure, or round-trip
@@ -50,8 +46,11 @@ does not prove that every malformed input completes without cancellation.
   macOS/arm64 archive SHA-256
   `9dc0dc3415a1cd30499750579defbf3f8e000a98f12a65cda8e25981f07e7b0f`
 
-The candidate source delta was tested in an isolated checkout. It is evidence,
-not yet a production grammar dependency.
+The candidate source delta and generated Go tables are repository-owned and
+locked under `internal/grammar/java25`. The lock records every upstream
+commit, tool version, archive digest, source-patch digest, generated
+`parser.c` digest, generated-Go digest, and deterministic post-processing
+step.
 
 ## Grammar patch sizing
 
@@ -97,9 +96,22 @@ Using the verified CLI:
 - all 108 upstream corpus/highlight tests passed.
 
 Generated `parser.c` churn is not patch complexity. The maintained source
-delta is 21 lines in one grammar file plus focused corpus fixtures. Production
-integration must regenerate the blob with one repository-locked generator and
-verify the resulting digest.
+delta is 21 lines in one grammar file plus focused corpus fixtures. The
+repository lock verifies the checked-in Go table and records:
+
+- patched `grammar.js` SHA-256
+  `71731ca48b47dba3f9c9c72029106cf68be19d191c76cc9d423c2b9183c071a6`;
+- generated `parser.c` SHA-256
+  `710ddd0c02708ee3a93f954b3897150c98173a523a9ff3540eb648d246aca425`;
+- generated `language.go` SHA-256
+  `69f6512ed2af2741a40c4dd2e5962169c525eb3e666885a541a9cc3f2c4b31da`.
+
+The v0.1.0 table generator emits an import of its own `internal/core`
+package, which is illegal from this module. The locked generation recipe
+rewrites that import to the runtime's public root facade and runs `gofmt`;
+the facade re-exports the same table types. This is deterministic and covered
+by the generated-file digest, but it should become an upstream generator
+option before regeneration is routine.
 
 ## Runtime comparison
 
@@ -141,18 +153,12 @@ product recovery requirement.
 - `cst-go`: no blocker or enhancement was exposed by this audit.
 - Java grammar: a small pinned fork is technically reasonable.
 - `gotreesitter`: reject as the production editor-facing runtime.
-- `treesitter-go`: leading replacement candidate; full-file M0 behavior is
+- `treesitter-go`: selected replacement runtime; full-file M0 behavior is
   compatible with the backend-neutral adapter.
-- M0 strategy: likely **replace** the runtime while retaining and patching the
-  Java grammar, pending generated-table and sustained-fuzz evidence.
+- M0 strategy: **replace** the runtime while retaining Tree-sitter's grammar
+  architecture and maintaining the bounded pinned Java grammar delta.
 
-The next decision tranche is:
-
-1. generate repository-owned Java tables from the bounded grammar delta with
-   a locked generator and verify their digest;
-2. rerun all fixture, conversion, exact-compiler, fuzz, and benchmark gates
-   through the alternative adapter;
-3. audit the v0.1.0 dependency surface and incremental claims without exposing
-   its types publicly;
-4. write the M0 decision, expected to select **replace** for the runtime and a
-   small pinned Java grammar fork unless the patched-table gate fails.
+The runtime module has no transitive module dependencies, is MIT licensed, and
+keeps its implementation types behind the repository-owned backend boundary.
+M0 proves full-file parsing and recovery, not the quality or cost of
+incremental reparsing; incremental behavior remains an explicit M1 gate.

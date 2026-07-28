@@ -1,13 +1,25 @@
 # M0 reports
 
-`results.json` contains per-fixture backend and conversion evidence generated
-with:
+`results.json` contains per-fixture baseline-backend and conversion evidence
+generated with:
 
 ```sh
 go run ./cmd/m0report \
   -runs 5 \
   -out reports/m0/results.json \
   -shapes-out reports/m0/backend-shapes.json
+```
+
+`results-java25.json` and `backend-shapes-java25.json` contain the equivalent
+evidence for the selected replacement runtime and repository-owned patched
+Java tables:
+
+```sh
+go run ./cmd/m0report \
+  -backend java25 \
+  -runs 5 \
+  -out reports/m0/results-java25.json \
+  -shapes-out reports/m0/backend-shapes-java25.json
 ```
 
 The command performs one warmup, then records the mean wall time and allocated
@@ -18,16 +30,17 @@ comparative spike evidence, not stable performance promises.
 source. Each case in `results.json` carries the corresponding SHA-256, so
 repeated release-level probes share one inspectable golden shape.
 
-`decision.md` will select keep, fork, hybridize, or replace after all M0 work
-packages pass their gates.
+`decision.md` selects **replace**: replace the original runtime with
+`treesitter-go`, retain Tree-sitter's grammar architecture, and own a bounded
+pinned patch for Java 25 syntax.
 
 No release-support claim is implied by a backend accepting a fixture.
 
 `GRAMMAR-RUNTIME-AUDIT.md` sizes the two confirmed Java grammar gaps and
 compares the pathological malformed-input reproducer against native
 Tree-sitter, the pinned pure-Go runtime, its post-release HEAD, and the
-alternative pure-Go runtime adapter. The candidate grammar delta is evidence,
-not yet a production dependency.
+replacement pure-Go runtime adapter. The generated patched grammar tables and
+their full provenance are locked under `internal/grammar/java25`.
 
 ## Compiler oracle toolchains
 
@@ -61,3 +74,8 @@ into an isolated temporary directory, applies a per-case deadline, and
 correlates each result with `results.json`. A feature accepted by the matching
 compiler but represented with backend error nodes is classified as a confirmed
 upstream Java grammar gap.
+
+The `javac-results-javaNN-java25.json` files repeat this correlation against
+`results-java25.json`. Across Java 21-26, all 52 compiler expectations match:
+35 cases are aligned, 17 require release-aware validation, and none retain a
+grammar gap.
