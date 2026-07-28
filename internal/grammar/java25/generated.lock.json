@@ -1,5 +1,10 @@
 {
   "schemaVersion": 1,
+  "sharedCST": {
+    "module": "github.com/albertocavalcante/cst-go",
+    "version": "v0.2.1-0.20260727192650-0dd634a2fbae",
+    "commit": "0dd634a2fbae8201cb1c521b7f05c3cc5bc6aac2"
+  },
   "runtime": {
     "module": "github.com/dcosson/treesitter-go",
     "version": "v0.1.0",

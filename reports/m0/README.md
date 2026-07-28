@@ -10,16 +10,11 @@ go run ./cmd/m0report \
   -shapes-out reports/m0/backend-shapes.json
 ```
 
-The rejected `gotreesitter` comparison remains available as the explicitly
-named baseline:
-
-```sh
-go run ./cmd/m0report \
-  -backend baseline \
-  -runs 5 \
-  -out reports/m0/results-gotreesitter.json \
-  -shapes-out reports/m0/backend-shapes-gotreesitter.json
-```
+The rejected `gotreesitter` comparison remains as historical
+`results-gotreesitter.json` and `backend-shapes-gotreesitter.json` evidence,
+with exact provenance in `gotreesitter.lock.json`. Its executable adapter and
+module dependency were removed after the selected golden migration passed;
+the current command intentionally runs only the selected backend.
 
 The command performs one warmup, then records the mean wall time and allocated
 bytes across the requested serial repetitions. These measurements are

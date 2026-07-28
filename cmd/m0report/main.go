@@ -44,11 +44,6 @@ func run() error {
 		"path for deduplicated backend shape snapshots",
 	)
 	runs := flag.Int("runs", 5, "measured pipeline repetitions per fixture")
-	backend := flag.String(
-		"backend",
-		string(m0report.BackendSelected),
-		"backend to measure: selected or baseline",
-	)
 	flag.Parse()
 
 	manifestData, err := os.ReadFile(*manifestPath)
@@ -63,7 +58,6 @@ func run() error {
 	evidence, err := m0report.Run(context.Background(), manifest, m0report.Options{
 		FixtureRoot: *fixtureRoot,
 		Runs:        *runs,
-		Backend:     m0report.Backend(*backend),
 	})
 	if err != nil {
 		return err

@@ -8,11 +8,18 @@ import (
 	"os"
 	"strings"
 	"testing"
+
+	"git.alberto.engineer/alberto/java-cst-go/internal/grammar/java25"
 )
 
 type generatedLock struct {
 	SchemaVersion int `json:"schemaVersion"`
-	Runtime       struct {
+	SharedCST     struct {
+		Module  string `json:"module"`
+		Version string `json:"version"`
+		Commit  string `json:"commit"`
+	} `json:"sharedCST"`
+	Runtime struct {
 		Module                    string `json:"module"`
 		Version                   string `json:"version"`
 		Commit                    string `json:"commit"`
@@ -52,7 +59,20 @@ func TestGeneratedTableMatchesLock(t *testing.T) {
 	if lock.SchemaVersion != 1 {
 		t.Fatalf("schema version = %d, want 1", lock.SchemaVersion)
 	}
+	for name, values := range map[string][2]string{
+		"shared CST version": {lock.SharedCST.Version, java25.SharedCSTVersion},
+		"shared CST commit":  {lock.SharedCST.Commit, java25.SharedCSTCommit},
+		"runtime version":    {lock.Runtime.Version, java25.RuntimeVersion},
+		"runtime commit":     {lock.Runtime.Commit, java25.RuntimeCommit},
+		"grammar commit":     {lock.Grammar.BaseCommit, java25.GrammarBaseCommit},
+	} {
+		if values[0] != values[1] {
+			t.Errorf("%s lock = %q, constant = %q", name, values[0], values[1])
+		}
+	}
 	for name, value := range map[string]string{
+		"shared CST module":       lock.SharedCST.Module,
+		"shared CST version":      lock.SharedCST.Version,
 		"runtime module":          lock.Runtime.Module,
 		"runtime version":         lock.Runtime.Version,
 		"runtime module sum":      lock.Runtime.ModuleSum,
@@ -81,6 +101,7 @@ func TestGeneratedTableMatchesLock(t *testing.T) {
 		assertHexDigest(t, name, value)
 	}
 	for name, value := range map[string]string{
+		"shared CST commit":      lock.SharedCST.Commit,
 		"runtime commit":         lock.Runtime.Commit,
 		"table generator commit": lock.TableGenerator.Commit,
 		"grammar base commit":    lock.Grammar.BaseCommit,

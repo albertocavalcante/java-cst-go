@@ -5,12 +5,10 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
-	"reflect"
 	"testing"
 	"time"
 
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend"
-	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesitter"
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesittergo"
 	"git.alberto.engineer/alberto/java-cst-go/internal/convert"
 	"git.alberto.engineer/alberto/java-cst-go/language"
@@ -47,7 +45,7 @@ func TestPathologicalRecoveryReturnsCompleteErrorTree(t *testing.T) {
 	}
 }
 
-func TestSelectedFixtureSnapshotsReviewAgainstBaseline(t *testing.T) {
+func TestSelectedFixtureSnapshotsAreCleanAndLossless(t *testing.T) {
 	t.Parallel()
 
 	manifestPath := filepath.Join("..", "..", "..", "testdata", "m0", "fixtures.json")
@@ -87,14 +85,6 @@ func TestSelectedFixtureSnapshotsReviewAgainstBaseline(t *testing.T) {
 			}
 			translation := source.Translate(string(raw))
 
-			want, err := treesitter.ParseTranslation(
-				context.Background(),
-				translation,
-				level,
-			)
-			if err != nil {
-				t.Fatalf("baseline ParseTranslation: %v", err)
-			}
 			got, err := treesittergo.ParseTranslation(
 				context.Background(),
 				translation,
@@ -114,7 +104,7 @@ func TestSelectedFixtureSnapshotsReviewAgainstBaseline(t *testing.T) {
 			if text := converted.Tree.Root().AppendText(); text != string(raw) {
 				t.Fatalf("selected round trip = %q, want %q", text, raw)
 			}
-			assertEquivalent(t, fixture, got, want)
+			assertSelected(t, fixture, got, len(raw), len(translation.Logical()))
 		})
 	}
 }
@@ -131,6 +121,36 @@ func TestParseHonorsPreCancelledContext(t *testing.T) {
 	)
 	if !errors.Is(err, context.Canceled) {
 		t.Fatalf("Parse error = %v, want context canceled", err)
+	}
+}
+
+func TestParseRejectsInvalidLevel(t *testing.T) {
+	t.Parallel()
+
+	if _, err := treesittergo.Parse(context.Background(), nil, language.Level{}); err == nil {
+		t.Fatal("Parse with invalid level returned nil error")
+	}
+}
+
+func TestParseEmptySource(t *testing.T) {
+	t.Parallel()
+
+	result, err := treesittergo.Parse(
+		context.Background(),
+		nil,
+		language.Level{Release: language.Release21},
+	)
+	if err != nil {
+		t.Fatalf("Parse: %v", err)
+	}
+	if result.Root == nil ||
+		result.Root.Kind != "program" ||
+		result.Root.StartByte != 0 ||
+		result.Root.EndByte != 0 {
+		t.Fatalf("empty source root = %+v, want zero-width program", result.Root)
+	}
+	if issues := result.ValidateRanges(0); len(issues) != 0 {
+		t.Fatalf("range validation issues: %+v", issues)
 	}
 }
 
@@ -176,51 +196,37 @@ func FuzzTranslatedBackendConversionRoundTrip(f *testing.F) {
 	})
 }
 
-func assertEquivalent(
+func assertSelected(
 	t *testing.T,
 	fixture testkit.Fixture,
-	got, want backend.Result,
+	got backend.Result,
+	rawBytes, logicalBytes int,
 ) {
 	t.Helper()
 
-	if got.Level != want.Level ||
-		got.RawBytes != want.RawBytes ||
-		got.LogicalBytes != want.LogicalBytes ||
+	if got.Level != (language.Level{
+		Release: fixture.Release,
+		Preview: fixture.Preview,
+	}) ||
+		got.RawBytes != uint32(rawBytes) ||
+		got.LogicalBytes != uint32(logicalBytes) ||
 		got.StoppedEarly ||
 		got.Root == nil {
-		t.Fatalf(
-			"selected metadata = %+v, baseline metadata = %+v",
-			got,
-			want,
-		)
+		t.Fatalf("selected metadata = %+v", got)
+	}
+	if got.ErrorCount != 0 || got.Root.HasError {
+		t.Fatalf("selected fixture tree contains backend errors: %+v", got)
 	}
 	switch fixture.Feature {
 	case "module-imports":
-		if got.ErrorCount != 0 ||
-			got.Root.HasError ||
-			!hasKind(got.Root, "module_import_declaration") {
+		if !hasKind(got.Root, "module_import_declaration") {
 			t.Fatalf("patched module-import shape = %+v, want clean named node", got)
 		}
-		return
 	case "flexible-constructor-bodies":
-		if got.ErrorCount != 0 ||
-			got.Root.HasError ||
-			!hasKind(got.Root, "explicit_constructor_invocation") {
+		if !hasKind(got.Root, "explicit_constructor_invocation") {
 			t.Fatalf("patched constructor shape = %+v, want clean invocation", got)
 		}
-		return
-	}
-	if want.ErrorCount > 0 {
-		if got.ErrorCount == 0 || !got.Root.HasError {
-			t.Fatalf(
-				"selected accepted baseline recovery case: selected=%+v baseline=%+v",
-				got,
-				want,
-			)
-		}
-		return
-	}
-	if fixture.Feature == "string-templates" {
+	case "string-templates":
 		if got.ErrorCount != 0 ||
 			!hasKind(got.Root, "string_interpolation") ||
 			hasKind(got.Root, "escape_sequence") {
@@ -229,15 +235,6 @@ func assertEquivalent(
 				got,
 			)
 		}
-		return
-	}
-
-	got.Backend = ""
-	want.Backend = ""
-	got.StopReason = ""
-	want.StopReason = ""
-	if !reflect.DeepEqual(got, want) {
-		t.Fatalf("clean selected snapshot differs from baseline snapshot")
 	}
 }
 

@@ -14,9 +14,7 @@ import (
 
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend"
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend/selected"
-	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesitter"
 	"git.alberto.engineer/alberto/java-cst-go/internal/convert"
-	"git.alberto.engineer/alberto/java-cst-go/internal/grammar"
 	"git.alberto.engineer/alberto/java-cst-go/internal/grammar/java25"
 	"git.alberto.engineer/alberto/java-cst-go/language"
 	"git.alberto.engineer/alberto/java-cst-go/source"
@@ -28,23 +26,7 @@ import (
 type Options struct {
 	FixtureRoot string
 	Runs        int
-	Backend     Backend
 }
-
-// Backend selects one M0 parser implementation.
-type Backend string
-
-const (
-	// BackendSelected is the accepted runtime with repository-owned patched
-	// Java tables. It is also selected when Options.Backend is empty.
-	BackendSelected Backend = "selected"
-	// BackendBaseline is the rejected gotreesitter M0 baseline oracle.
-	BackendBaseline Backend = "baseline"
-	// BackendPinned is the historical spelling of BackendBaseline.
-	BackendPinned Backend = "pinned"
-	// BackendJava25 is the historical spelling of BackendSelected.
-	BackendJava25 Backend = "java25"
-)
 
 // Evidence contains scalar case results and deduplicated backend shapes.
 type Evidence struct {
@@ -77,25 +59,16 @@ func Run(
 	if options.Runs < 1 {
 		return Evidence{}, fmt.Errorf("run M0 report: runs = %d, want at least 1", options.Runs)
 	}
-	selected, err := selectBackend(options.Backend)
-	if err != nil {
-		return Evidence{}, fmt.Errorf("run M0 report: %w", err)
-	}
-
-	lock, err := grammar.Load()
-	if err != nil {
-		return Evidence{}, fmt.Errorf("run M0 report: %w", err)
-	}
 	report := testkit.Report{
 		SchemaVersion: 1,
 		Run: testkit.RunMetadata{
 			GoVersion:      runtime.Version(),
 			OS:             runtime.GOOS,
 			Arch:           runtime.GOARCH,
-			CSTGoCommit:    lock.SharedCST.Commit,
-			RuntimeVersion: selected.runtimeVersion,
-			RuntimeCommit:  selected.runtimeCommit,
-			GrammarCommit:  selected.grammarCommit,
+			CSTGoCommit:    java25.SharedCSTCommit,
+			RuntimeVersion: java25.RuntimeVersion,
+			RuntimeCommit:  java25.RuntimeCommit,
+			GrammarCommit:  java25.GrammarBaseCommit,
 		},
 		Cases: make([]testkit.CaseResult, 0, len(manifest.Fixtures)),
 	}
@@ -118,7 +91,7 @@ func Run(
 			fixture,
 			string(raw),
 			options.Runs,
-			selected.parse,
+			selected.ParseTranslation,
 		)
 		if err != nil {
 			return Evidence{}, fmt.Errorf("measure fixture %q: %w", fixture.ID, err)
@@ -162,38 +135,6 @@ type parseTranslationFunc func(
 	*source.Translation,
 	language.Level,
 ) (backend.Result, error)
-
-type selectedBackend struct {
-	runtimeVersion string
-	runtimeCommit  string
-	grammarCommit  string
-	parse          parseTranslationFunc
-}
-
-func selectBackend(choice Backend) (selectedBackend, error) {
-	switch choice {
-	case "", BackendSelected, BackendJava25:
-		return selectedBackend{
-			runtimeVersion: java25.RuntimeVersion,
-			runtimeCommit:  java25.RuntimeCommit,
-			grammarCommit:  java25.GrammarBaseCommit,
-			parse:          selected.ParseTranslation,
-		}, nil
-	case BackendBaseline, BackendPinned:
-		lock, err := grammar.Load()
-		if err != nil {
-			return selectedBackend{}, err
-		}
-		return selectedBackend{
-			runtimeVersion: lock.Runtime.Version,
-			runtimeCommit:  lock.Runtime.Commit,
-			grammarCommit:  lock.Grammar.Commit,
-			parse:          treesitter.ParseTranslation,
-		}, nil
-	default:
-		return selectedBackend{}, fmt.Errorf("unknown backend %q", choice)
-	}
-}
 
 func measureCase(
 	ctx context.Context,
