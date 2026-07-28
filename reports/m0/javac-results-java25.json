@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "compiler": {
+    "release": 25,
+    "version": "25.0.2",
+    "build": "25.0.2+10",
+    "os": "darwin",
+    "arch": "arm64",
+    "sha256": "7581b0d1752cd5acbf39e286c03f07b6cd6c205b562eb2fe753ff0253cf4c1bf"
+  },
+  "cases": [
+    {
+      "id": "java25/module-import/final",
+      "release": 25,
+      "preview": false,
+      "feature": "module-imports",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 1915253333,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
+    },
+    {
+      "id": "java25/compact-source/final",
+      "release": 25,
+      "preview": false,
+      "feature": "compact-source-files",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 229805833,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java25/instance-main/final",
+      "release": 25,
+      "preview": false,
+      "feature": "instance-main-methods",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 234674834,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java25/flexible-constructor/final",
+      "release": 25,
+      "preview": false,
+      "feature": "flexible-constructor-bodies",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 223781958,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
+    },
+    {
+      "id": "java25/primitive-pattern/preview-disabled-p3",
+      "release": 25,
+      "preview": false,
+      "feature": "primitive-patterns",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:4:18: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.primitive.patterns)",
+        "1 error"
+      ],
+      "elapsedNs": 215766334,
+      "matches": true,
+      "backendMeasured": true,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java25/primitive-pattern/preview-p3",
+      "release": 25,
+      "preview": true,
+      "feature": "primitive-patterns",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 235121708,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    }
+  ]
+}

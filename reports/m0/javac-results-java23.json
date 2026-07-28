@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "compiler": {
+    "release": 23,
+    "version": "23.0.2",
+    "build": "23.0.2+7",
+    "os": "darwin",
+    "arch": "arm64",
+    "sha256": "bff699bb27455c2bb51d6e8f2467b77a4833388412aa2d95ec1970ddfb0e7b6c"
+  },
+  "cases": [
+    {
+      "id": "java23/module-import/preview-disabled-p1",
+      "release": 23,
+      "preview": false,
+      "feature": "module-imports",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:1:8: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.module.imports)",
+        "1 error"
+      ],
+      "elapsedNs": 1696628000,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java23/module-import/preview-p1",
+      "release": 23,
+      "preview": true,
+      "feature": "module-imports",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 308033791,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
+    },
+    {
+      "id": "java23/string-template/withdrawn",
+      "release": 23,
+      "preview": true,
+      "feature": "string-templates",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:3:28: compiler.err.illegal.esc.char",
+        "1 error"
+      ],
+      "elapsedNs": 202108709,
+      "matches": true,
+      "backendMeasured": true,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java23/compact-source/preview-p3",
+      "release": 23,
+      "preview": true,
+      "feature": "compact-source-files",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 247839833,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java23/instance-main/preview-p3",
+      "release": 23,
+      "preview": true,
+      "feature": "instance-main-methods",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 280220833,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java23/flexible-constructor/preview-p2",
+      "release": 23,
+      "preview": true,
+      "feature": "flexible-constructor-bodies",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 228285125,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
+    },
+    {
+      "id": "java23/primitive-pattern/preview-disabled-p1",
+      "release": 23,
+      "preview": false,
+      "feature": "primitive-patterns",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:4:18: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.primitive.patterns)",
+        "1 error"
+      ],
+      "elapsedNs": 219857292,
+      "matches": true,
+      "backendMeasured": true,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java23/primitive-pattern/preview-p1",
+      "release": 23,
+      "preview": true,
+      "feature": "primitive-patterns",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 244575167,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    }
+  ]
+}

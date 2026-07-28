@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "compiler": {
+    "release": 24,
+    "version": "24.0.2",
+    "build": "24.0.2+12",
+    "os": "darwin",
+    "arch": "arm64",
+    "sha256": "d2bcbedc348978625e6ad03dda9f8f9993ce6918c34ec5328ec1c1dd2e71e0c7"
+  },
+  "cases": [
+    {
+      "id": "java24/module-import/preview-disabled-p2",
+      "release": 24,
+      "preview": false,
+      "feature": "module-imports",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:1:8: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.module.imports)",
+        "1 error"
+      ],
+      "elapsedNs": 1724490375,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java24/module-import/preview-p2",
+      "release": 24,
+      "preview": true,
+      "feature": "module-imports",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 255582292,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
+    },
+    {
+      "id": "java24/compact-source/preview-p4",
+      "release": 24,
+      "preview": true,
+      "feature": "compact-source-files",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 244671417,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java24/instance-main/preview-p4",
+      "release": 24,
+      "preview": true,
+      "feature": "instance-main-methods",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 243888917,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java24/flexible-constructor/preview-p3",
+      "release": 24,
+      "preview": true,
+      "feature": "flexible-constructor-bodies",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 227159625,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
+    },
+    {
+      "id": "java24/primitive-pattern/preview-disabled-p2",
+      "release": 24,
+      "preview": false,
+      "feature": "primitive-patterns",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:4:18: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.primitive.patterns)",
+        "1 error"
+      ],
+      "elapsedNs": 237027208,
+      "matches": true,
+      "backendMeasured": true,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java24/primitive-pattern/preview-p2",
+      "release": 24,
+      "preview": true,
+      "feature": "primitive-patterns",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 255745125,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    }
+  ]
+}
