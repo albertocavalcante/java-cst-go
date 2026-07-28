@@ -249,7 +249,7 @@ func runPipeline(
 }
 
 func validateTree(
-	tree *syntax.Tree,
+	tree *syntax.CoreTree,
 	raw string,
 	notes []string,
 ) (bool, []string) {

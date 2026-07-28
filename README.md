@@ -15,6 +15,25 @@ supported, and its syntax API is not frozen.
 The normative design and executable spike plan live in the sibling
 [`jvm-cst-plan`](../jvm-cst-plan/) workspace.
 
+## Usage
+
+```go
+tree, err := javacst.Parse(source, javacst.Options{
+	Level: language.Level{Release: language.Release25},
+})
+if err != nil {
+	// Invalid configuration, cancellation, a resource limit, or an internal
+	// invariant failure.
+}
+
+exactSource := tree.Text()
+root := tree.Root()
+diagnostics := tree.Diagnostics()
+```
+
+Java syntax and lexical errors are attached to a usable tree. They do not
+become operational Go errors. A zero `Options` value selects stable Java 25.
+
 ## Development
 
 ```sh

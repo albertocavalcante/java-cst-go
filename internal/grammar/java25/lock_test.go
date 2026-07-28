@@ -65,6 +65,7 @@ func TestGeneratedTableMatchesLock(t *testing.T) {
 		"runtime version":    {lock.Runtime.Version, java25.RuntimeVersion},
 		"runtime commit":     {lock.Runtime.Commit, java25.RuntimeCommit},
 		"grammar commit":     {lock.Grammar.BaseCommit, java25.GrammarBaseCommit},
+		"grammar patch":      {lock.Grammar.PatchSHA256, java25.GrammarPatchSHA256},
 	} {
 		if values[0] != values[1] {
 			t.Errorf("%s lock = %q, constant = %q", name, values[0], values[1])

@@ -35,3 +35,23 @@ needed for parsing, lexical fidelity, diagnostics, and later generated views.
 - Translation diagnostics remain in deterministic raw-source order, and
   returned slices do not expose stored diagnostic or note slices.
 - The syntax substrate uses `diagnostic.Code` as its generic stable code type.
+
+## Public lossless parse seam
+
+- The root `javacst` package exposes `Parse` and `ParseContext`; zero options
+  resolve to stable Java 25.
+- `syntax.Tree` owns exact source, resolved language level, translation,
+  diagnostics, and selected runtime/grammar provenance around its immutable
+  `cst-go` core.
+- Lexical and parser recovery diagnostics are deterministically merged while
+  syntax errors still return a usable tree and nil operational error.
+- Invalid configuration and cancellation return a nil tree and wrapped Go
+  error.
+- Public-pipeline tests cover Java 25 patched syntax, malformed input, empty
+  and trivia-only files, BOM/line-ending fidelity, Unicode escapes, invalid
+  UTF-8, defensive diagnostics, provenance, concurrent reads, and bounded
+  fuzz round trips.
+- A 30-second public `ParseContext` fuzz lane completed 289,095 executions
+  without a panic, operational failure, or round-trip mismatch.
+- The complete gate passes 303 tests under the race detector plus formatting,
+  vet, lint, and module-tidy checks.

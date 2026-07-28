@@ -47,7 +47,7 @@ type (
 	Builder      = cst.Builder[Kind, TriviaKind, TokenData]
 	RedNode      = cst.RedNode[Kind, TriviaKind, TokenData]
 	RedToken     = cst.RedToken[Kind, TriviaKind, TokenData]
-	Tree         = cst.Tree[Kind, TriviaKind, TokenData, DiagnosticCode]
+	CoreTree     = cst.Tree[Kind, TriviaKind, TokenData, DiagnosticCode]
 )
 
 // NodeKind maps one backend-neutral grammar name into the M0 node namespace.

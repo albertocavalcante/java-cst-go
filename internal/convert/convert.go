@@ -14,7 +14,7 @@ import (
 
 // Result contains the lossless shared CST and conversion measurements.
 type Result struct {
-	Tree              *syntax.Tree
+	Tree              *syntax.CoreTree
 	BackendLeaves     int
 	SyntaxTokens      int
 	TriviaItems       int

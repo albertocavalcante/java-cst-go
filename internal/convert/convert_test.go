@@ -450,7 +450,7 @@ func FuzzTranslatedBackendConversionRoundTrip(f *testing.F) {
 	})
 }
 
-func assertTreeInvariants(t *testing.T, tree *syntax.Tree, source string) {
+func assertTreeInvariants(t *testing.T, tree *syntax.CoreTree, source string) {
 	t.Helper()
 
 	if tree == nil {
