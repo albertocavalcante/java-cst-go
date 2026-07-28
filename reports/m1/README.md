@@ -19,3 +19,7 @@ M1 began by promoting the accepted backend without changing the public API.
 The selected generation lock now owns `cst-go`, runtime, grammar, generator,
 patch, and generated-table provenance. No active package depends on the
 historical baseline lock.
+
+Typed Java declaration, statement, expression, pattern, and type wrappers are
+an M2 deliverable. M1 establishes only the backend-neutral syntax/tree seams
+needed for parsing, lexical fidelity, diagnostics, and later generated views.

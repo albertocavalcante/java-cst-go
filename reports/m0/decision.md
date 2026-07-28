@@ -92,8 +92,9 @@ handles both clean and malformed fixtures through one backend.
    retain the old backend only until the migration diff is reviewed.
 2. Implement release- and preview-aware feature validation with stable
    diagnostics for the 17 demonstrated validation cases.
-3. Add typed Java syntax views over the lossless `cst-go` tree without leaking
-   runtime nodes.
+3. Establish the backend-neutral Java tree, kind, and navigation seams needed
+   by the public parse API. Generated typed Java wrappers begin in M2, as
+   required by the normative milestone specification.
 4. Gate incremental parsing with representative files, adversarial edit
    sequences, cancellation, reuse, latency, and allocation measurements.
 5. Automate grammar regeneration from the lock and pursue upstream grammar and
