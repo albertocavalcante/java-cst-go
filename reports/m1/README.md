@@ -110,3 +110,28 @@ Java name resolution, type checking, or dominance analysis.
 - A 10-second lexical-diagnostic fuzz lane completed 2,464,131 executions
   without failure. The complete gate passes 364 tests under the race detector
   plus formatting, vet, lint, and module-tidy checks.
+
+## Public surface and fuzz exit gate
+
+- Executable external-package examples cover `javacst`, `language`, `source`,
+  `syntax`, and `diagnostic`.
+- Exported comments pass lint, and an import/signature audit found no
+  `treesitter-go` runtime type in any public package or signature.
+- Public regressions cover a 256-level expression tree, 512 KiB of contiguous
+  trivia, a mixed invalid-UTF-8/malformed-escape/recovery buffer, and 16
+  concurrent readers.
+
+Fresh bounded fuzz lanes:
+
+| Layer | Duration | Executions |
+|---|---:|---:|
+| Unicode translation and span mapping | 10s | 2,402,972 |
+| Lexical diagnostics | 10s | 1,930,409 |
+| Selected adapter and detached conversion | 10s | 63,249 |
+| Translation-aware CST conversion | 10s | 90,252 |
+| Public `ParseContext` pipeline | 10s | 68,243 |
+| **Total** | **50s** | **4,555,125** |
+
+All lanes completed without a panic, operational failure, out-of-bounds span,
+or round-trip mismatch. The complete gate passes 373 tests under the race
+detector plus formatting, vet, lint, and module-tidy checks.

@@ -317,6 +317,56 @@ func TestParsedTreeSupportsConcurrentReads(t *testing.T) {
 	group.Wait()
 }
 
+func TestPublicPipelineAdversarialBuffers(t *testing.T) {
+	tests := []struct {
+		name string
+		raw  string
+	}{
+		{
+			name: "deep-tree",
+			raw: "class Deep { int value = " +
+				strings.Repeat("(", 256) +
+				"1" +
+				strings.Repeat(")", 256) +
+				"; }\n",
+		},
+		{
+			name: "large-trivia",
+			raw: "class Trivia { /*" +
+				strings.Repeat(" trivia ", 64*1024) +
+				"*/ int value; }\n",
+		},
+		{
+			name: "malformed-buffer",
+			raw: strings.Repeat(
+				"\xff\\u12\x00#0#.}\"unterminated\n",
+				256,
+			),
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+			defer cancel()
+
+			tree, err := javacst.ParseContext(ctx, test.raw, javacst.Options{})
+			if err != nil {
+				t.Fatalf("ParseContext: %v", err)
+			}
+			if tree.Text() != test.raw || tree.Root().AppendText() != test.raw {
+				t.Fatalf("adversarial buffer did not round trip")
+			}
+			for _, value := range tree.Diagnostics() {
+				if value.Span.Start < 0 ||
+					value.Span.End < value.Span.Start ||
+					value.Span.End > len(test.raw) {
+					t.Fatalf("diagnostic span is out of bounds: %+v", value)
+				}
+			}
+		})
+	}
+}
+
 func hasCode(values []diagnostic.Diagnostic, code diagnostic.Code) bool {
 	for _, value := range values {
 		if value.Code == code {
