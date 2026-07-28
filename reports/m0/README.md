@@ -22,3 +22,21 @@ repeated release-level probes share one inspectable golden shape.
 packages pass their gates.
 
 No release-support claim is implied by a backend accepting a fixture.
+
+## Compiler oracle toolchains
+
+The OpenJDK 21-26 compiler archives used for differential checks are pinned in
+`internal/oracle/toolchains.lock.json`. Each entry records the canonical
+archive URL, byte length, SHA-256, build, and extracted Java home.
+
+Install one compiler into a caller-selected, non-system cache:
+
+```sh
+go run ./cmd/jdkoracle \
+  -release 26 \
+  -cache /path/with/sufficient-space/java-cst-go-oracle
+```
+
+The archive is fully downloaded and SHA-256 verified before extraction.
+Temporary downloads and partial installations are never published as valid
+cache entries. The JDK is not added to the system Java installation.

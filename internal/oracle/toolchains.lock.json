@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "catalogURL": "https://jdk.java.net/archive/",
+  "license": "GPL-2.0-with-classpath-exception",
+  "toolchains": [
+    {
+      "release": 26,
+      "version": "26.0.1",
+      "build": "26.0.1+8",
+      "os": "darwin",
+      "arch": "arm64",
+      "archiveURL": "https://download.java.net/java/GA/jdk26.0.1/458fda22e4c54d5ba572ab8d2b22eb83/8/GPL/openjdk-26.0.1_macos-aarch64_bin.tar.gz",
+      "archiveBytes": 220143967,
+      "sha256": "b2d57405194a312ed4ec6ec08e83b314d3fd2e425e895d704ec5ef8ea6059e17",
+      "javaHome": "jdk-26.0.1.jdk/Contents/Home"
+    },
+    {
+      "release": 25,
+      "version": "25.0.2",
+      "build": "25.0.2+10",
+      "os": "darwin",
+      "arch": "arm64",
+      "archiveURL": "https://download.java.net/java/GA/jdk25.0.2/b1e0dfa218384cb9959bdcb897162d4e/10/GPL/openjdk-25.0.2_macos-aarch64_bin.tar.gz",
+      "archiveBytes": 215449592,
+      "sha256": "7581b0d1752cd5acbf39e286c03f07b6cd6c205b562eb2fe753ff0253cf4c1bf",
+      "javaHome": "jdk-25.0.2.jdk/Contents/Home"
+    },
+    {
+      "release": 24,
+      "version": "24.0.2",
+      "build": "24.0.2+12",
+      "os": "darwin",
+      "arch": "arm64",
+      "archiveURL": "https://download.java.net/java/GA/jdk24.0.2/fdc5d0102fe0414db21410ad5834341f/12/GPL/openjdk-24.0.2_macos-aarch64_bin.tar.gz",
+      "archiveBytes": 205833942,
+      "sha256": "d2bcbedc348978625e6ad03dda9f8f9993ce6918c34ec5328ec1c1dd2e71e0c7",
+      "javaHome": "jdk-24.0.2.jdk/Contents/Home"
+    },
+    {
+      "release": 23,
+      "version": "23.0.2",
+      "build": "23.0.2+7",
+      "os": "darwin",
+      "arch": "arm64",
+      "archiveURL": "https://download.java.net/java/GA/jdk23.0.2/6da2a6609d6e406f85c491fcb119101b/7/GPL/openjdk-23.0.2_macos-aarch64_bin.tar.gz",
+      "archiveBytes": 204446912,
+      "sha256": "bff699bb27455c2bb51d6e8f2467b77a4833388412aa2d95ec1970ddfb0e7b6c",
+      "javaHome": "jdk-23.0.2.jdk/Contents/Home"
+    },
+    {
+      "release": 22,
+      "version": "22.0.2",
+      "build": "22.0.2+9",
+      "os": "darwin",
+      "arch": "arm64",
+      "archiveURL": "https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_macos-aarch64_bin.tar.gz",
+      "archiveBytes": 195674824,
+      "sha256": "3dab98730234e1a87aec14bcb8171d2cae101e96ff4eed1dab96abbb08e843fd",
+      "javaHome": "jdk-22.0.2.jdk/Contents/Home"
+    },
+    {
+      "release": 21,
+      "version": "21.0.2",
+      "build": "21.0.2+13",
+      "os": "darwin",
+      "arch": "arm64",
+      "archiveURL": "https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_macos-aarch64_bin.tar.gz",
+      "archiveBytes": 197537405,
+      "sha256": "b3d588e16ec1e0ef9805d8a696591bd518a5cea62567da8f53b5ce32d11d22e4",
+      "javaHome": "jdk-21.0.2.jdk/Contents/Home"
+    }
+  ]
+}
