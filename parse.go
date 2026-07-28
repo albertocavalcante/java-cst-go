@@ -7,6 +7,7 @@ import (
 	"fmt"
 
 	"git.alberto.engineer/alberto/java-cst-go/diagnostic"
+	"git.alberto.engineer/alberto/java-cst-go/internal/backend"
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend/selected"
 	"git.alberto.engineer/alberto/java-cst-go/internal/convert"
 	"git.alberto.engineer/alberto/java-cst-go/internal/diagnose"
@@ -46,9 +47,30 @@ func ParseContext(
 		return nil, fmt.Errorf("parse Java source: %w", err)
 	}
 
+	limits := options.Limits.resolve()
+	if uint64(len(text)) > uint64(limits.MaxSourceBytes) {
+		return nil, fmt.Errorf("parse Java source: %w", &LimitError{
+			Kind:   LimitSourceBytes,
+			Limit:  uint64(limits.MaxSourceBytes),
+			Actual: uint64(len(text)),
+		})
+	}
 	translation := source.Translate(text)
-	snapshot, err := selected.ParseTranslation(ctx, translation, level)
+	snapshot, err := selected.ParseTranslationWithLimits(
+		ctx,
+		translation,
+		level,
+		limits,
+	)
 	if err != nil {
+		var limitErr *backend.LimitError
+		if errors.As(err, &limitErr) {
+			return nil, fmt.Errorf("parse Java source: %w", &LimitError{
+				Kind:   LimitKind(limitErr.Kind),
+				Limit:  limitErr.Limit,
+				Actual: limitErr.Actual,
+			})
+		}
 		return nil, fmt.Errorf("parse Java source: %w", err)
 	}
 	converted, err := convert.ConvertTranslation(translation, snapshot)

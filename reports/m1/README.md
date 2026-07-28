@@ -55,3 +55,17 @@ needed for parsing, lexical fidelity, diagnostics, and later generated views.
   without a panic, operational failure, or round-trip mismatch.
 - The complete gate passes 303 tests under the race detector plus formatting,
   vet, lint, and module-tidy checks.
+
+## Per-parse resource limits
+
+- Zero-valued limit fields resolve independently to bounded defaults: 16 MiB
+  of raw source, 2,000,000 detached snapshot nodes, and a snapshot depth of
+  4,096 (the root is depth zero).
+- The raw-source bound is checked before translation and before invoking the
+  selected runtime.
+- Node and depth bounds are checked while copying the runtime tree into the
+  repository-owned backend snapshot; the runtime does not expose equivalent
+  parser-internal knobs.
+- Runtime parsing and snapshot publication observe the caller's context.
+- Limit failures publish no partial public tree and expose both
+  `ErrLimitExceeded` and a typed `LimitError`.

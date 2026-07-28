@@ -138,6 +138,72 @@ func TestParseContextHonorsPreCancellation(t *testing.T) {
 	}
 }
 
+func TestParseAppliesPerParseResourceLimits(t *testing.T) {
+	t.Parallel()
+
+	const raw = "class Example { int value = 1; }\n"
+	tree, err := javacst.Parse(raw, javacst.Options{
+		Limits: javacst.Limits{MaxSourceBytes: uint32(len(raw))},
+	})
+	if err != nil || tree == nil {
+		t.Fatalf("Parse at source boundary = (%v, %v), want tree and nil", tree, err)
+	}
+
+	tests := []struct {
+		name   string
+		source string
+		limits javacst.Limits
+		want   javacst.LimitKind
+	}{
+		{
+			name:   "source",
+			limits: javacst.Limits{MaxSourceBytes: uint32(len(raw) - 1)},
+			want:   javacst.LimitSourceBytes,
+		},
+		{
+			name:   "nodes",
+			source: "#0#.}",
+			limits: javacst.Limits{MaxNodes: 1},
+			want:   javacst.LimitNodes,
+		},
+		{
+			name:   "depth",
+			source: "#0#.}",
+			limits: javacst.Limits{MaxDepth: 1},
+			want:   javacst.LimitDepth,
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			t.Parallel()
+
+			source := test.source
+			if source == "" {
+				source = raw
+			}
+			tree, err := javacst.Parse(source, javacst.Options{Limits: test.limits})
+			if tree != nil || !errors.Is(err, javacst.ErrLimitExceeded) {
+				t.Fatalf(
+					"Parse with %s limit = (%v, %v), want nil and ErrLimitExceeded",
+					test.name,
+					tree,
+					err,
+				)
+			}
+			if !strings.Contains(err.Error(), string(test.want)) {
+				t.Errorf("limit error = %q, want resource %q", err, test.want)
+			}
+			var limitErr *javacst.LimitError
+			if !errors.As(err, &limitErr) {
+				t.Fatalf("limit error %T does not expose *javacst.LimitError", err)
+			}
+			if limitErr.Kind != test.want {
+				t.Errorf("LimitError.Kind = %q, want %q", limitErr.Kind, test.want)
+			}
+		})
+	}
+}
+
 func TestParsedTreeSupportsConcurrentReads(t *testing.T) {
 	t.Parallel()
 

@@ -7,6 +7,8 @@ type Options struct {
 	// Level selects a Java release and preview policy. Its zero value resolves
 	// to Java 25 without preview features.
 	Level language.Level
+	// Limits applies parser-local resource bounds.
+	Limits Limits
 }
 
 func (o Options) resolveLevel() (language.Level, bool) {

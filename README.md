@@ -20,6 +20,9 @@ The normative design and executable spike plan live in the sibling
 ```go
 tree, err := javacst.Parse(source, javacst.Options{
 	Level: language.Level{Release: language.Release25},
+	Limits: javacst.Limits{
+		MaxSourceBytes: 2 << 20,
+	},
 })
 if err != nil {
 	// Invalid configuration, cancellation, a resource limit, or an internal
@@ -32,7 +35,13 @@ diagnostics := tree.Diagnostics()
 ```
 
 Java syntax and lexical errors are attached to a usable tree. They do not
-become operational Go errors. A zero `Options` value selects stable Java 25.
+become operational Go errors. A zero `Options` value selects stable Java 25
+and bounded defaults of 16 MiB of raw source, 2,000,000 snapshot nodes, and
+a maximum snapshot depth of 4,096 (the root is depth zero). Source size is
+checked before translation and runtime parsing;
+node/depth bounds apply while publishing the detached CST. Use
+`errors.Is(err, javacst.ErrLimitExceeded)` and `errors.As` to
+`*javacst.LimitError` to inspect limit failures.
 
 ## Development
 

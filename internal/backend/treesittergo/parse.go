@@ -18,8 +18,6 @@ import (
 const (
 	rawBackendName        = "treesitter-go/v0.1.0:token-source:raw"
 	translatedBackendName = "treesitter-go/v0.1.0:token-source:logical"
-	maxSnapshotDepth      = 4096
-	maxSnapshotNodes      = 2_000_000
 )
 
 // Parse parses source with the selected pure-Go Tree-sitter runtime and
@@ -29,6 +27,24 @@ func Parse(
 	input []byte,
 	level language.Level,
 ) (backend.Result, error) {
+	return ParseWithLimits(ctx, input, level, backend.DefaultLimits())
+}
+
+// ParseWithLimits parses raw source with explicit per-parse resource limits.
+func ParseWithLimits(
+	ctx context.Context,
+	input []byte,
+	level language.Level,
+	limits backend.Limits,
+) (backend.Result, error) {
+	limits = backend.ResolveLimits(limits)
+	if uint64(len(input)) > uint64(limits.MaxSourceBytes) {
+		return backend.Result{}, &backend.LimitError{
+			Kind:   backend.LimitSourceBytes,
+			Limit:  uint64(limits.MaxSourceBytes),
+			Actual: uint64(len(input)),
+		}
+	}
 	if len(input) > math.MaxUint32 {
 		return backend.Result{}, fmt.Errorf(
 			"parse selected Java backend snapshot: source is %d bytes, maximum is %d",
@@ -44,6 +60,7 @@ func Parse(
 		rawBackendName,
 		uint32(len(input)),
 		identityProjector,
+		limits,
 	)
 }
 
@@ -54,10 +71,34 @@ func ParseTranslation(
 	translation *source.Translation,
 	level language.Level,
 ) (backend.Result, error) {
+	return ParseTranslationWithLimits(
+		ctx,
+		translation,
+		level,
+		backend.DefaultLimits(),
+	)
+}
+
+// ParseTranslationWithLimits parses translated source with explicit per-parse
+// resource limits.
+func ParseTranslationWithLimits(
+	ctx context.Context,
+	translation *source.Translation,
+	level language.Level,
+	limits backend.Limits,
+) (backend.Result, error) {
 	if translation == nil {
 		return backend.Result{}, errors.New(
 			"parse selected Java backend snapshot: nil source translation",
 		)
+	}
+	limits = backend.ResolveLimits(limits)
+	if uint64(len(translation.Raw())) > uint64(limits.MaxSourceBytes) {
+		return backend.Result{}, &backend.LimitError{
+			Kind:   backend.LimitSourceBytes,
+			Limit:  uint64(limits.MaxSourceBytes),
+			Actual: uint64(len(translation.Raw())),
+		}
 	}
 	if len(translation.Raw()) > math.MaxUint32 {
 		return backend.Result{}, fmt.Errorf(
@@ -92,6 +133,7 @@ func ParseTranslation(
 		translatedBackendName,
 		uint32(len(translation.Raw())),
 		project,
+		limits,
 	)
 }
 
@@ -108,6 +150,7 @@ func parseSnapshot(
 	name string,
 	rawBytes uint32,
 	project rangeProjector,
+	limits backend.Limits,
 ) (backend.Result, error) {
 	if !level.Valid() {
 		return backend.Result{}, errors.New(
@@ -153,9 +196,11 @@ func parseSnapshot(
 	counts := snapshotCounts{}
 	cursor := dts.NewTreeCursor(root)
 	snapshot, err := snapshotCursor(
+		ctx,
 		&cursor,
 		javaLanguage,
 		project,
+		limits,
 		0,
 		&counts,
 	)
@@ -183,26 +228,38 @@ type snapshotCounts struct {
 }
 
 func snapshotCursor(
+	ctx context.Context,
 	cursor *dts.TreeCursor,
 	javaLanguage *dts.Language,
 	project rangeProjector,
+	limits backend.Limits,
 	depth int,
 	counts *snapshotCounts,
 ) (backend.Node, error) {
-	if depth > maxSnapshotDepth {
-		return backend.Node{}, fmt.Errorf(
-			"parse selected Java backend snapshot: depth exceeds %d",
-			maxSnapshotDepth,
-		)
+	if counts.nodes&1023 == 0 {
+		if err := ctx.Err(); err != nil {
+			return backend.Node{}, fmt.Errorf(
+				"parse selected Java backend snapshot: %w",
+				err,
+			)
+		}
+	}
+	if uint64(depth) > uint64(limits.MaxDepth) {
+		return backend.Node{}, &backend.LimitError{
+			Kind:   backend.LimitDepth,
+			Limit:  uint64(limits.MaxDepth),
+			Actual: uint64(depth),
+		}
 	}
 
 	node := cursor.CurrentNode()
 	counts.nodes++
-	if counts.nodes > maxSnapshotNodes {
-		return backend.Node{}, fmt.Errorf(
-			"parse selected Java backend snapshot: node count exceeds %d",
-			maxSnapshotNodes,
-		)
+	if uint64(counts.nodes) > uint64(limits.MaxNodes) {
+		return backend.Node{}, &backend.LimitError{
+			Kind:   backend.LimitNodes,
+			Limit:  uint64(limits.MaxNodes),
+			Actual: uint64(counts.nodes),
+		}
 	}
 
 	isError := node.Symbol() == dts.SymbolError
@@ -242,9 +299,11 @@ func snapshotCursor(
 	}
 	for {
 		child, err := snapshotCursor(
+			ctx,
 			cursor,
 			javaLanguage,
 			project,
+			limits,
 			depth+1,
 			counts,
 		)
