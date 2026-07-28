@@ -1,6 +1,8 @@
 # M1 implementation evidence
 
-M1 began by promoting the accepted backend without changing the public API.
+M1 implementation is complete through its public/fuzz gate. The only remaining
+gate is the separately authorized `cst-go` v0.3.0 release decision and tagged
+dependency update; no tag is created by this repository.
 
 ## Selected-backend promotion
 
@@ -135,3 +137,17 @@ Fresh bounded fuzz lanes:
 All lanes completed without a panic, operational failure, out-of-bounds span,
 or round-trip mismatch. The complete gate passes 373 tests under the race
 detector plus formatting, vet, lint, and module-tidy checks.
+
+## Dependency gate status
+
+- Java currently pins the immutable hardened core commit `0dd634a` as
+  `v0.2.1-0.20260727192650-0dd634a2fbae`, with no local replacement.
+- `cst-go` P0-P8 and its v0.3 acceptance audit are complete. Its synchronized
+  documentation head is `8efd13e`; only v0.1.0 and v0.2.0 are tagged.
+- Java M1 required no further generic `cst-go` enhancement.
+- M1.7 remains pending until an explicit v0.3.0 tag decision. If authorized,
+  Java must update to the tagged version and rerun the coordinated
+  core/Starlark/CMake/Java gates.
+
+Until that dependency decision, the project does not claim a completed M1
+release or advertise Java 8-26 structural conformance.
