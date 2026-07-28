@@ -5,6 +5,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 
@@ -117,6 +118,25 @@ func TestParseHonorsPreCancelledContext(t *testing.T) {
 	_, err := treesittergo.Parse(
 		ctx,
 		nil,
+		language.Level{Release: language.Release21},
+	)
+	if !errors.Is(err, context.Canceled) {
+		t.Fatalf("Parse error = %v, want context canceled", err)
+	}
+}
+
+func TestParseHonorsCancellationFromLiveContext(t *testing.T) {
+	t.Parallel()
+
+	input := []byte(strings.Repeat("class C {}\n", 100_000))
+	ctx, cancel := context.WithCancel(context.Background())
+	timer := time.AfterFunc(time.Millisecond, cancel)
+	defer timer.Stop()
+	defer cancel()
+
+	_, err := treesittergo.Parse(
+		ctx,
+		input,
 		language.Level{Release: language.Release21},
 	)
 	if !errors.Is(err, context.Canceled) {
