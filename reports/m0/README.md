@@ -40,3 +40,18 @@ go run ./cmd/jdkoracle \
 The archive is fully downloaded and SHA-256 verified before extraction.
 Temporary downloads and partial installations are never published as valid
 cache entries. The JDK is not added to the system Java installation.
+
+Run compiler-backed evidence for fixtures matching one locked release:
+
+```sh
+go run ./cmd/javacoracle \
+  -release 26 \
+  -cache /path/with/sufficient-space/java-cst-go-oracle \
+  -out reports/m0/javac-results-java26.json
+```
+
+The runner uses `-XDrawDiagnostics`, disables annotation processing, compiles
+into an isolated temporary directory, applies a per-case deadline, and
+correlates each result with `results.json`. A feature accepted by the matching
+compiler but represented with backend error nodes is classified as a confirmed
+upstream Java grammar gap.

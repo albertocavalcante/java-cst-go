@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "compiler": {
+    "release": 26,
+    "version": "26.0.1",
+    "build": "26.0.1+8",
+    "os": "darwin",
+    "arch": "arm64",
+    "sha256": "b2d57405194a312ed4ec6ec08e83b314d3fd2e425e895d704ec5ef8ea6059e17"
+  },
+  "cases": [
+    {
+      "id": "java26/primitive-pattern/preview-p4",
+      "release": 26,
+      "preview": true,
+      "feature": "primitive-patterns",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 465074792,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java26/module-import/final",
+      "release": 26,
+      "preview": false,
+      "feature": "module-imports",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 247134625,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
+    },
+    {
+      "id": "java26/string-template/withdrawn",
+      "release": 26,
+      "preview": true,
+      "feature": "string-templates",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:3:28: compiler.err.illegal.esc.char",
+        "1 error"
+      ],
+      "elapsedNs": 210136875,
+      "matches": true,
+      "backendMeasured": true,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java26/compact-source/final",
+      "release": 26,
+      "preview": false,
+      "feature": "compact-source-files",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 249314083,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java26/instance-main/final",
+      "release": 26,
+      "preview": false,
+      "feature": "instance-main-methods",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 244195708,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java26/flexible-constructor/final",
+      "release": 26,
+      "preview": false,
+      "feature": "flexible-constructor-bodies",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 243298042,
+      "matches": true,
+      "backendMeasured": true,
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
+    },
+    {
+      "id": "java26/primitive-pattern/preview-disabled-p4",
+      "release": 26,
+      "preview": false,
+      "feature": "primitive-patterns",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:4:18: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.primitive.patterns)",
+        "1 error"
+      ],
+      "elapsedNs": 224848000,
+      "matches": true,
+      "backendMeasured": true,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    }
+  ]
+}
