@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesitter"
+	"git.alberto.engineer/alberto/java-cst-go/internal/backend/selected"
 	"git.alberto.engineer/alberto/java-cst-go/language"
 )
 
@@ -28,7 +28,7 @@ func BenchmarkM0ParseAndConvert(b *testing.B) {
 			level: language.Level{Release: language.Release21},
 		},
 		{
-			name: "java25-module-import-gap",
+			name: "java25-module-import",
 			source: `import module java.base;
 final class Example {
     List<String> values = List.of("m0");
@@ -52,7 +52,7 @@ final class Example {
 					context.Background(),
 					test.source,
 					test.level,
-					treesitter.ParseTranslation,
+					selected.ParseTranslation,
 				); err != nil {
 					b.Fatal(err)
 				}

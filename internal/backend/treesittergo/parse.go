@@ -22,7 +22,7 @@ const (
 	maxSnapshotNodes      = 2_000_000
 )
 
-// Parse parses source with the alternative pure-Go Tree-sitter runtime and
+// Parse parses source with the selected pure-Go Tree-sitter runtime and
 // returns a detached, repository-owned diagnostic snapshot.
 func Parse(
 	ctx context.Context,
@@ -31,7 +31,7 @@ func Parse(
 ) (backend.Result, error) {
 	if len(input) > math.MaxUint32 {
 		return backend.Result{}, fmt.Errorf(
-			"parse alternative Java backend snapshot: source is %d bytes, maximum is %d",
+			"parse selected Java backend snapshot: source is %d bytes, maximum is %d",
 			len(input),
 			uint64(math.MaxUint32),
 		)
@@ -56,19 +56,19 @@ func ParseTranslation(
 ) (backend.Result, error) {
 	if translation == nil {
 		return backend.Result{}, errors.New(
-			"parse alternative Java backend snapshot: nil source translation",
+			"parse selected Java backend snapshot: nil source translation",
 		)
 	}
 	if len(translation.Raw()) > math.MaxUint32 {
 		return backend.Result{}, fmt.Errorf(
-			"parse alternative Java backend snapshot: raw source is %d bytes, maximum is %d",
+			"parse selected Java backend snapshot: raw source is %d bytes, maximum is %d",
 			len(translation.Raw()),
 			uint64(math.MaxUint32),
 		)
 	}
 	if len(translation.Logical()) > math.MaxUint32 {
 		return backend.Result{}, fmt.Errorf(
-			"parse alternative Java backend snapshot: logical source is %d bytes, maximum is %d",
+			"parse selected Java backend snapshot: logical source is %d bytes, maximum is %d",
 			len(translation.Logical()),
 			uint64(math.MaxUint32),
 		)
@@ -111,12 +111,12 @@ func parseSnapshot(
 ) (backend.Result, error) {
 	if !level.Valid() {
 		return backend.Result{}, errors.New(
-			"parse alternative Java backend snapshot: invalid language level",
+			"parse selected Java backend snapshot: invalid language level",
 		)
 	}
 	if err := ctx.Err(); err != nil {
 		return backend.Result{}, fmt.Errorf(
-			"parse alternative Java backend snapshot: %w",
+			"parse selected Java backend snapshot: %w",
 			err,
 		)
 	}
@@ -128,12 +128,12 @@ func parseSnapshot(
 	if tree == nil {
 		if err := ctx.Err(); err != nil {
 			return backend.Result{}, fmt.Errorf(
-				"parse alternative Java backend snapshot: %w",
+				"parse selected Java backend snapshot: %w",
 				err,
 			)
 		}
 		return backend.Result{}, errors.New(
-			"parse alternative Java backend snapshot: runtime returned nil tree",
+			"parse selected Java backend snapshot: runtime returned nil tree",
 		)
 	}
 
@@ -169,7 +169,7 @@ func parseSnapshot(
 
 	if err := ctx.Err(); err != nil {
 		return result, fmt.Errorf(
-			"parse alternative Java backend snapshot: %w",
+			"parse selected Java backend snapshot: %w",
 			err,
 		)
 	}
@@ -191,7 +191,7 @@ func snapshotCursor(
 ) (backend.Node, error) {
 	if depth > maxSnapshotDepth {
 		return backend.Node{}, fmt.Errorf(
-			"parse alternative Java backend snapshot: depth exceeds %d",
+			"parse selected Java backend snapshot: depth exceeds %d",
 			maxSnapshotDepth,
 		)
 	}
@@ -200,7 +200,7 @@ func snapshotCursor(
 	counts.nodes++
 	if counts.nodes > maxSnapshotNodes {
 		return backend.Node{}, fmt.Errorf(
-			"parse alternative Java backend snapshot: node count exceeds %d",
+			"parse selected Java backend snapshot: node count exceeds %d",
 			maxSnapshotNodes,
 		)
 	}
@@ -216,7 +216,7 @@ func snapshotCursor(
 	rawStart, rawEnd, ok := project(node.StartByte(), node.EndByte())
 	if !ok {
 		return backend.Node{}, fmt.Errorf(
-			"parse alternative Java backend snapshot: cannot project %s logical range [%d,%d)",
+			"parse selected Java backend snapshot: cannot project %s logical range [%d,%d)",
 			node.Type(),
 			node.StartByte(),
 			node.EndByte(),
@@ -260,7 +260,7 @@ func snapshotCursor(
 	}
 	if !cursor.GotoParent() {
 		return backend.Node{}, errors.New(
-			"parse alternative Java backend snapshot: cursor lost parent",
+			"parse selected Java backend snapshot: cursor lost parent",
 		)
 	}
 	return snapshot, nil

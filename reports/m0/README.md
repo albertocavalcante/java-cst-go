@@ -1,7 +1,7 @@
 # M0 reports
 
-`results.json` contains per-fixture baseline-backend and conversion evidence
-generated with:
+`results.json` contains per-fixture evidence for the selected backend and
+repository-owned patched Java tables:
 
 ```sh
 go run ./cmd/m0report \
@@ -10,25 +10,24 @@ go run ./cmd/m0report \
   -shapes-out reports/m0/backend-shapes.json
 ```
 
-`results-java25.json` and `backend-shapes-java25.json` contain the equivalent
-evidence for the selected replacement runtime and repository-owned patched
-Java tables:
+The rejected `gotreesitter` comparison remains available as the explicitly
+named baseline:
 
 ```sh
 go run ./cmd/m0report \
-  -backend java25 \
+  -backend baseline \
   -runs 5 \
-  -out reports/m0/results-java25.json \
-  -shapes-out reports/m0/backend-shapes-java25.json
+  -out reports/m0/results-gotreesitter.json \
+  -shapes-out reports/m0/backend-shapes-gotreesitter.json
 ```
 
 The command performs one warmup, then records the mean wall time and allocated
 bytes across the requested serial repetitions. These measurements are
 comparative spike evidence, not stable performance promises.
 
-`backend-shapes.json` stores one full backend-neutral tree per unique fixture
-source. Each case in `results.json` carries the corresponding SHA-256, so
-repeated release-level probes share one inspectable golden shape.
+`backend-shapes.json` stores one full selected-backend-neutral tree per unique
+fixture source. Each case in `results.json` carries the corresponding SHA-256,
+so repeated release-level probes share one inspectable golden shape.
 
 `decision.md` selects **replace**: replace the original runtime with
 `treesitter-go`, retain Tree-sitter's grammar architecture, and own a bounded
@@ -75,7 +74,8 @@ correlates each result with `results.json`. A feature accepted by the matching
 compiler but represented with backend error nodes is classified as a confirmed
 upstream Java grammar gap.
 
-The `javac-results-javaNN-java25.json` files repeat this correlation against
-`results-java25.json`. Across Java 21-26, all 52 compiler expectations match:
-35 cases are aligned, 17 require release-aware validation, and none retain a
-grammar gap.
+The canonical `javac-results-javaNN.json` files correlate the selected
+`results.json`. Across Java 21-26, all 52 compiler expectations match: 35
+cases are aligned, 17 require release-aware validation, and none retain a
+grammar gap. The `javac-results-javaNN-gotreesitter.json` files preserve the
+original baseline correlation.

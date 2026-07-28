@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesitter"
+	"git.alberto.engineer/alberto/java-cst-go/internal/backend/selected"
 	"git.alberto.engineer/alberto/java-cst-go/internal/convert"
 	"git.alberto.engineer/alberto/java-cst-go/language"
 	"git.alberto.engineer/alberto/java-cst-go/source"
@@ -53,7 +53,7 @@ func TestReleaseAnchorsRoundTripThroughSharedCST(t *testing.T) {
 				t.Fatalf("read fixture: %v", err)
 			}
 			source := string(sourceBytes)
-			snapshot, err := treesitter.Parse(
+			snapshot, err := selected.Parse(
 				context.Background(),
 				sourceBytes,
 				language.Level{
@@ -99,7 +99,7 @@ func TestLexicalAdversariesRoundTrip(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
-			snapshot, err := treesitter.Parse(
+			snapshot, err := selected.Parse(
 				context.Background(),
 				[]byte(source),
 				language.Level{Release: language.Release21},
@@ -120,7 +120,7 @@ func TestInterTokenTriviaOwnership(t *testing.T) {
 	t.Parallel()
 
 	source := "class A { int a; // comment\r\n    int b; }\n"
-	snapshot, err := treesitter.Parse(
+	snapshot, err := selected.Parse(
 		context.Background(),
 		[]byte(source),
 		language.Level{Release: language.Release21},
@@ -168,7 +168,7 @@ func TestTranslatedTokensRetainRawAndLogicalSpellings(t *testing.T) {
 	if diagnostics := translation.Diagnostics(); len(diagnostics) != 0 {
 		t.Fatalf("translation diagnostics: %+v", diagnostics)
 	}
-	snapshot, err := treesitter.ParseTranslation(
+	snapshot, err := selected.ParseTranslation(
 		context.Background(),
 		translation,
 		language.Level{Release: language.Release21},
@@ -237,7 +237,7 @@ func TestTranslatedTriviaRetainsRawEscapeSpellings(t *testing.T) {
 	if diagnostics := translation.Diagnostics(); len(diagnostics) != 0 {
 		t.Fatalf("translation diagnostics: %+v", diagnostics)
 	}
-	snapshot, err := treesitter.ParseTranslation(
+	snapshot, err := selected.ParseTranslation(
 		context.Background(),
 		translation,
 		language.Level{Release: language.Release21},
@@ -320,7 +320,7 @@ func TestMalformedUnicodeEscapeStillRoundTrips(t *testing.T) {
 	if got, want := len(translation.Diagnostics()), 1; got != want {
 		t.Fatalf("translation diagnostic count = %d, want %d", got, want)
 	}
-	snapshot, err := treesitter.ParseTranslation(
+	snapshot, err := selected.ParseTranslation(
 		context.Background(),
 		translation,
 		language.Level{Release: language.Release21},
@@ -339,7 +339,7 @@ func TestConvertedTreeSupportsConcurrentReads(t *testing.T) {
 	t.Parallel()
 
 	source := "class Concurrent { /* trivia */ int value = 1; }\n"
-	snapshot, err := treesitter.Parse(
+	snapshot, err := selected.Parse(
 		context.Background(),
 		[]byte(source),
 		language.Level{Release: language.Release21},
@@ -384,7 +384,7 @@ func FuzzBackendConversionRoundTrip(f *testing.F) {
 
 		ctx, cancel := context.WithTimeout(context.Background(), 250*time.Millisecond)
 		defer cancel()
-		snapshot, err := treesitter.Parse(
+		snapshot, err := selected.Parse(
 			ctx,
 			[]byte(source),
 			language.Level{Release: language.Release21},
@@ -429,7 +429,7 @@ func FuzzTranslatedBackendConversionRoundTrip(f *testing.F) {
 		translation := source.Translate(raw)
 		ctx, cancel := context.WithTimeout(context.Background(), 250*time.Millisecond)
 		defer cancel()
-		snapshot, err := treesitter.ParseTranslation(
+		snapshot, err := selected.ParseTranslation(
 			ctx,
 			translation,
 			language.Level{Release: language.Release21},

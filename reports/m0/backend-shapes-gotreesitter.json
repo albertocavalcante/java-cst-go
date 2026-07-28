@@ -3,13 +3,13 @@
   "shapes": [
     {
       "path": "java8/lambda.java",
-      "sha256": "a9593423bf5d9b2298c5553248c0984503b9c72a33b4def08573f89d4f1493f1",
+      "sha256": "990cd66dba8c26c5c15a48295b32039ef55cff00e93eac74b8be10c4f96fd4cf",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 122,
         "logicalBytes": 122,
         "stopReason": "accepted",
@@ -371,13 +371,13 @@
     },
     {
       "path": "java11/var_lambda.java",
-      "sha256": "f5ca88fde6b7467c5796cf01d5e72d8b6949e5c8b1c5492f52f6ae367908c4fe",
+      "sha256": "c0fd2e0490cb2df23a586809b321970db14673eec187f8c34ae565ab4ea90176",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 128,
         "logicalBytes": 128,
         "stopReason": "accepted",
@@ -842,13 +842,13 @@
     },
     {
       "path": "java17/record.java",
-      "sha256": "4857857a4170d6908bb1da88f5e343e43bfb6db6ef2ede36a8998f6841d549bf",
+      "sha256": "af50d2647218b4de721e84be96605b132133b26fbb2e67d01e8e79a36ad110e7",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 91,
         "logicalBytes": 91,
         "stopReason": "accepted",
@@ -1135,13 +1135,13 @@
     },
     {
       "path": "java21/pattern_switch.java",
-      "sha256": "8cb59973b28b93475c1e5b9d3fcdb240d84c3dc7c25736c3ea090bd22bf8ac06",
+      "sha256": "4661bcd07d31817e4c12ef43f3962f66660c04b694b8779db0d5f88d320b3732",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 269,
         "logicalBytes": 269,
         "stopReason": "accepted",
@@ -1909,19 +1909,19 @@
     },
     {
       "path": "features/module-imports/basic.java",
-      "sha256": "ade4c95358b3a02a05ba7327a1e23a21ae20f9c64e00b088db58a7433ccbef2e",
+      "sha256": "69cb7e3d063958f0ee0f23df65cd010531b99a527a7318770d103a2560b908e2",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 104,
         "logicalBytes": 104,
         "stopReason": "accepted",
         "stoppedEarly": false,
-        "nodeCount": 39,
-        "errorCount": 0,
+        "nodeCount": 40,
+        "errorCount": 1,
         "missingCount": 0,
         "root": {
           "kind": "program",
@@ -1930,14 +1930,16 @@
           "logicalStartByte": 0,
           "logicalEndByte": 104,
           "named": true,
+          "hasError": true,
           "children": [
             {
-              "kind": "module_import_declaration",
+              "kind": "import_declaration",
               "startByte": 0,
               "endByte": 24,
               "logicalStartByte": 0,
               "logicalEndByte": 24,
               "named": true,
+              "hasError": true,
               "children": [
                 {
                   "kind": "import",
@@ -1948,16 +1950,28 @@
                   "named": false
                 },
                 {
-                  "kind": "module",
+                  "kind": "ERROR",
                   "startByte": 7,
                   "endByte": 13,
                   "logicalStartByte": 7,
                   "logicalEndByte": 13,
-                  "named": false
+                  "named": true,
+                  "extra": true,
+                  "error": true,
+                  "hasError": true,
+                  "children": [
+                    {
+                      "kind": "identifier",
+                      "startByte": 7,
+                      "endByte": 13,
+                      "logicalStartByte": 7,
+                      "logicalEndByte": 13,
+                      "named": true
+                    }
+                  ]
                 },
                 {
                   "kind": "scoped_identifier",
-                  "field": "module",
                   "startByte": 14,
                   "endByte": 23,
                   "logicalStartByte": 14,
@@ -2277,13 +2291,13 @@
     },
     {
       "path": "features/primitive-patterns/basic.java",
-      "sha256": "5e9bffa7d7c1c2b3ae794004e42823079ef2963d8055972e7545c1b5ce4177c6",
+      "sha256": "083cf9c4641c853a480b8ca4fba43e948945a63968167bc75aeea74fca4cc0ec",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 213,
         "logicalBytes": 213,
         "stopReason": "accepted",
@@ -2862,18 +2876,18 @@
     },
     {
       "path": "features/string-templates/basic.java",
-      "sha256": "7fecbeb747235b4342897bc65bbc1cc39be53007827cc223dab3725d344faa4a",
+      "sha256": "fce7891f304bbe66b1436502a937dd95d99bd195a030d2ce452fb6cb4f25650b",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 120,
         "logicalBytes": 120,
         "stopReason": "accepted",
         "stoppedEarly": false,
-        "nodeCount": 37,
+        "nodeCount": 35,
         "errorCount": 0,
         "missingCount": 0,
         "root": {
@@ -3127,38 +3141,20 @@
                                           "named": true
                                         },
                                         {
-                                          "kind": "string_interpolation",
+                                          "kind": "escape_sequence",
                                           "startByte": 102,
-                                          "endByte": 109,
+                                          "endByte": 104,
                                           "logicalStartByte": 102,
+                                          "logicalEndByte": 104,
+                                          "named": true
+                                        },
+                                        {
+                                          "kind": "string_fragment",
+                                          "startByte": 104,
+                                          "endByte": 109,
+                                          "logicalStartByte": 104,
                                           "logicalEndByte": 109,
-                                          "named": true,
-                                          "children": [
-                                            {
-                                              "kind": "\\{",
-                                              "startByte": 102,
-                                              "endByte": 104,
-                                              "logicalStartByte": 102,
-                                              "logicalEndByte": 104,
-                                              "named": false
-                                            },
-                                            {
-                                              "kind": "identifier",
-                                              "startByte": 104,
-                                              "endByte": 108,
-                                              "logicalStartByte": 104,
-                                              "logicalEndByte": 108,
-                                              "named": true
-                                            },
-                                            {
-                                              "kind": "}",
-                                              "startByte": 108,
-                                              "endByte": 109,
-                                              "logicalStartByte": 108,
-                                              "logicalEndByte": 109,
-                                              "named": false
-                                            }
-                                          ]
+                                          "named": true
                                         },
                                         {
                                           "kind": "\"",
@@ -3212,13 +3208,13 @@
     },
     {
       "path": "features/compact-source-files/basic.java",
-      "sha256": "2b3d2e9786d58dfc5a5f82398d74799cb3f8229a58ec9ce96ae8f9a383dd00b5",
+      "sha256": "37097beb5f1b74074d9860bfe5cd33de8b1312e5ba50ca419a85c68a5b847690",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 51,
         "logicalBytes": 51,
         "stopReason": "accepted",
@@ -3465,19 +3461,19 @@
     },
     {
       "path": "features/flexible-constructor-bodies/basic.java",
-      "sha256": "63aef4060185f94cfffbe5f7880c54cf3f8c0bf87f9084d114b5cd9b070ee473",
+      "sha256": "3ad9e3dbfbdde792d5a33c0f9b882999bde40ffbf182474b894ba6a6c0a2d12c",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 239,
         "logicalBytes": 239,
         "stopReason": "accepted",
         "stoppedEarly": false,
-        "nodeCount": 57,
-        "errorCount": 0,
+        "nodeCount": 58,
+        "errorCount": 1,
         "missingCount": 0,
         "root": {
           "kind": "program",
@@ -3486,6 +3482,7 @@
           "logicalStartByte": 0,
           "logicalEndByte": 239,
           "named": true,
+          "hasError": true,
           "children": [
             {
               "kind": "class_declaration",
@@ -3494,6 +3491,7 @@
               "logicalStartByte": 0,
               "logicalEndByte": 238,
               "named": true,
+              "hasError": true,
               "children": [
                 {
                   "kind": "class",
@@ -3547,6 +3545,7 @@
                   "logicalStartByte": 59,
                   "logicalEndByte": 238,
                   "named": true,
+                  "hasError": true,
                   "children": [
                     {
                       "kind": "{",
@@ -3563,6 +3562,7 @@
                       "logicalStartByte": 65,
                       "logicalEndByte": 236,
                       "named": true,
+                      "hasError": true,
                       "children": [
                         {
                           "kind": "identifier",
@@ -3646,6 +3646,7 @@
                           "logicalStartByte": 104,
                           "logicalEndByte": 236,
                           "named": true,
+                          "hasError": true,
                           "children": [
                             {
                               "kind": "{",
@@ -3845,25 +3846,36 @@
                               ]
                             },
                             {
-                              "kind": "explicit_constructor_invocation",
+                              "kind": "ERROR",
                               "startByte": 199,
-                              "endByte": 230,
+                              "endByte": 204,
                               "logicalStartByte": 199,
-                              "logicalEndByte": 230,
+                              "logicalEndByte": 204,
                               "named": true,
+                              "extra": true,
+                              "error": true,
+                              "hasError": true,
                               "children": [
                                 {
                                   "kind": "super",
-                                  "field": "constructor",
                                   "startByte": 199,
                                   "endByte": 204,
                                   "logicalStartByte": 199,
                                   "logicalEndByte": 204,
                                   "named": true
-                                },
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "expression_statement",
+                              "startByte": 204,
+                              "endByte": 230,
+                              "logicalStartByte": 204,
+                              "logicalEndByte": 230,
+                              "named": true,
+                              "children": [
                                 {
-                                  "kind": "argument_list",
-                                  "field": "arguments",
+                                  "kind": "parenthesized_expression",
                                   "startByte": 204,
                                   "endByte": 229,
                                   "logicalStartByte": 204,
@@ -3999,13 +4011,13 @@
     },
     {
       "path": "features/switch-expressions/basic.java",
-      "sha256": "ecfec2bccda6a75b169f3e65cf6a0515f4c6874550958d71a3af6773abe2911d",
+      "sha256": "240d6c331716f9abd7aa8ed66a20c4dcd192f63dd2ea1324e5a4eb2d9c4b6cdf",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 192,
         "logicalBytes": 192,
         "stopReason": "accepted",
@@ -4527,13 +4539,13 @@
     },
     {
       "path": "features/switch-patterns/basic.java",
-      "sha256": "fa3e6147d9a6f2c7626bd3a22a49145462fb573dac1f4eed6be11a475760394c",
+      "sha256": "944cd7b33ab43389fea368ff277e4cb0f70d29d16b4abaa693a94c9781e3928a",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 200,
         "logicalBytes": 200,
         "stopReason": "accepted",
@@ -5047,19 +5059,19 @@
     },
     {
       "path": "features/flexible-constructor-bodies/field-before-super.java",
-      "sha256": "3160e398a8996325c3412271c42dd537c37f10b77ab87f3bf00642c80d7e3677",
+      "sha256": "67ef3f41a42da0c55aa523713665031efdd2e71e6bec9a757e34373570553b84",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 186,
         "logicalBytes": 186,
         "stopReason": "accepted",
         "stoppedEarly": false,
-        "nodeCount": 51,
-        "errorCount": 0,
+        "nodeCount": 52,
+        "errorCount": 1,
         "missingCount": 0,
         "root": {
           "kind": "program",
@@ -5068,6 +5080,7 @@
           "logicalStartByte": 0,
           "logicalEndByte": 186,
           "named": true,
+          "hasError": true,
           "children": [
             {
               "kind": "class_declaration",
@@ -5076,6 +5089,7 @@
               "logicalStartByte": 0,
               "logicalEndByte": 185,
               "named": true,
+              "hasError": true,
               "children": [
                 {
                   "kind": "class",
@@ -5129,6 +5143,7 @@
                   "logicalStartByte": 53,
                   "logicalEndByte": 185,
                   "named": true,
+                  "hasError": true,
                   "children": [
                     {
                       "kind": "{",
@@ -5202,6 +5217,7 @@
                       "logicalStartByte": 75,
                       "logicalEndByte": 183,
                       "named": true,
+                      "hasError": true,
                       "children": [
                         {
                           "kind": "identifier",
@@ -5285,6 +5301,7 @@
                           "logicalStartByte": 108,
                           "logicalEndByte": 183,
                           "named": true,
+                          "hasError": true,
                           "children": [
                             {
                               "kind": "{",
@@ -5378,25 +5395,36 @@
                               ]
                             },
                             {
-                              "kind": "explicit_constructor_invocation",
+                              "kind": "ERROR",
                               "startByte": 146,
-                              "endByte": 177,
+                              "endByte": 151,
                               "logicalStartByte": 146,
-                              "logicalEndByte": 177,
+                              "logicalEndByte": 151,
                               "named": true,
+                              "extra": true,
+                              "error": true,
+                              "hasError": true,
                               "children": [
                                 {
                                   "kind": "super",
-                                  "field": "constructor",
                                   "startByte": 146,
                                   "endByte": 151,
                                   "logicalStartByte": 146,
                                   "logicalEndByte": 151,
                                   "named": true
-                                },
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "expression_statement",
+                              "startByte": 151,
+                              "endByte": 177,
+                              "logicalStartByte": 151,
+                              "logicalEndByte": 177,
+                              "named": true,
+                              "children": [
                                 {
-                                  "kind": "argument_list",
-                                  "field": "arguments",
+                                  "kind": "parenthesized_expression",
                                   "startByte": 151,
                                   "endByte": 176,
                                   "logicalStartByte": 151,
@@ -5532,19 +5560,19 @@
     },
     {
       "path": "features/module-imports/on-demand-shadow.java",
-      "sha256": "a5fdff5b233257ad551da10c7b59ed7b9487ddebd737ec17772de33e077fb1ba",
+      "sha256": "b44f96e4aecc729af43365f9c022b7ae584f49574f674e2db13d5c4174b55577",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 104,
         "logicalBytes": 104,
         "stopReason": "accepted",
         "stoppedEarly": false,
-        "nodeCount": 32,
-        "errorCount": 0,
+        "nodeCount": 33,
+        "errorCount": 1,
         "missingCount": 0,
         "root": {
           "kind": "program",
@@ -5553,14 +5581,16 @@
           "logicalStartByte": 0,
           "logicalEndByte": 104,
           "named": true,
+          "hasError": true,
           "children": [
             {
-              "kind": "module_import_declaration",
+              "kind": "import_declaration",
               "startByte": 0,
               "endByte": 24,
               "logicalStartByte": 0,
               "logicalEndByte": 24,
               "named": true,
+              "hasError": true,
               "children": [
                 {
                   "kind": "import",
@@ -5571,16 +5601,28 @@
                   "named": false
                 },
                 {
-                  "kind": "module",
+                  "kind": "ERROR",
                   "startByte": 7,
                   "endByte": 13,
                   "logicalStartByte": 7,
                   "logicalEndByte": 13,
-                  "named": false
+                  "named": true,
+                  "extra": true,
+                  "error": true,
+                  "hasError": true,
+                  "children": [
+                    {
+                      "kind": "identifier",
+                      "startByte": 7,
+                      "endByte": 13,
+                      "logicalStartByte": 7,
+                      "logicalEndByte": 13,
+                      "named": true
+                    }
+                  ]
                 },
                 {
                   "kind": "scoped_identifier",
-                  "field": "module",
                   "startByte": 14,
                   "endByte": 23,
                   "logicalStartByte": 14,
@@ -5838,13 +5880,13 @@
     },
     {
       "path": "features/primitive-patterns/p4-dominance.java",
-      "sha256": "08ec84c14b8b346b0df5dbb90996d274efa3b2e41b6c263e92267216e2efb924",
+      "sha256": "c61cfeead35b9c5d5a75d10bf10830562b9b46c4dfcd806e68601d66abefca70",
       "snapshot": {
         "level": {
           "Release": 0,
           "Preview": false
         },
-        "backend": "treesitter-go/v0.1.0:token-source:logical",
+        "backend": "gotreesitter/v0.47.0:token-source:logical",
         "rawBytes": 217,
         "logicalBytes": 217,
         "stopReason": "accepted",

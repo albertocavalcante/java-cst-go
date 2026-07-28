@@ -46,8 +46,8 @@ func run() error {
 	runs := flag.Int("runs", 5, "measured pipeline repetitions per fixture")
 	backend := flag.String(
 		"backend",
-		string(m0report.BackendPinned),
-		"backend to measure: pinned or java25",
+		string(m0report.BackendSelected),
+		"backend to measure: selected or baseline",
 	)
 	flag.Parse()
 

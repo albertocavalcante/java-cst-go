@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend"
+	"git.alberto.engineer/alberto/java-cst-go/internal/backend/selected"
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesitter"
-	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesittergo"
 	"git.alberto.engineer/alberto/java-cst-go/internal/convert"
 	"git.alberto.engineer/alberto/java-cst-go/internal/grammar"
 	"git.alberto.engineer/alberto/java-cst-go/internal/grammar/java25"
@@ -35,10 +35,14 @@ type Options struct {
 type Backend string
 
 const (
-	// BackendPinned is the original gotreesitter spike baseline.
+	// BackendSelected is the accepted runtime with repository-owned patched
+	// Java tables. It is also selected when Options.Backend is empty.
+	BackendSelected Backend = "selected"
+	// BackendBaseline is the rejected gotreesitter M0 baseline oracle.
+	BackendBaseline Backend = "baseline"
+	// BackendPinned is the historical spelling of BackendBaseline.
 	BackendPinned Backend = "pinned"
-	// BackendJava25 is the alternative runtime with repository-owned patched
-	// Java tables.
+	// BackendJava25 is the historical spelling of BackendSelected.
 	BackendJava25 Backend = "java25"
 )
 
@@ -168,7 +172,14 @@ type selectedBackend struct {
 
 func selectBackend(choice Backend) (selectedBackend, error) {
 	switch choice {
-	case "", BackendPinned:
+	case "", BackendSelected, BackendJava25:
+		return selectedBackend{
+			runtimeVersion: java25.RuntimeVersion,
+			runtimeCommit:  java25.RuntimeCommit,
+			grammarCommit:  java25.GrammarBaseCommit,
+			parse:          selected.ParseTranslation,
+		}, nil
+	case BackendBaseline, BackendPinned:
 		lock, err := grammar.Load()
 		if err != nil {
 			return selectedBackend{}, err
@@ -178,13 +189,6 @@ func selectBackend(choice Backend) (selectedBackend, error) {
 			runtimeCommit:  lock.Runtime.Commit,
 			grammarCommit:  lock.Grammar.Commit,
 			parse:          treesitter.ParseTranslation,
-		}, nil
-	case BackendJava25:
-		return selectedBackend{
-			runtimeVersion: java25.RuntimeVersion,
-			runtimeCommit:  java25.RuntimeCommit,
-			grammarCommit:  java25.GrammarBaseCommit,
-			parse:          treesittergo.ParseTranslation,
 		}, nil
 	default:
 		return selectedBackend{}, fmt.Errorf("unknown backend %q", choice)

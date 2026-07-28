@@ -47,7 +47,7 @@ func TestPathologicalRecoveryReturnsCompleteErrorTree(t *testing.T) {
 	}
 }
 
-func TestFixtureSnapshotsMatchPinnedBackend(t *testing.T) {
+func TestSelectedFixtureSnapshotsReviewAgainstBaseline(t *testing.T) {
 	t.Parallel()
 
 	manifestPath := filepath.Join("..", "..", "..", "testdata", "m0", "fixtures.json")
@@ -93,7 +93,7 @@ func TestFixtureSnapshotsMatchPinnedBackend(t *testing.T) {
 				level,
 			)
 			if err != nil {
-				t.Fatalf("pinned ParseTranslation: %v", err)
+				t.Fatalf("baseline ParseTranslation: %v", err)
 			}
 			got, err := treesittergo.ParseTranslation(
 				context.Background(),
@@ -101,18 +101,18 @@ func TestFixtureSnapshotsMatchPinnedBackend(t *testing.T) {
 				level,
 			)
 			if err != nil {
-				t.Fatalf("alternative ParseTranslation: %v", err)
+				t.Fatalf("selected ParseTranslation: %v", err)
 			}
 
 			if issues := got.ValidateRanges(uint32(len(raw))); len(issues) != 0 {
-				t.Fatalf("alternative range issues: %+v", issues)
+				t.Fatalf("selected range issues: %+v", issues)
 			}
 			converted, err := convert.ConvertTranslation(translation, got)
 			if err != nil {
-				t.Fatalf("alternative ConvertTranslation: %v", err)
+				t.Fatalf("selected ConvertTranslation: %v", err)
 			}
 			if text := converted.Tree.Root().AppendText(); text != string(raw) {
-				t.Fatalf("alternative round trip = %q, want %q", text, raw)
+				t.Fatalf("selected round trip = %q, want %q", text, raw)
 			}
 			assertEquivalent(t, fixture, got, want)
 		})
@@ -189,7 +189,7 @@ func assertEquivalent(
 		got.StoppedEarly ||
 		got.Root == nil {
 		t.Fatalf(
-			"alternative metadata = %+v, pinned metadata = %+v",
+			"selected metadata = %+v, baseline metadata = %+v",
 			got,
 			want,
 		)
@@ -213,7 +213,7 @@ func assertEquivalent(
 	if want.ErrorCount > 0 {
 		if got.ErrorCount == 0 || !got.Root.HasError {
 			t.Fatalf(
-				"alternative accepted pinned recovery case: alternative=%+v pinned=%+v",
+				"selected accepted baseline recovery case: selected=%+v baseline=%+v",
 				got,
 				want,
 			)
@@ -225,7 +225,7 @@ func assertEquivalent(
 			!hasKind(got.Root, "string_interpolation") ||
 			hasKind(got.Root, "escape_sequence") {
 			t.Fatalf(
-				"alternative string-template shape does not match native grammar: %+v",
+				"selected string-template shape does not match native grammar: %+v",
 				got,
 			)
 		}
@@ -237,7 +237,7 @@ func assertEquivalent(
 	got.StopReason = ""
 	want.StopReason = ""
 	if !reflect.DeepEqual(got, want) {
-		t.Fatalf("clean alternative snapshot differs from pinned snapshot")
+		t.Fatalf("clean selected snapshot differs from baseline snapshot")
 	}
 }
 

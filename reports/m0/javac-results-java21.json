@@ -17,7 +17,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 761813583,
+      "elapsedNs": 728445042,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -34,7 +34,7 @@
         "basic.java:3:20: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.string.templates)",
         "1 error"
       ],
-      "elapsedNs": 243589792,
+      "elapsedNs": 495890333,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -52,7 +52,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 319288625,
+      "elapsedNs": 605180375,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -69,7 +69,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 290970041,
+      "elapsedNs": 529273000,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -86,7 +86,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 312847917,
+      "elapsedNs": 580421708,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -103,10 +103,9 @@
         "basic.java:6:14: compiler.err.call.must.be.first.stmt.in.ctor: super",
         "1 error"
       ],
-      "elapsedNs": 1563168583,
+      "elapsedNs": 645535750,
       "matches": true,
       "backendMeasured": true,
-      "backendErrors": 1,
       "backendClassification": "post-parse feature-validation requirement",
       "differentialClassification": "post-parse feature-validation requirement"
     },
@@ -119,7 +118,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 437693958,
+      "elapsedNs": 635515625,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"

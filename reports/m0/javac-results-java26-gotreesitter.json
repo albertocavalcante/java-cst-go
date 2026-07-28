@@ -21,7 +21,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 583053792,
+      "elapsedNs": 1304864542,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -35,10 +35,12 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 239984708,
+      "elapsedNs": 606980000,
       "matches": true,
       "backendMeasured": true,
-      "differentialClassification": "aligned"
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
     },
     {
       "id": "java26/string-template/withdrawn",
@@ -52,7 +54,7 @@
         "basic.java:3:28: compiler.err.illegal.esc.char",
         "1 error"
       ],
-      "elapsedNs": 197657541,
+      "elapsedNs": 499918000,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -67,7 +69,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 239320833,
+      "elapsedNs": 860279542,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -81,7 +83,7 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 246352417,
+      "elapsedNs": 693809083,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -95,10 +97,12 @@
       "accepted": true,
       "exitCode": 0,
       "diagnostics": [],
-      "elapsedNs": 240181167,
+      "elapsedNs": 519605417,
       "matches": true,
       "backendMeasured": true,
-      "differentialClassification": "aligned"
+      "backendErrors": 1,
+      "backendClassification": "upstream Java grammar gap",
+      "differentialClassification": "confirmed upstream Java grammar gap"
     },
     {
       "id": "java26/primitive-pattern/preview-disabled-p4",
@@ -112,7 +116,7 @@
         "basic.java:4:18: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.primitive.patterns)",
         "1 error"
       ],
-      "elapsedNs": 223850125,
+      "elapsedNs": 598925834,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -132,7 +136,7 @@
         "- compiler.note.preview.recompile",
         "1 error"
       ],
-      "elapsedNs": 213757417,
+      "elapsedNs": 397094667,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "post-parse feature-validation requirement"

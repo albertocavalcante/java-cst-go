@@ -21,10 +21,9 @@
         "basic.java:1:8: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.module.imports)",
         "1 error"
       ],
-      "elapsedNs": 721786000,
+      "elapsedNs": 485785875,
       "matches": true,
       "backendMeasured": true,
-      "backendErrors": 1,
       "backendClassification": "post-parse feature-validation requirement",
       "differentialClassification": "post-parse feature-validation requirement"
     },
@@ -40,12 +39,10 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 445333292,
+      "elapsedNs": 556596584,
       "matches": true,
       "backendMeasured": true,
-      "backendErrors": 1,
-      "backendClassification": "upstream Java grammar gap",
-      "differentialClassification": "confirmed upstream Java grammar gap"
+      "differentialClassification": "aligned"
     },
     {
       "id": "java23/string-template/withdrawn",
@@ -59,7 +56,7 @@
         "basic.java:3:28: compiler.err.illegal.esc.char",
         "1 error"
       ],
-      "elapsedNs": 382116500,
+      "elapsedNs": 419060208,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -77,7 +74,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 465405708,
+      "elapsedNs": 605514625,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -94,7 +91,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 492597458,
+      "elapsedNs": 582461166,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -111,12 +108,10 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 482061375,
+      "elapsedNs": 526649958,
       "matches": true,
       "backendMeasured": true,
-      "backendErrors": 1,
-      "backendClassification": "upstream Java grammar gap",
-      "differentialClassification": "confirmed upstream Java grammar gap"
+      "differentialClassification": "aligned"
     },
     {
       "id": "java23/primitive-pattern/preview-disabled-p1",
@@ -130,7 +125,7 @@
         "basic.java:4:18: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.primitive.patterns)",
         "1 error"
       ],
-      "elapsedNs": 440739750,
+      "elapsedNs": 539566084,
       "matches": true,
       "backendMeasured": true,
       "backendClassification": "post-parse feature-validation requirement",
@@ -148,7 +143,7 @@
         "- compiler.note.preview.filename: basic.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 422701125,
+      "elapsedNs": 544736000,
       "matches": true,
       "backendMeasured": true,
       "differentialClassification": "aligned"
@@ -165,12 +160,10 @@
         "- compiler.note.preview.filename: field-before-super.java, DEFAULT",
         "- compiler.note.preview.recompile"
       ],
-      "elapsedNs": 437025709,
+      "elapsedNs": 368612250,
       "matches": true,
       "backendMeasured": true,
-      "backendErrors": 1,
-      "backendClassification": "upstream Java grammar gap",
-      "differentialClassification": "confirmed upstream Java grammar gap"
+      "differentialClassification": "aligned"
     },
     {
       "id": "java23/module-import/on-demand-shadow-rejected-p1",
@@ -186,11 +179,9 @@
         "- compiler.note.preview.recompile",
         "1 error"
       ],
-      "elapsedNs": 420381958,
+      "elapsedNs": 266993666,
       "matches": true,
       "backendMeasured": true,
-      "backendErrors": 1,
-      "backendClassification": "upstream Java grammar gap",
       "differentialClassification": "post-parse feature-validation requirement"
     }
   ]

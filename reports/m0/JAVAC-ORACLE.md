@@ -30,8 +30,9 @@ grammar gaps:
 | 26 | 8 | 8 | 5 | 0 | 3 |
 | **Total** | **52** | **52** | **35** | **0** | **17** |
 
-The second matrix was generated from `results-java25.json`, using the same
-verified compiler installations and fixture expectations as the baseline.
+The second matrix is now canonical and was generated from `results.json`,
+using the same verified compiler installations and fixture expectations as
+the explicitly named `results-gotreesitter.json` baseline.
 The 14 former fixture-level grammar gaps become aligned without changing the
 17 cases that intentionally require release-aware validation.
 

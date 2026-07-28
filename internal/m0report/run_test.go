@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"git.alberto.engineer/alberto/java-cst-go/internal/grammar"
 	"git.alberto.engineer/alberto/java-cst-go/internal/grammar/java25"
 	"git.alberto.engineer/alberto/java-cst-go/internal/m0report"
 	"git.alberto.engineer/alberto/java-cst-go/language"
@@ -111,7 +112,7 @@ func TestRunRejectsInvalidOptions(t *testing.T) {
 	}
 }
 
-func TestRunSelectsRepositoryJava25Backend(t *testing.T) {
+func TestRunDefaultsToSelectedBackend(t *testing.T) {
 	t.Parallel()
 
 	evidence, err := m0report.Run(
@@ -120,7 +121,6 @@ func TestRunSelectsRepositoryJava25Backend(t *testing.T) {
 		m0report.Options{
 			FixtureRoot: t.TempDir(),
 			Runs:        1,
-			Backend:     m0report.BackendJava25,
 		},
 	)
 	if err != nil {
@@ -133,6 +133,36 @@ func TestRunSelectsRepositoryJava25Backend(t *testing.T) {
 		t.Errorf("runtime commit = %q, want %q", got, want)
 	}
 	if got, want := evidence.Report.Run.GrammarCommit, java25.GrammarBaseCommit; got != want {
+		t.Errorf("grammar commit = %q, want %q", got, want)
+	}
+}
+
+func TestRunRetainsExplicitBaselineOracle(t *testing.T) {
+	t.Parallel()
+
+	lock, err := grammar.Load()
+	if err != nil {
+		t.Fatalf("load baseline lock: %v", err)
+	}
+	evidence, err := m0report.Run(
+		context.Background(),
+		testkit.Manifest{},
+		m0report.Options{
+			FixtureRoot: t.TempDir(),
+			Runs:        1,
+			Backend:     m0report.BackendBaseline,
+		},
+	)
+	if err != nil {
+		t.Fatalf("Run: %v", err)
+	}
+	if got, want := evidence.Report.Run.RuntimeVersion, lock.Runtime.Version; got != want {
+		t.Errorf("runtime version = %q, want %q", got, want)
+	}
+	if got, want := evidence.Report.Run.RuntimeCommit, lock.Runtime.Commit; got != want {
+		t.Errorf("runtime commit = %q, want %q", got, want)
+	}
+	if got, want := evidence.Report.Run.GrammarCommit, lock.Grammar.Commit; got != want {
 		t.Errorf("grammar commit = %q, want %q", got, want)
 	}
 }
