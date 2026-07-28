@@ -194,6 +194,22 @@ func assertEquivalent(
 			want,
 		)
 	}
+	switch fixture.Feature {
+	case "module-imports":
+		if got.ErrorCount != 0 ||
+			got.Root.HasError ||
+			!hasKind(got.Root, "module_import_declaration") {
+			t.Fatalf("patched module-import shape = %+v, want clean named node", got)
+		}
+		return
+	case "flexible-constructor-bodies":
+		if got.ErrorCount != 0 ||
+			got.Root.HasError ||
+			!hasKind(got.Root, "explicit_constructor_invocation") {
+			t.Fatalf("patched constructor shape = %+v, want clean invocation", got)
+		}
+		return
+	}
 	if want.ErrorCount > 0 {
 		if got.ErrorCount == 0 || !got.Root.HasError {
 			t.Fatalf(

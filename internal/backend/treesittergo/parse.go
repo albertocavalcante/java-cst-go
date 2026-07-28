@@ -7,10 +7,10 @@ import (
 	"math"
 
 	dts "github.com/dcosson/treesitter-go"
-	"github.com/dcosson/treesitter-go/languages/java"
 	dparser "github.com/dcosson/treesitter-go/parser"
 
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend"
+	"git.alberto.engineer/alberto/java-cst-go/internal/grammar/java25"
 	"git.alberto.engineer/alberto/java-cst-go/language"
 	"git.alberto.engineer/alberto/java-cst-go/source"
 )
@@ -121,7 +121,7 @@ func parseSnapshot(
 		)
 	}
 
-	javaLanguage := java.Language()
+	javaLanguage := java25.JavaLanguage()
 	parser := dparser.NewParser()
 	parser.SetLanguage(javaLanguage)
 	tree := parser.ParseString(ctx, input)

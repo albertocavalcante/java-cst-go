@@ -4,6 +4,7 @@ import (
 	"context"
 	"testing"
 
+	"git.alberto.engineer/alberto/java-cst-go/internal/backend/treesitter"
 	"git.alberto.engineer/alberto/java-cst-go/language"
 )
 
@@ -47,7 +48,12 @@ final class Example {
 			b.ReportAllocs()
 			b.SetBytes(int64(len(test.source)))
 			for b.Loop() {
-				if _, err := runPipeline(context.Background(), test.source, test.level); err != nil {
+				if _, err := runPipeline(
+					context.Background(),
+					test.source,
+					test.level,
+					treesitter.ParseTranslation,
+				); err != nil {
 					b.Fatal(err)
 				}
 			}

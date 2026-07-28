@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "runtime": {
+    "module": "github.com/dcosson/treesitter-go",
+    "version": "v0.1.0",
+    "commit": "cf63d32385984f5accbd17557c0e26fcd281f61a",
+    "moduleSum": "h1:E+tXGxZTJT7wPlAAANLMbejaNhreemIKiZgxj4oXV5I=",
+    "upstreamTreeSitterVersion": "v0.26.6"
+  },
+  "parserGenerator": {
+    "version": "v0.26.8",
+    "archiveURL": "https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.8/tree-sitter-cli-macos-arm64.zip",
+    "archiveSHA256": "9dc0dc3415a1cd30499750579defbf3f8e000a98f12a65cda8e25981f07e7b0f"
+  },
+  "tableGenerator": {
+    "module": "github.com/dcosson/treesitter-go",
+    "version": "v0.1.0",
+    "commit": "cf63d32385984f5accbd17557c0e26fcd281f61a",
+    "command": "cmd/tsgo-generate",
+    "postprocess": "rewrite internal/core import to public root facade; gofmt language.go"
+  },
+  "grammar": {
+    "repository": "https://github.com/tree-sitter/tree-sitter-java",
+    "baseCommit": "e10607b45ff745f5f876bfa3e94fbcc6b44bdc11",
+    "patchPath": "patch.json",
+    "patchSHA256": "c5aa5286759b7c6bee77fb2725efbff8b1ce3d985c45b38bb403a7072d7c5030",
+    "patchedGrammarSHA256": "71731ca48b47dba3f9c9c72029106cf68be19d191c76cc9d423c2b9183c071a6",
+    "generatedParserCBytes": 2598300,
+    "generatedParserCSHA256": "710ddd0c02708ee3a93f954b3897150c98173a523a9ff3540eb648d246aca425",
+    "generatedGoPath": "language.go",
+    "generatedGoBytes": 1198674,
+    "generatedGoSHA256": "69f6512ed2af2741a40c4dd2e5962169c525eb3e666885a541a9cc3f2c4b31da"
+  }
+}

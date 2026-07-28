@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "compiler": {
+    "release": 21,
+    "version": "21.0.2",
+    "build": "21.0.2+13",
+    "os": "darwin",
+    "arch": "arm64",
+    "sha256": "b3d588e16ec1e0ef9805d8a696591bd518a5cea62567da8f53b5ce32d11d22e4"
+  },
+  "cases": [
+    {
+      "id": "java21/pattern-switch/release-anchor",
+      "release": 21,
+      "preview": false,
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 696819708,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java21/string-template/preview-disabled-p1",
+      "release": 21,
+      "preview": false,
+      "feature": "string-templates",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:3:20: compiler.err.preview.feature.disabled.plural: (compiler.misc.feature.string.templates)",
+        "1 error"
+      ],
+      "elapsedNs": 191150167,
+      "matches": true,
+      "backendMeasured": true,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java21/string-template/preview-p1",
+      "release": 21,
+      "preview": true,
+      "feature": "string-templates",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 230883125,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java21/compact-source/preview-p1",
+      "release": 21,
+      "preview": true,
+      "feature": "compact-source-files",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 218521500,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java21/instance-main/preview-p1",
+      "release": 21,
+      "preview": true,
+      "feature": "instance-main-methods",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [
+        "- compiler.note.preview.filename: basic.java, DEFAULT",
+        "- compiler.note.preview.recompile"
+      ],
+      "elapsedNs": 231134042,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    },
+    {
+      "id": "java21/flexible-constructor/unavailable",
+      "release": 21,
+      "preview": false,
+      "feature": "flexible-constructor-bodies",
+      "expectedAccepted": false,
+      "accepted": false,
+      "exitCode": 1,
+      "diagnostics": [
+        "basic.java:6:14: compiler.err.call.must.be.first.stmt.in.ctor: super",
+        "1 error"
+      ],
+      "elapsedNs": 229267666,
+      "matches": true,
+      "backendMeasured": true,
+      "backendClassification": "post-parse feature-validation requirement",
+      "differentialClassification": "post-parse feature-validation requirement"
+    },
+    {
+      "id": "java21/switch-pattern/final",
+      "release": 21,
+      "preview": false,
+      "feature": "switch-patterns",
+      "expectedAccepted": true,
+      "accepted": true,
+      "exitCode": 0,
+      "diagnostics": [],
+      "elapsedNs": 252625125,
+      "matches": true,
+      "backendMeasured": true,
+      "differentialClassification": "aligned"
+    }
+  ]
+}
