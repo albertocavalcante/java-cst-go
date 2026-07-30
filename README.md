@@ -7,7 +7,9 @@ implementation-dependent M1 parser-foundation work. The selected internal
 parser uses the pure-Go `treesitter-go` runtime with repository-owned patched
 Java grammar tables, then converts its backend-neutral snapshot into immutable
 `cst-go` green/red trees. M1 is complete against the signed `cst-go` v0.3.0
-release.
+release. M2 is underway: its first generated typed views cover Java 8
+compilation units, top-level types, class/interface/enum members, parameters,
+and declaration names without constructing a second AST.
 
 The spike targets Java release modeling from 8 through 26, including exact
 Java 21-26 preview boundaries. It does not yet advertise any Java release as
@@ -35,6 +37,22 @@ root := tree.Root()
 diagnostics := tree.Diagnostics()
 ```
 
+Typed views retain the identity and spans of the underlying red nodes:
+
+```go
+unit, ok := ast.AsCompilationUnit(tree.Root())
+if !ok {
+	// The root is not a Java compilation unit.
+}
+for declaration := range unit.Types() {
+	if class, ok := declaration.AsClassDeclaration(); ok {
+		name, present := class.Name()
+		_ = name
+		_ = present
+	}
+}
+```
+
 Java syntax, lexical, and release/preview feature errors are attached to a
 usable tree. They do not become operational Go errors. A zero `Options` value
 selects stable Java 25 and bounded defaults of 16 MiB of raw source,
@@ -48,8 +66,12 @@ node/depth bounds apply while publishing the detached CST. Use
 ## Development
 
 ```sh
+just generate
 just check
 ```
+
+`schema/java-syntax.json` is the source of generated syntax kinds and typed
+views. The test gate rejects stale generated files.
 
 The module is library-first. Reporting commands are thin measurement drivers;
 backend implementation types and selection remain internal.

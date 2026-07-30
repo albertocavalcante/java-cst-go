@@ -311,8 +311,8 @@ func buildTokenModels(
 	return models, triviaCount, nil
 }
 
-func buildTokens(models []tokenModel) ([]*syntax.Token, error) {
-	tokens := make([]*syntax.Token, len(models))
+func buildTokens(models []tokenModel) ([]*syntax.GreenToken, error) {
+	tokens := make([]*syntax.GreenToken, len(models))
 	for index := range models {
 		model := models[index]
 		if model.missing {
@@ -351,7 +351,7 @@ func buildTokens(models []tokenModel) ([]*syntax.Token, error) {
 }
 
 type tokenCursor struct {
-	tokens []*syntax.Token
+	tokens []*syntax.GreenToken
 	index  int
 }
 

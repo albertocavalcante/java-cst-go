@@ -75,9 +75,9 @@ func NewTree(
 }
 
 // Root returns the positioned root node.
-func (t *Tree) Root() RedNode {
+func (t *Tree) Root() Node {
 	if t == nil || t.core == nil {
-		return RedNode{}
+		return Node{}
 	}
 	return t.core.Root()
 }

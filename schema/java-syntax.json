@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "nodes": [
+    {"type": "CompilationUnit", "kind": "program"},
+    {"type": "PackageDeclaration", "kind": "package_declaration"},
+    {"type": "ImportDeclaration", "kind": "import_declaration"},
+    {"type": "ClassDeclaration", "kind": "class_declaration"},
+    {"type": "InterfaceDeclaration", "kind": "interface_declaration"},
+    {"type": "EnumDeclaration", "kind": "enum_declaration"},
+    {"type": "AnnotationTypeDeclaration", "kind": "annotation_type_declaration"},
+    {"type": "ClassBody", "kind": "class_body"},
+    {"type": "InterfaceBody", "kind": "interface_body"},
+    {"type": "EnumBody", "kind": "enum_body"},
+    {"type": "EnumBodyDeclarations", "kind": "enum_body_declarations"},
+    {"type": "AnnotationTypeBody", "kind": "annotation_type_body"},
+    {"type": "FieldDeclaration", "kind": "field_declaration"},
+    {"type": "ConstantDeclaration", "kind": "constant_declaration"},
+    {"type": "MethodDeclaration", "kind": "method_declaration"},
+    {"type": "ConstructorDeclaration", "kind": "constructor_declaration"},
+    {"type": "StaticInitializer", "kind": "static_initializer"},
+    {"type": "AnnotationTypeElementDeclaration", "kind": "annotation_type_element_declaration"},
+    {"type": "EnumConstant", "kind": "enum_constant"},
+    {"type": "VariableDeclarator", "kind": "variable_declarator"},
+    {"type": "FormalParameters", "kind": "formal_parameters"},
+    {"type": "FormalParameter", "kind": "formal_parameter"},
+    {"type": "SpreadParameter", "kind": "spread_parameter"},
+    {"type": "ReceiverParameter", "kind": "receiver_parameter"},
+    {"type": "Block", "kind": "block"},
+    {"type": "ConstructorBody", "kind": "constructor_body"}
+  ],
+  "unions": [
+    {
+      "type": "TypeDeclaration",
+      "members": [
+        "ClassDeclaration",
+        "InterfaceDeclaration",
+        "EnumDeclaration",
+        "AnnotationTypeDeclaration"
+      ]
+    },
+    {
+      "type": "MemberDeclaration",
+      "members": [
+        "FieldDeclaration",
+        "ConstantDeclaration",
+        "MethodDeclaration",
+        "ConstructorDeclaration",
+        "StaticInitializer",
+        "AnnotationTypeElementDeclaration",
+        "ClassDeclaration",
+        "InterfaceDeclaration",
+        "EnumDeclaration",
+        "AnnotationTypeDeclaration"
+      ]
+    },
+    {
+      "type": "Parameter",
+      "members": [
+        "FormalParameter",
+        "SpreadParameter",
+        "ReceiverParameter"
+      ]
+    }
+  ],
+  "accessors": [
+    {"owner": "CompilationUnit", "name": "Package", "target": "PackageDeclaration", "cardinality": "optional"},
+    {"owner": "CompilationUnit", "name": "Imports", "target": "ImportDeclaration", "cardinality": "many"},
+    {"owner": "CompilationUnit", "name": "Types", "target": "TypeDeclaration", "cardinality": "many"},
+
+    {"owner": "ClassDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+    {"owner": "ClassDeclaration", "name": "Body", "target": "ClassBody", "cardinality": "optional"},
+    {"owner": "InterfaceDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+    {"owner": "InterfaceDeclaration", "name": "Body", "target": "InterfaceBody", "cardinality": "optional"},
+    {"owner": "EnumDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+    {"owner": "EnumDeclaration", "name": "Body", "target": "EnumBody", "cardinality": "optional"},
+    {"owner": "AnnotationTypeDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+    {"owner": "AnnotationTypeDeclaration", "name": "Body", "target": "AnnotationTypeBody", "cardinality": "optional"},
+
+    {"owner": "ClassBody", "name": "Members", "target": "MemberDeclaration", "cardinality": "many"},
+    {"owner": "InterfaceBody", "name": "Members", "target": "MemberDeclaration", "cardinality": "many"},
+    {"owner": "AnnotationTypeBody", "name": "Members", "target": "MemberDeclaration", "cardinality": "many"},
+    {"owner": "EnumBody", "name": "Constants", "target": "EnumConstant", "cardinality": "many"},
+    {"owner": "EnumBody", "name": "Declarations", "target": "EnumBodyDeclarations", "cardinality": "optional"},
+    {"owner": "EnumBodyDeclarations", "name": "Members", "target": "MemberDeclaration", "cardinality": "many"},
+
+    {"owner": "MethodDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+    {"owner": "MethodDeclaration", "name": "Parameters", "target": "FormalParameters", "cardinality": "optional"},
+    {"owner": "MethodDeclaration", "name": "Body", "target": "Block", "cardinality": "optional"},
+    {"owner": "ConstructorDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+    {"owner": "ConstructorDeclaration", "name": "Parameters", "target": "FormalParameters", "cardinality": "optional"},
+    {"owner": "ConstructorDeclaration", "name": "Body", "target": "ConstructorBody", "cardinality": "optional"},
+    {"owner": "VariableDeclarator", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+    {"owner": "FormalParameter", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+    {"owner": "SpreadParameter", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+    {"owner": "ReceiverParameter", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
+
+    {"owner": "FieldDeclaration", "name": "Declarators", "target": "VariableDeclarator", "cardinality": "many"},
+    {"owner": "ConstantDeclaration", "name": "Declarators", "target": "VariableDeclarator", "cardinality": "many"},
+    {"owner": "FormalParameters", "name": "Items", "target": "Parameter", "cardinality": "many"}
+  ]
+}

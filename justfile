@@ -5,6 +5,9 @@ default: test
 build:
     go build ./...
 
+generate:
+    go generate ./ast
+
 test:
     go tool -modfile=tools.go.mod gotestsum --format pkgname-and-test-fails -- ./...
 

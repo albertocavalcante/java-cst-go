@@ -8,8 +8,9 @@ import (
 
 // Kind is a repository-owned Java syntax kind.
 //
-// M0 uses stable, prefixed grammar names. A generated closed enum may replace
-// this representation before the public syntax API is frozen.
+// During the staged M2 schema migration, kinds retain their stable prefixed
+// spelling. Public consumers should use the generated KindNode... and
+// KindToken... constants rather than constructing values.
 type Kind string
 
 // TriviaKind is a repository-owned Java trivia kind.
@@ -41,10 +42,12 @@ type (
 	Span         = cst.Span
 	ElementID    = cst.ElementID
 	Trivia       = cst.Trivia[TriviaKind]
-	Token        = cst.Token[Kind, TriviaKind, TokenData]
+	GreenToken   = cst.Token[Kind, TriviaKind, TokenData]
+	Token        = cst.RedToken[Kind, TriviaKind, TokenData]
 	GreenNode    = cst.GreenNode[Kind, TriviaKind, TokenData]
 	GreenElement = cst.GreenElement[Kind, TriviaKind, TokenData]
 	Builder      = cst.Builder[Kind, TriviaKind, TokenData]
+	Node         = cst.RedNode[Kind, TriviaKind, TokenData]
 	RedNode      = cst.RedNode[Kind, TriviaKind, TokenData]
 	RedToken     = cst.RedToken[Kind, TriviaKind, TokenData]
 	CoreTree     = cst.Tree[Kind, TriviaKind, TokenData, DiagnosticCode]

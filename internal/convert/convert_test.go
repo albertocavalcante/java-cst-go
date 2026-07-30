@@ -133,7 +133,7 @@ func TestInterTokenTriviaOwnership(t *testing.T) {
 		t.Fatalf("Convert: %v", err)
 	}
 
-	var semicolon, secondInt *syntax.Token
+	var semicolon, secondInt *syntax.GreenToken
 	intCount := 0
 	for token := range result.Tree.Root().DescendantTokens() {
 		switch token.Text() {
@@ -255,7 +255,7 @@ func TestTranslatedTriviaRetainsRawEscapeSpellings(t *testing.T) {
 	}
 	assertTreeInvariants(t, result.Tree, raw)
 
-	var classToken, firstSemicolon, secondInt *syntax.Token
+	var classToken, firstSemicolon, secondInt *syntax.GreenToken
 	intCount := 0
 	for token := range result.Tree.Root().DescendantTokens() {
 		switch token.Text() {
