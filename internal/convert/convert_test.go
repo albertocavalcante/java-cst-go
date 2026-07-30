@@ -6,10 +6,12 @@ import (
 	"os"
 	"path/filepath"
 	"slices"
+	"strings"
 	"sync"
 	"testing"
 	"time"
 
+	"git.alberto.engineer/alberto/java-cst-go/internal/backend"
 	"git.alberto.engineer/alberto/java-cst-go/internal/backend/selected"
 	"git.alberto.engineer/alberto/java-cst-go/internal/convert"
 	"git.alberto.engineer/alberto/java-cst-go/language"
@@ -403,6 +405,62 @@ func FuzzBackendConversionRoundTrip(f *testing.F) {
 			t.Fatalf("round trip = %q, want %q", got, source)
 		}
 	})
+}
+
+func TestConvertRejectsUnregisteredKinds(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name     string
+		snapshot backend.Result
+		want     string
+	}{
+		{
+			name: "node",
+			snapshot: backend.Result{
+				RawBytes:     1,
+				LogicalBytes: 1,
+				Root: &backend.Node{
+					Kind:    "unregistered_node",
+					EndByte: 1,
+					Children: []backend.Node{{
+						Kind:    "identifier",
+						EndByte: 1,
+						Named:   true,
+					}},
+				},
+			},
+			want: `unknown node kind "unregistered_node"`,
+		},
+		{
+			name: "token",
+			snapshot: backend.Result{
+				RawBytes:     1,
+				LogicalBytes: 1,
+				Root: &backend.Node{
+					Kind:    "program",
+					EndByte: 1,
+					Named:   true,
+					Children: []backend.Node{{
+						Kind:    "unregistered_token",
+						EndByte: 1,
+						Named:   true,
+					}},
+				},
+			},
+			want: `unknown token kind "unregistered_token"`,
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			t.Parallel()
+
+			_, err := convert.Convert("x", test.snapshot)
+			if err == nil || !strings.Contains(err.Error(), test.want) {
+				t.Fatalf("Convert error = %v, want containing %q", err, test.want)
+			}
+		})
+	}
 }
 
 func FuzzTranslatedBackendConversionRoundTrip(f *testing.F) {

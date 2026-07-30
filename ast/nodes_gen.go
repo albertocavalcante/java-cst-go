@@ -398,6 +398,351 @@ func (value ConstructorBody) Node() syntax.Node {
 	return value.node
 }
 
+type Modifiers struct {
+	node syntax.Node
+}
+
+func AsModifiers(node syntax.Node) (Modifiers, bool) {
+	if node.Kind() != syntax.KindNodeModifiers {
+		return Modifiers{}, false
+	}
+	return Modifiers{node: node}, true
+}
+
+func (value Modifiers) Node() syntax.Node {
+	return value.node
+}
+
+type ScopedIdentifier struct {
+	node syntax.Node
+}
+
+func AsScopedIdentifier(node syntax.Node) (ScopedIdentifier, bool) {
+	if node.Kind() != syntax.KindNodeScopedIdentifier {
+		return ScopedIdentifier{}, false
+	}
+	return ScopedIdentifier{node: node}, true
+}
+
+func (value ScopedIdentifier) Node() syntax.Node {
+	return value.node
+}
+
+type MarkerAnnotation struct {
+	node syntax.Node
+}
+
+func AsMarkerAnnotation(node syntax.Node) (MarkerAnnotation, bool) {
+	if node.Kind() != syntax.KindNodeMarkerAnnotation {
+		return MarkerAnnotation{}, false
+	}
+	return MarkerAnnotation{node: node}, true
+}
+
+func (value MarkerAnnotation) Node() syntax.Node {
+	return value.node
+}
+
+type Annotation struct {
+	node syntax.Node
+}
+
+func AsAnnotation(node syntax.Node) (Annotation, bool) {
+	if node.Kind() != syntax.KindNodeAnnotation {
+		return Annotation{}, false
+	}
+	return Annotation{node: node}, true
+}
+
+func (value Annotation) Node() syntax.Node {
+	return value.node
+}
+
+type AnnotationArgumentList struct {
+	node syntax.Node
+}
+
+func AsAnnotationArgumentList(node syntax.Node) (AnnotationArgumentList, bool) {
+	if node.Kind() != syntax.KindNodeAnnotationArgumentList {
+		return AnnotationArgumentList{}, false
+	}
+	return AnnotationArgumentList{node: node}, true
+}
+
+func (value AnnotationArgumentList) Node() syntax.Node {
+	return value.node
+}
+
+type TypeParameters struct {
+	node syntax.Node
+}
+
+func AsTypeParameters(node syntax.Node) (TypeParameters, bool) {
+	if node.Kind() != syntax.KindNodeTypeParameters {
+		return TypeParameters{}, false
+	}
+	return TypeParameters{node: node}, true
+}
+
+func (value TypeParameters) Node() syntax.Node {
+	return value.node
+}
+
+type TypeParameter struct {
+	node syntax.Node
+}
+
+func AsTypeParameter(node syntax.Node) (TypeParameter, bool) {
+	if node.Kind() != syntax.KindNodeTypeParameter {
+		return TypeParameter{}, false
+	}
+	return TypeParameter{node: node}, true
+}
+
+func (value TypeParameter) Node() syntax.Node {
+	return value.node
+}
+
+type TypeBound struct {
+	node syntax.Node
+}
+
+func AsTypeBound(node syntax.Node) (TypeBound, bool) {
+	if node.Kind() != syntax.KindNodeTypeBound {
+		return TypeBound{}, false
+	}
+	return TypeBound{node: node}, true
+}
+
+func (value TypeBound) Node() syntax.Node {
+	return value.node
+}
+
+type Superclass struct {
+	node syntax.Node
+}
+
+func AsSuperclass(node syntax.Node) (Superclass, bool) {
+	if node.Kind() != syntax.KindNodeSuperclass {
+		return Superclass{}, false
+	}
+	return Superclass{node: node}, true
+}
+
+func (value Superclass) Node() syntax.Node {
+	return value.node
+}
+
+type SuperInterfaces struct {
+	node syntax.Node
+}
+
+func AsSuperInterfaces(node syntax.Node) (SuperInterfaces, bool) {
+	if node.Kind() != syntax.KindNodeSuperInterfaces {
+		return SuperInterfaces{}, false
+	}
+	return SuperInterfaces{node: node}, true
+}
+
+func (value SuperInterfaces) Node() syntax.Node {
+	return value.node
+}
+
+type ExtendsInterfaces struct {
+	node syntax.Node
+}
+
+func AsExtendsInterfaces(node syntax.Node) (ExtendsInterfaces, bool) {
+	if node.Kind() != syntax.KindNodeExtendsInterfaces {
+		return ExtendsInterfaces{}, false
+	}
+	return ExtendsInterfaces{node: node}, true
+}
+
+func (value ExtendsInterfaces) Node() syntax.Node {
+	return value.node
+}
+
+type TypeList struct {
+	node syntax.Node
+}
+
+func AsTypeList(node syntax.Node) (TypeList, bool) {
+	if node.Kind() != syntax.KindNodeTypeList {
+		return TypeList{}, false
+	}
+	return TypeList{node: node}, true
+}
+
+func (value TypeList) Node() syntax.Node {
+	return value.node
+}
+
+type ScopedTypeIdentifier struct {
+	node syntax.Node
+}
+
+func AsScopedTypeIdentifier(node syntax.Node) (ScopedTypeIdentifier, bool) {
+	if node.Kind() != syntax.KindNodeScopedTypeIdentifier {
+		return ScopedTypeIdentifier{}, false
+	}
+	return ScopedTypeIdentifier{node: node}, true
+}
+
+func (value ScopedTypeIdentifier) Node() syntax.Node {
+	return value.node
+}
+
+type GenericType struct {
+	node syntax.Node
+}
+
+func AsGenericType(node syntax.Node) (GenericType, bool) {
+	if node.Kind() != syntax.KindNodeGenericType {
+		return GenericType{}, false
+	}
+	return GenericType{node: node}, true
+}
+
+func (value GenericType) Node() syntax.Node {
+	return value.node
+}
+
+type TypeArguments struct {
+	node syntax.Node
+}
+
+func AsTypeArguments(node syntax.Node) (TypeArguments, bool) {
+	if node.Kind() != syntax.KindNodeTypeArguments {
+		return TypeArguments{}, false
+	}
+	return TypeArguments{node: node}, true
+}
+
+func (value TypeArguments) Node() syntax.Node {
+	return value.node
+}
+
+type Wildcard struct {
+	node syntax.Node
+}
+
+func AsWildcard(node syntax.Node) (Wildcard, bool) {
+	if node.Kind() != syntax.KindNodeWildcard {
+		return Wildcard{}, false
+	}
+	return Wildcard{node: node}, true
+}
+
+func (value Wildcard) Node() syntax.Node {
+	return value.node
+}
+
+type ArrayType struct {
+	node syntax.Node
+}
+
+func AsArrayType(node syntax.Node) (ArrayType, bool) {
+	if node.Kind() != syntax.KindNodeArrayType {
+		return ArrayType{}, false
+	}
+	return ArrayType{node: node}, true
+}
+
+func (value ArrayType) Node() syntax.Node {
+	return value.node
+}
+
+type AnnotatedType struct {
+	node syntax.Node
+}
+
+func AsAnnotatedType(node syntax.Node) (AnnotatedType, bool) {
+	if node.Kind() != syntax.KindNodeAnnotatedType {
+		return AnnotatedType{}, false
+	}
+	return AnnotatedType{node: node}, true
+}
+
+func (value AnnotatedType) Node() syntax.Node {
+	return value.node
+}
+
+type IntegralType struct {
+	node syntax.Node
+}
+
+func AsIntegralType(node syntax.Node) (IntegralType, bool) {
+	if node.Kind() != syntax.KindNodeIntegralType {
+		return IntegralType{}, false
+	}
+	return IntegralType{node: node}, true
+}
+
+func (value IntegralType) Node() syntax.Node {
+	return value.node
+}
+
+type FloatingPointType struct {
+	node syntax.Node
+}
+
+func AsFloatingPointType(node syntax.Node) (FloatingPointType, bool) {
+	if node.Kind() != syntax.KindNodeFloatingPointType {
+		return FloatingPointType{}, false
+	}
+	return FloatingPointType{node: node}, true
+}
+
+func (value FloatingPointType) Node() syntax.Node {
+	return value.node
+}
+
+type Dimensions struct {
+	node syntax.Node
+}
+
+func AsDimensions(node syntax.Node) (Dimensions, bool) {
+	if node.Kind() != syntax.KindNodeDimensions {
+		return Dimensions{}, false
+	}
+	return Dimensions{node: node}, true
+}
+
+func (value Dimensions) Node() syntax.Node {
+	return value.node
+}
+
+type Throws struct {
+	node syntax.Node
+}
+
+func AsThrows(node syntax.Node) (Throws, bool) {
+	if node.Kind() != syntax.KindNodeThrows {
+		return Throws{}, false
+	}
+	return Throws{node: node}, true
+}
+
+func (value Throws) Node() syntax.Node {
+	return value.node
+}
+
+type Asterisk struct {
+	node syntax.Node
+}
+
+func AsAsterisk(node syntax.Node) (Asterisk, bool) {
+	if node.Kind() != syntax.KindNodeAsterisk {
+		return Asterisk{}, false
+	}
+	return Asterisk{node: node}, true
+}
+
+func (value Asterisk) Node() syntax.Node {
+	return value.node
+}
+
 type TypeDeclaration struct {
 	node syntax.Node
 }
@@ -555,6 +900,496 @@ func (value Parameter) AsSpreadParameter() (SpreadParameter, bool) {
 
 func (value Parameter) AsReceiverParameter() (ReceiverParameter, bool) {
 	return AsReceiverParameter(value.node)
+}
+
+type Name struct {
+	element syntax.Element
+}
+
+func AsName(element syntax.Element) (Name, bool) {
+	if node, ok := element.Node(); ok {
+		switch node.Kind() {
+		case syntax.KindNodeScopedIdentifier:
+			return Name{element: element}, true
+		}
+	}
+	if token, ok := element.Token(); ok {
+		switch token.Kind() {
+		case syntax.KindTokenIdentifier:
+			return Name{element: element}, true
+		}
+	}
+	return Name{}, false
+}
+
+func (value Name) Element() syntax.Element {
+	return value.element
+}
+
+func (value Name) Node() (syntax.Node, bool) {
+	return value.element.Node()
+}
+
+func (value Name) Token() (syntax.Token, bool) {
+	return value.element.Token()
+}
+
+func (value Name) Kind() syntax.Kind {
+	if node, ok := value.element.Node(); ok {
+		return node.Kind()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Kind()
+	}
+	return syntax.KindUnknown
+}
+
+func (value Name) ID() syntax.ElementID {
+	return value.element.ID()
+}
+
+func (value Name) Span() syntax.Span {
+	return value.element.Span()
+}
+
+func (value Name) FullSpan() syntax.Span {
+	return value.element.FullSpan()
+}
+
+func (value Name) Text() string {
+	if node, ok := value.element.Node(); ok {
+		return node.Text()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Text()
+	}
+	return ""
+}
+
+type AnnotationUse struct {
+	element syntax.Element
+}
+
+func AsAnnotationUse(element syntax.Element) (AnnotationUse, bool) {
+	if node, ok := element.Node(); ok {
+		switch node.Kind() {
+		case syntax.KindNodeMarkerAnnotation:
+			return AnnotationUse{element: element}, true
+		case syntax.KindNodeAnnotation:
+			return AnnotationUse{element: element}, true
+		}
+	}
+	if token, ok := element.Token(); ok {
+		switch token.Kind() {
+		}
+	}
+	return AnnotationUse{}, false
+}
+
+func (value AnnotationUse) Element() syntax.Element {
+	return value.element
+}
+
+func (value AnnotationUse) Node() (syntax.Node, bool) {
+	return value.element.Node()
+}
+
+func (value AnnotationUse) Token() (syntax.Token, bool) {
+	return value.element.Token()
+}
+
+func (value AnnotationUse) Kind() syntax.Kind {
+	if node, ok := value.element.Node(); ok {
+		return node.Kind()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Kind()
+	}
+	return syntax.KindUnknown
+}
+
+func (value AnnotationUse) ID() syntax.ElementID {
+	return value.element.ID()
+}
+
+func (value AnnotationUse) Span() syntax.Span {
+	return value.element.Span()
+}
+
+func (value AnnotationUse) FullSpan() syntax.Span {
+	return value.element.FullSpan()
+}
+
+func (value AnnotationUse) Text() string {
+	if node, ok := value.element.Node(); ok {
+		return node.Text()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Text()
+	}
+	return ""
+}
+
+type Modifier struct {
+	element syntax.Element
+}
+
+func AsModifier(element syntax.Element) (Modifier, bool) {
+	if node, ok := element.Node(); ok {
+		switch node.Kind() {
+		case syntax.KindNodeMarkerAnnotation:
+			return Modifier{element: element}, true
+		case syntax.KindNodeAnnotation:
+			return Modifier{element: element}, true
+		}
+	}
+	if token, ok := element.Token(); ok {
+		switch token.Kind() {
+		case syntax.KindTokenPublic:
+			return Modifier{element: element}, true
+		case syntax.KindTokenProtected:
+			return Modifier{element: element}, true
+		case syntax.KindTokenPrivate:
+			return Modifier{element: element}, true
+		case syntax.KindTokenAbstract:
+			return Modifier{element: element}, true
+		case syntax.KindTokenStatic:
+			return Modifier{element: element}, true
+		case syntax.KindTokenFinal:
+			return Modifier{element: element}, true
+		case syntax.KindTokenStrictfp:
+			return Modifier{element: element}, true
+		case syntax.KindTokenNative:
+			return Modifier{element: element}, true
+		case syntax.KindTokenSynchronized:
+			return Modifier{element: element}, true
+		case syntax.KindTokenTransient:
+			return Modifier{element: element}, true
+		case syntax.KindTokenVolatile:
+			return Modifier{element: element}, true
+		case syntax.KindTokenDefault:
+			return Modifier{element: element}, true
+		}
+	}
+	return Modifier{}, false
+}
+
+func (value Modifier) Element() syntax.Element {
+	return value.element
+}
+
+func (value Modifier) Node() (syntax.Node, bool) {
+	return value.element.Node()
+}
+
+func (value Modifier) Token() (syntax.Token, bool) {
+	return value.element.Token()
+}
+
+func (value Modifier) Kind() syntax.Kind {
+	if node, ok := value.element.Node(); ok {
+		return node.Kind()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Kind()
+	}
+	return syntax.KindUnknown
+}
+
+func (value Modifier) ID() syntax.ElementID {
+	return value.element.ID()
+}
+
+func (value Modifier) Span() syntax.Span {
+	return value.element.Span()
+}
+
+func (value Modifier) FullSpan() syntax.Span {
+	return value.element.FullSpan()
+}
+
+func (value Modifier) Text() string {
+	if node, ok := value.element.Node(); ok {
+		return node.Text()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Text()
+	}
+	return ""
+}
+
+type Type struct {
+	element syntax.Element
+}
+
+func AsType(element syntax.Element) (Type, bool) {
+	if node, ok := element.Node(); ok {
+		switch node.Kind() {
+		case syntax.KindNodeAnnotatedType:
+			return Type{element: element}, true
+		case syntax.KindNodeScopedTypeIdentifier:
+			return Type{element: element}, true
+		case syntax.KindNodeGenericType:
+			return Type{element: element}, true
+		case syntax.KindNodeArrayType:
+			return Type{element: element}, true
+		case syntax.KindNodeIntegralType:
+			return Type{element: element}, true
+		case syntax.KindNodeFloatingPointType:
+			return Type{element: element}, true
+		}
+	}
+	if token, ok := element.Token(); ok {
+		switch token.Kind() {
+		case syntax.KindTokenTypeIdentifier:
+			return Type{element: element}, true
+		case syntax.KindTokenByte:
+			return Type{element: element}, true
+		case syntax.KindTokenShort:
+			return Type{element: element}, true
+		case syntax.KindTokenInt:
+			return Type{element: element}, true
+		case syntax.KindTokenLong:
+			return Type{element: element}, true
+		case syntax.KindTokenChar:
+			return Type{element: element}, true
+		case syntax.KindTokenFloat:
+			return Type{element: element}, true
+		case syntax.KindTokenDouble:
+			return Type{element: element}, true
+		case syntax.KindTokenBooleanType:
+			return Type{element: element}, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value Type) Element() syntax.Element {
+	return value.element
+}
+
+func (value Type) Node() (syntax.Node, bool) {
+	return value.element.Node()
+}
+
+func (value Type) Token() (syntax.Token, bool) {
+	return value.element.Token()
+}
+
+func (value Type) Kind() syntax.Kind {
+	if node, ok := value.element.Node(); ok {
+		return node.Kind()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Kind()
+	}
+	return syntax.KindUnknown
+}
+
+func (value Type) ID() syntax.ElementID {
+	return value.element.ID()
+}
+
+func (value Type) Span() syntax.Span {
+	return value.element.Span()
+}
+
+func (value Type) FullSpan() syntax.Span {
+	return value.element.FullSpan()
+}
+
+func (value Type) Text() string {
+	if node, ok := value.element.Node(); ok {
+		return node.Text()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Text()
+	}
+	return ""
+}
+
+type ReturnType struct {
+	element syntax.Element
+}
+
+func AsReturnType(element syntax.Element) (ReturnType, bool) {
+	if node, ok := element.Node(); ok {
+		switch node.Kind() {
+		case syntax.KindNodeAnnotatedType:
+			return ReturnType{element: element}, true
+		case syntax.KindNodeScopedTypeIdentifier:
+			return ReturnType{element: element}, true
+		case syntax.KindNodeGenericType:
+			return ReturnType{element: element}, true
+		case syntax.KindNodeArrayType:
+			return ReturnType{element: element}, true
+		case syntax.KindNodeIntegralType:
+			return ReturnType{element: element}, true
+		case syntax.KindNodeFloatingPointType:
+			return ReturnType{element: element}, true
+		}
+	}
+	if token, ok := element.Token(); ok {
+		switch token.Kind() {
+		case syntax.KindTokenTypeIdentifier:
+			return ReturnType{element: element}, true
+		case syntax.KindTokenByte:
+			return ReturnType{element: element}, true
+		case syntax.KindTokenShort:
+			return ReturnType{element: element}, true
+		case syntax.KindTokenInt:
+			return ReturnType{element: element}, true
+		case syntax.KindTokenLong:
+			return ReturnType{element: element}, true
+		case syntax.KindTokenChar:
+			return ReturnType{element: element}, true
+		case syntax.KindTokenFloat:
+			return ReturnType{element: element}, true
+		case syntax.KindTokenDouble:
+			return ReturnType{element: element}, true
+		case syntax.KindTokenBooleanType:
+			return ReturnType{element: element}, true
+		case syntax.KindTokenVoidType:
+			return ReturnType{element: element}, true
+		}
+	}
+	return ReturnType{}, false
+}
+
+func (value ReturnType) Element() syntax.Element {
+	return value.element
+}
+
+func (value ReturnType) Node() (syntax.Node, bool) {
+	return value.element.Node()
+}
+
+func (value ReturnType) Token() (syntax.Token, bool) {
+	return value.element.Token()
+}
+
+func (value ReturnType) Kind() syntax.Kind {
+	if node, ok := value.element.Node(); ok {
+		return node.Kind()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Kind()
+	}
+	return syntax.KindUnknown
+}
+
+func (value ReturnType) ID() syntax.ElementID {
+	return value.element.ID()
+}
+
+func (value ReturnType) Span() syntax.Span {
+	return value.element.Span()
+}
+
+func (value ReturnType) FullSpan() syntax.Span {
+	return value.element.FullSpan()
+}
+
+func (value ReturnType) Text() string {
+	if node, ok := value.element.Node(); ok {
+		return node.Text()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Text()
+	}
+	return ""
+}
+
+type TypeArgument struct {
+	element syntax.Element
+}
+
+func AsTypeArgument(element syntax.Element) (TypeArgument, bool) {
+	if node, ok := element.Node(); ok {
+		switch node.Kind() {
+		case syntax.KindNodeWildcard:
+			return TypeArgument{element: element}, true
+		case syntax.KindNodeAnnotatedType:
+			return TypeArgument{element: element}, true
+		case syntax.KindNodeScopedTypeIdentifier:
+			return TypeArgument{element: element}, true
+		case syntax.KindNodeGenericType:
+			return TypeArgument{element: element}, true
+		case syntax.KindNodeArrayType:
+			return TypeArgument{element: element}, true
+		case syntax.KindNodeIntegralType:
+			return TypeArgument{element: element}, true
+		case syntax.KindNodeFloatingPointType:
+			return TypeArgument{element: element}, true
+		}
+	}
+	if token, ok := element.Token(); ok {
+		switch token.Kind() {
+		case syntax.KindTokenTypeIdentifier:
+			return TypeArgument{element: element}, true
+		case syntax.KindTokenByte:
+			return TypeArgument{element: element}, true
+		case syntax.KindTokenShort:
+			return TypeArgument{element: element}, true
+		case syntax.KindTokenInt:
+			return TypeArgument{element: element}, true
+		case syntax.KindTokenLong:
+			return TypeArgument{element: element}, true
+		case syntax.KindTokenChar:
+			return TypeArgument{element: element}, true
+		case syntax.KindTokenFloat:
+			return TypeArgument{element: element}, true
+		case syntax.KindTokenDouble:
+			return TypeArgument{element: element}, true
+		case syntax.KindTokenBooleanType:
+			return TypeArgument{element: element}, true
+		}
+	}
+	return TypeArgument{}, false
+}
+
+func (value TypeArgument) Element() syntax.Element {
+	return value.element
+}
+
+func (value TypeArgument) Node() (syntax.Node, bool) {
+	return value.element.Node()
+}
+
+func (value TypeArgument) Token() (syntax.Token, bool) {
+	return value.element.Token()
+}
+
+func (value TypeArgument) Kind() syntax.Kind {
+	if node, ok := value.element.Node(); ok {
+		return node.Kind()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Kind()
+	}
+	return syntax.KindUnknown
+}
+
+func (value TypeArgument) ID() syntax.ElementID {
+	return value.element.ID()
+}
+
+func (value TypeArgument) Span() syntax.Span {
+	return value.element.Span()
+}
+
+func (value TypeArgument) FullSpan() syntax.Span {
+	return value.element.FullSpan()
+}
+
+func (value TypeArgument) Text() string {
+	if node, ok := value.element.Node(); ok {
+		return node.Text()
+	}
+	if token, ok := value.element.Token(); ok {
+		return token.Text()
+	}
+	return ""
 }
 
 func (value CompilationUnit) Package() (PackageDeclaration, bool) {
@@ -912,6 +1747,573 @@ func (value FormalParameters) Items() iter.Seq[Parameter] {
 func (value FormalParameters) ItemsSlice() []Parameter {
 	var result []Parameter
 	for item := range value.Items() {
+		result = append(result, item)
+	}
+	return result
+}
+
+func (value PackageDeclaration) Annotations() iter.Seq[AnnotationUse] {
+	return func(yield func(AnnotationUse) bool) {
+		for child := range value.node.Children() {
+			if result, ok := AsAnnotationUse(child); ok && !yield(result) {
+				return
+			}
+		}
+	}
+}
+
+func (value PackageDeclaration) AnnotationsSlice() []AnnotationUse {
+	var result []AnnotationUse
+	for item := range value.Annotations() {
+		result = append(result, item)
+	}
+	return result
+}
+
+func (value PackageDeclaration) Name() (Name, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsName(child); ok {
+			return result, true
+		}
+	}
+	return Name{}, false
+}
+
+func (value ImportDeclaration) Static() (syntax.Token, bool) {
+	for token := range value.node.ChildTokens() {
+		if token.Kind() == syntax.KindTokenStatic {
+			return token, true
+		}
+	}
+	return syntax.Token{}, false
+}
+
+func (value ImportDeclaration) Name() (Name, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsName(child); ok {
+			return result, true
+		}
+	}
+	return Name{}, false
+}
+
+func (value ImportDeclaration) Wildcard() (Asterisk, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsAsterisk(child); ok {
+			return result, true
+		}
+	}
+	return Asterisk{}, false
+}
+
+func (value ClassDeclaration) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value ClassDeclaration) TypeParameters() (TypeParameters, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsTypeParameters(child); ok {
+			return result, true
+		}
+	}
+	return TypeParameters{}, false
+}
+
+func (value ClassDeclaration) Superclass() (Superclass, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsSuperclass(child); ok {
+			return result, true
+		}
+	}
+	return Superclass{}, false
+}
+
+func (value ClassDeclaration) Interfaces() (SuperInterfaces, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsSuperInterfaces(child); ok {
+			return result, true
+		}
+	}
+	return SuperInterfaces{}, false
+}
+
+func (value InterfaceDeclaration) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value InterfaceDeclaration) TypeParameters() (TypeParameters, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsTypeParameters(child); ok {
+			return result, true
+		}
+	}
+	return TypeParameters{}, false
+}
+
+func (value InterfaceDeclaration) Interfaces() (ExtendsInterfaces, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsExtendsInterfaces(child); ok {
+			return result, true
+		}
+	}
+	return ExtendsInterfaces{}, false
+}
+
+func (value EnumDeclaration) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value AnnotationTypeDeclaration) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value FieldDeclaration) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value FieldDeclaration) Type() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value ConstantDeclaration) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value ConstantDeclaration) Type() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value MethodDeclaration) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value MethodDeclaration) TypeParameters() (TypeParameters, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsTypeParameters(child); ok {
+			return result, true
+		}
+	}
+	return TypeParameters{}, false
+}
+
+func (value MethodDeclaration) Result() (ReturnType, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsReturnType(child); ok {
+			return result, true
+		}
+	}
+	return ReturnType{}, false
+}
+
+func (value MethodDeclaration) Throws() (Throws, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsThrows(child); ok {
+			return result, true
+		}
+	}
+	return Throws{}, false
+}
+
+func (value ConstructorDeclaration) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value ConstructorDeclaration) TypeParameters() (TypeParameters, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsTypeParameters(child); ok {
+			return result, true
+		}
+	}
+	return TypeParameters{}, false
+}
+
+func (value ConstructorDeclaration) Throws() (Throws, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsThrows(child); ok {
+			return result, true
+		}
+	}
+	return Throws{}, false
+}
+
+func (value AnnotationTypeElementDeclaration) Type() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value FormalParameter) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value FormalParameter) Type() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value SpreadParameter) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value SpreadParameter) Type() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value ReceiverParameter) Modifiers() (Modifiers, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsModifiers(child); ok {
+			return result, true
+		}
+	}
+	return Modifiers{}, false
+}
+
+func (value ReceiverParameter) Type() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value Modifiers) Items() iter.Seq[Modifier] {
+	return func(yield func(Modifier) bool) {
+		for child := range value.node.Children() {
+			if result, ok := AsModifier(child); ok && !yield(result) {
+				return
+			}
+		}
+	}
+}
+
+func (value Modifiers) ItemsSlice() []Modifier {
+	var result []Modifier
+	for item := range value.Items() {
+		result = append(result, item)
+	}
+	return result
+}
+
+func (value MarkerAnnotation) Name() (Name, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsName(child); ok {
+			return result, true
+		}
+	}
+	return Name{}, false
+}
+
+func (value Annotation) Name() (Name, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsName(child); ok {
+			return result, true
+		}
+	}
+	return Name{}, false
+}
+
+func (value Annotation) Arguments() (AnnotationArgumentList, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsAnnotationArgumentList(child); ok {
+			return result, true
+		}
+	}
+	return AnnotationArgumentList{}, false
+}
+
+func (value TypeParameters) Items() iter.Seq[TypeParameter] {
+	return func(yield func(TypeParameter) bool) {
+		for child := range value.node.ChildNodes() {
+			if result, ok := AsTypeParameter(child); ok && !yield(result) {
+				return
+			}
+		}
+	}
+}
+
+func (value TypeParameters) ItemsSlice() []TypeParameter {
+	var result []TypeParameter
+	for item := range value.Items() {
+		result = append(result, item)
+	}
+	return result
+}
+
+func (value TypeParameter) Name() (syntax.Token, bool) {
+	for token := range value.node.ChildTokens() {
+		if token.Kind() == syntax.KindTokenTypeIdentifier {
+			return token, true
+		}
+	}
+	return syntax.Token{}, false
+}
+
+func (value TypeParameter) Bound() (TypeBound, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsTypeBound(child); ok {
+			return result, true
+		}
+	}
+	return TypeBound{}, false
+}
+
+func (value TypeBound) Types() iter.Seq[Type] {
+	return func(yield func(Type) bool) {
+		for child := range value.node.Children() {
+			if result, ok := AsType(child); ok && !yield(result) {
+				return
+			}
+		}
+	}
+}
+
+func (value TypeBound) TypesSlice() []Type {
+	var result []Type
+	for item := range value.Types() {
+		result = append(result, item)
+	}
+	return result
+}
+
+func (value Superclass) Type() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value SuperInterfaces) Types() (TypeList, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsTypeList(child); ok {
+			return result, true
+		}
+	}
+	return TypeList{}, false
+}
+
+func (value ExtendsInterfaces) Types() (TypeList, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsTypeList(child); ok {
+			return result, true
+		}
+	}
+	return TypeList{}, false
+}
+
+func (value TypeList) Items() iter.Seq[Type] {
+	return func(yield func(Type) bool) {
+		for child := range value.node.Children() {
+			if result, ok := AsType(child); ok && !yield(result) {
+				return
+			}
+		}
+	}
+}
+
+func (value TypeList) ItemsSlice() []Type {
+	var result []Type
+	for item := range value.Items() {
+		result = append(result, item)
+	}
+	return result
+}
+
+func (value ScopedTypeIdentifier) Scope() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value ScopedTypeIdentifier) Name() (syntax.Token, bool) {
+	for token := range value.node.ChildTokens() {
+		if token.Kind() == syntax.KindTokenTypeIdentifier {
+			return token, true
+		}
+	}
+	return syntax.Token{}, false
+}
+
+func (value GenericType) Name() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value GenericType) Arguments() (TypeArguments, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsTypeArguments(child); ok {
+			return result, true
+		}
+	}
+	return TypeArguments{}, false
+}
+
+func (value TypeArguments) Items() iter.Seq[TypeArgument] {
+	return func(yield func(TypeArgument) bool) {
+		for child := range value.node.Children() {
+			if result, ok := AsTypeArgument(child); ok && !yield(result) {
+				return
+			}
+		}
+	}
+}
+
+func (value TypeArguments) ItemsSlice() []TypeArgument {
+	var result []TypeArgument
+	for item := range value.Items() {
+		result = append(result, item)
+	}
+	return result
+}
+
+func (value Wildcard) Bound() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value ArrayType) ElementType() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value ArrayType) Dimensions() (Dimensions, bool) {
+	for child := range value.node.ChildNodes() {
+		if result, ok := AsDimensions(child); ok {
+			return result, true
+		}
+	}
+	return Dimensions{}, false
+}
+
+func (value AnnotatedType) Annotations() iter.Seq[AnnotationUse] {
+	return func(yield func(AnnotationUse) bool) {
+		for child := range value.node.Children() {
+			if result, ok := AsAnnotationUse(child); ok && !yield(result) {
+				return
+			}
+		}
+	}
+}
+
+func (value AnnotatedType) AnnotationsSlice() []AnnotationUse {
+	var result []AnnotationUse
+	for item := range value.Annotations() {
+		result = append(result, item)
+	}
+	return result
+}
+
+func (value AnnotatedType) Type() (Type, bool) {
+	for child := range value.node.Children() {
+		if result, ok := AsType(child); ok {
+			return result, true
+		}
+	}
+	return Type{}, false
+}
+
+func (value Throws) Types() iter.Seq[Type] {
+	return func(yield func(Type) bool) {
+		for child := range value.node.Children() {
+			if result, ok := AsType(child); ok && !yield(result) {
+				return
+			}
+		}
+	}
+}
+
+func (value Throws) TypesSlice() []Type {
+	var result []Type
+	for item := range value.Types() {
 		result = append(result, item)
 	}
 	return result

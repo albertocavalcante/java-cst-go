@@ -1,0 +1,55 @@
+{
+  "package": "example.types",
+  "imports": [
+    {
+      "name": "java.util.List",
+      "static": false,
+      "wildcard": false
+    },
+    {
+      "name": "java.util.Collections",
+      "static": true,
+      "wildcard": true
+    }
+  ],
+  "classModifiers": [
+    "@Deprecated",
+    "public",
+    "final"
+  ],
+  "typeParameterBounds": [
+    "Number",
+    "Comparable<T>"
+  ],
+  "superclass": "Base",
+  "interfaces": [
+    "java.io.Serializable",
+    "Cloneable"
+  ],
+  "fieldTypes": [
+    "java.util.Map<String,?extendsNumber>[]",
+    "int",
+    "boolean",
+    "double"
+  ],
+  "methods": [
+    {
+      "name": "convert",
+      "result": "List<?superU>",
+      "parameters": [
+        "List<?extendsT>",
+        "U"
+      ],
+      "throws": [
+        "java.io.IOException",
+        "IllegalArgumentException"
+      ]
+    },
+    {
+      "name": "reset",
+      "result": "void",
+      "parameters": [],
+      "throws": []
+    }
+  ]
+}

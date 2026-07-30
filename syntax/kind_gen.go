@@ -3,31 +3,1342 @@
 package syntax
 
 const (
-	KindNodeProgram                          Kind = "node:program"
-	KindNodePackageDeclaration               Kind = "node:package_declaration"
-	KindNodeImportDeclaration                Kind = "node:import_declaration"
-	KindNodeClassDeclaration                 Kind = "node:class_declaration"
-	KindNodeInterfaceDeclaration             Kind = "node:interface_declaration"
-	KindNodeEnumDeclaration                  Kind = "node:enum_declaration"
-	KindNodeAnnotationTypeDeclaration        Kind = "node:annotation_type_declaration"
-	KindNodeClassBody                        Kind = "node:class_body"
-	KindNodeInterfaceBody                    Kind = "node:interface_body"
-	KindNodeEnumBody                         Kind = "node:enum_body"
-	KindNodeEnumBodyDeclarations             Kind = "node:enum_body_declarations"
-	KindNodeAnnotationTypeBody               Kind = "node:annotation_type_body"
-	KindNodeFieldDeclaration                 Kind = "node:field_declaration"
-	KindNodeConstantDeclaration              Kind = "node:constant_declaration"
-	KindNodeMethodDeclaration                Kind = "node:method_declaration"
-	KindNodeConstructorDeclaration           Kind = "node:constructor_declaration"
-	KindNodeStaticInitializer                Kind = "node:static_initializer"
-	KindNodeAnnotationTypeElementDeclaration Kind = "node:annotation_type_element_declaration"
-	KindNodeEnumConstant                     Kind = "node:enum_constant"
-	KindNodeVariableDeclarator               Kind = "node:variable_declarator"
-	KindNodeFormalParameters                 Kind = "node:formal_parameters"
-	KindNodeFormalParameter                  Kind = "node:formal_parameter"
-	KindNodeSpreadParameter                  Kind = "node:spread_parameter"
-	KindNodeReceiverParameter                Kind = "node:receiver_parameter"
-	KindNodeBlock                            Kind = "node:block"
-	KindNodeConstructorBody                  Kind = "node:constructor_body"
-	KindTokenIdentifier                      Kind = "token:identifier"
+	KindUnknown                                         Kind = ""
+	KindNodeProgram                                     Kind = "node:program"
+	KindNodePackageDeclaration                          Kind = "node:package_declaration"
+	KindNodeImportDeclaration                           Kind = "node:import_declaration"
+	KindNodeClassDeclaration                            Kind = "node:class_declaration"
+	KindNodeInterfaceDeclaration                        Kind = "node:interface_declaration"
+	KindNodeEnumDeclaration                             Kind = "node:enum_declaration"
+	KindNodeAnnotationTypeDeclaration                   Kind = "node:annotation_type_declaration"
+	KindNodeClassBody                                   Kind = "node:class_body"
+	KindNodeInterfaceBody                               Kind = "node:interface_body"
+	KindNodeEnumBody                                    Kind = "node:enum_body"
+	KindNodeEnumBodyDeclarations                        Kind = "node:enum_body_declarations"
+	KindNodeAnnotationTypeBody                          Kind = "node:annotation_type_body"
+	KindNodeFieldDeclaration                            Kind = "node:field_declaration"
+	KindNodeConstantDeclaration                         Kind = "node:constant_declaration"
+	KindNodeMethodDeclaration                           Kind = "node:method_declaration"
+	KindNodeConstructorDeclaration                      Kind = "node:constructor_declaration"
+	KindNodeStaticInitializer                           Kind = "node:static_initializer"
+	KindNodeAnnotationTypeElementDeclaration            Kind = "node:annotation_type_element_declaration"
+	KindNodeEnumConstant                                Kind = "node:enum_constant"
+	KindNodeVariableDeclarator                          Kind = "node:variable_declarator"
+	KindNodeFormalParameters                            Kind = "node:formal_parameters"
+	KindNodeFormalParameter                             Kind = "node:formal_parameter"
+	KindNodeSpreadParameter                             Kind = "node:spread_parameter"
+	KindNodeReceiverParameter                           Kind = "node:receiver_parameter"
+	KindNodeBlock                                       Kind = "node:block"
+	KindNodeConstructorBody                             Kind = "node:constructor_body"
+	KindTokenIdentifier                                 Kind = "token:identifier"
+	KindNodeERROR                                       Kind = "node:ERROR"
+	KindTokenERROR                                      Kind = "token:ERROR"
+	KindTokenEof                                        Kind = "token:eof"
+	KindTokenEnd                                        Kind = "token:end"
+	KindTokenDecimalIntegerLiteral                      Kind = "token:decimal_integer_literal"
+	KindTokenHexIntegerLiteral                          Kind = "token:hex_integer_literal"
+	KindTokenOctalIntegerLiteral                        Kind = "token:octal_integer_literal"
+	KindTokenBinaryIntegerLiteral                       Kind = "token:binary_integer_literal"
+	KindTokenDecimalFloatingPointLiteral                Kind = "token:decimal_floating_point_literal"
+	KindTokenHexFloatingPointLiteral                    Kind = "token:hex_floating_point_literal"
+	KindTokenTrue                                       Kind = "token:true"
+	KindTokenFalse                                      Kind = "token:false"
+	KindTokenCharacterLiteral                           Kind = "token:character_literal"
+	KindTokenDoubleQuote                                Kind = "token:\""
+	KindTokenTripleQuote                                Kind = "token:\"\"\""
+	KindTokenStringFragment                             Kind = "token:string_fragment"
+	KindTokenInternalMultilineStringFragmentToken1      Kind = "token:_multiline_string_fragment_token1"
+	KindTokenInternalMultilineStringFragmentToken2      Kind = "token:_multiline_string_fragment_token2"
+	KindTokenBackslashLBrace                            Kind = "token:\\{"
+	KindTokenRBrace                                     Kind = "token:}"
+	KindTokenInternalEscapeSequenceToken1               Kind = "token:_escape_sequence_token1"
+	KindTokenEscapeSequence                             Kind = "token:escape_sequence"
+	KindTokenNullLiteral                                Kind = "token:null_literal"
+	KindTokenLParen                                     Kind = "token:("
+	KindTokenRParen                                     Kind = "token:)"
+	KindTokenAmpersand                                  Kind = "token:&"
+	KindTokenEquals                                     Kind = "token:="
+	KindTokenPlusEquals                                 Kind = "token:+="
+	KindTokenMinusEquals                                Kind = "token:-="
+	KindTokenStarEquals                                 Kind = "token:*="
+	KindTokenSlashEquals                                Kind = "token:/="
+	KindTokenAmpersandEquals                            Kind = "token:&="
+	KindTokenPipeEquals                                 Kind = "token:|="
+	KindTokenCaretEquals                                Kind = "token:^="
+	KindTokenPercentEquals                              Kind = "token:%="
+	KindTokenLShiftEquals                               Kind = "token:<<="
+	KindTokenRShiftEquals                               Kind = "token:>>="
+	KindTokenUnsignedRShiftEquals                       Kind = "token:>>>="
+	KindTokenGreaterThan                                Kind = "token:>"
+	KindTokenLessThan                                   Kind = "token:<"
+	KindTokenGreaterThanEquals                          Kind = "token:>="
+	KindTokenLessThanEquals                             Kind = "token:<="
+	KindTokenEqualsEquals                               Kind = "token:=="
+	KindTokenBangEquals                                 Kind = "token:!="
+	KindTokenAmpersandAmpersand                         Kind = "token:&&"
+	KindTokenPipePipe                                   Kind = "token:||"
+	KindTokenPlus                                       Kind = "token:+"
+	KindTokenMinus                                      Kind = "token:-"
+	KindTokenStar                                       Kind = "token:*"
+	KindTokenSlash                                      Kind = "token:/"
+	KindTokenPipe                                       Kind = "token:|"
+	KindTokenCaret                                      Kind = "token:^"
+	KindTokenPercent                                    Kind = "token:%"
+	KindTokenLShift                                     Kind = "token:<<"
+	KindTokenRShift                                     Kind = "token:>>"
+	KindTokenUnsignedRShift                             Kind = "token:>>>"
+	KindTokenInstanceof                                 Kind = "token:instanceof"
+	KindTokenFinal                                      Kind = "token:final"
+	KindTokenArrow                                      Kind = "token:->"
+	KindTokenComma                                      Kind = "token:,"
+	KindTokenBackslashQuestion                          Kind = "token:\\?"
+	KindTokenColon                                      Kind = "token::"
+	KindTokenBang                                       Kind = "token:!"
+	KindTokenTilde                                      Kind = "token:~"
+	KindTokenPlusPlus                                   Kind = "token:++"
+	KindTokenMinusMinus                                 Kind = "token:--"
+	KindTokenNew                                        Kind = "token:new"
+	KindTokenLBracket                                   Kind = "token:["
+	KindTokenRBracket                                   Kind = "token:]"
+	KindTokenDot                                        Kind = "token:."
+	KindTokenClass                                      Kind = "token:class"
+	KindTokenColonColon                                 Kind = "token:::"
+	KindTokenExtends                                    Kind = "token:extends"
+	KindTokenSwitch                                     Kind = "token:switch"
+	KindTokenLBrace                                     Kind = "token:{"
+	KindTokenCase                                       Kind = "token:case"
+	KindTokenDefault                                    Kind = "token:default"
+	KindTokenUnderscorePattern                          Kind = "token:underscore_pattern"
+	KindTokenWhen                                       Kind = "token:when"
+	KindTokenSemicolon                                  Kind = "token:;"
+	KindTokenAssert                                     Kind = "token:assert"
+	KindTokenDo                                         Kind = "token:do"
+	KindTokenWhile                                      Kind = "token:while"
+	KindTokenBreak                                      Kind = "token:break"
+	KindTokenContinue                                   Kind = "token:continue"
+	KindTokenReturn                                     Kind = "token:return"
+	KindTokenYield                                      Kind = "token:yield"
+	KindTokenSynchronized                               Kind = "token:synchronized"
+	KindTokenThrow                                      Kind = "token:throw"
+	KindTokenTry                                        Kind = "token:try"
+	KindTokenCatch                                      Kind = "token:catch"
+	KindTokenFinally                                    Kind = "token:finally"
+	KindTokenIf                                         Kind = "token:if"
+	KindTokenElse                                       Kind = "token:else"
+	KindTokenFor                                        Kind = "token:for"
+	KindTokenAt                                         Kind = "token:@"
+	KindTokenOpen                                       Kind = "token:open"
+	KindTokenModule                                     Kind = "token:module"
+	KindTokenRequires                                   Kind = "token:requires"
+	KindTokenTransitive                                 Kind = "token:transitive"
+	KindTokenStatic                                     Kind = "token:static"
+	KindTokenExports                                    Kind = "token:exports"
+	KindTokenTo                                         Kind = "token:to"
+	KindTokenOpens                                      Kind = "token:opens"
+	KindTokenUses                                       Kind = "token:uses"
+	KindTokenProvides                                   Kind = "token:provides"
+	KindTokenWith                                       Kind = "token:with"
+	KindTokenPackage                                    Kind = "token:package"
+	KindTokenImport                                     Kind = "token:import"
+	KindTokenEnum                                       Kind = "token:enum"
+	KindTokenPublic                                     Kind = "token:public"
+	KindTokenProtected                                  Kind = "token:protected"
+	KindTokenPrivate                                    Kind = "token:private"
+	KindTokenAbstract                                   Kind = "token:abstract"
+	KindTokenStrictfp                                   Kind = "token:strictfp"
+	KindTokenNative                                     Kind = "token:native"
+	KindTokenTransient                                  Kind = "token:transient"
+	KindTokenVolatile                                   Kind = "token:volatile"
+	KindTokenSealed                                     Kind = "token:sealed"
+	KindTokenNonSealed                                  Kind = "token:non-sealed"
+	KindTokenImplements                                 Kind = "token:implements"
+	KindTokenPermits                                    Kind = "token:permits"
+	KindTokenRecord                                     Kind = "token:record"
+	KindTokenAnnotationInterface                        Kind = "token:@interface"
+	KindTokenInterface                                  Kind = "token:interface"
+	KindTokenByte                                       Kind = "token:byte"
+	KindTokenShort                                      Kind = "token:short"
+	KindTokenInt                                        Kind = "token:int"
+	KindTokenLong                                       Kind = "token:long"
+	KindTokenChar                                       Kind = "token:char"
+	KindTokenFloat                                      Kind = "token:float"
+	KindTokenDouble                                     Kind = "token:double"
+	KindTokenBooleanType                                Kind = "token:boolean_type"
+	KindTokenVoidType                                   Kind = "token:void_type"
+	KindTokenEllipsis                                   Kind = "token:..."
+	KindTokenThrows                                     Kind = "token:throws"
+	KindTokenThis                                       Kind = "token:this"
+	KindTokenSuper                                      Kind = "token:super"
+	KindTokenLineComment                                Kind = "token:line_comment"
+	KindTokenBlockComment                               Kind = "token:block_comment"
+	KindNodeInternalToplevelStatement                   Kind = "node:_toplevel_statement"
+	KindNodeInternalLiteral                             Kind = "node:_literal"
+	KindNodeStringLiteral                               Kind = "node:string_literal"
+	KindNodeInternalStringLiteral                       Kind = "node:_string_literal"
+	KindNodeInternalMultilineStringLiteral              Kind = "node:_multiline_string_literal"
+	KindNodeMultilineStringFragment                     Kind = "node:multiline_string_fragment"
+	KindNodeStringInterpolation                         Kind = "node:string_interpolation"
+	KindNodeInternalEscapeSequence                      Kind = "node:_escape_sequence"
+	KindNodeExpression                                  Kind = "node:expression"
+	KindNodeCastExpression                              Kind = "node:cast_expression"
+	KindNodeAssignmentExpression                        Kind = "node:assignment_expression"
+	KindNodeBinaryExpression                            Kind = "node:binary_expression"
+	KindNodeInstanceofExpression                        Kind = "node:instanceof_expression"
+	KindNodeLambdaExpression                            Kind = "node:lambda_expression"
+	KindNodeInferredParameters                          Kind = "node:inferred_parameters"
+	KindNodeTernaryExpression                           Kind = "node:ternary_expression"
+	KindNodeUnaryExpression                             Kind = "node:unary_expression"
+	KindNodeUpdateExpression                            Kind = "node:update_expression"
+	KindNodePrimaryExpression                           Kind = "node:primary_expression"
+	KindNodeArrayCreationExpression                     Kind = "node:array_creation_expression"
+	KindNodeDimensionsExpr                              Kind = "node:dimensions_expr"
+	KindNodeParenthesizedExpression                     Kind = "node:parenthesized_expression"
+	KindNodeClassLiteral                                Kind = "node:class_literal"
+	KindNodeObjectCreationExpression                    Kind = "node:object_creation_expression"
+	KindNodeInternalUnqualifiedObjectCreationExpression Kind = "node:_unqualified_object_creation_expression"
+	KindNodeFieldAccess                                 Kind = "node:field_access"
+	KindNodeTemplateExpression                          Kind = "node:template_expression"
+	KindNodeArrayAccess                                 Kind = "node:array_access"
+	KindNodeMethodInvocation                            Kind = "node:method_invocation"
+	KindNodeArgumentList                                Kind = "node:argument_list"
+	KindNodeMethodReference                             Kind = "node:method_reference"
+	KindNodeTypeArguments                               Kind = "node:type_arguments"
+	KindNodeWildcard                                    Kind = "node:wildcard"
+	KindNodeInternalWildcardBounds                      Kind = "node:_wildcard_bounds"
+	KindNodeDimensions                                  Kind = "node:dimensions"
+	KindNodeSwitchExpression                            Kind = "node:switch_expression"
+	KindNodeSwitchBlock                                 Kind = "node:switch_block"
+	KindNodeSwitchBlockStatementGroup                   Kind = "node:switch_block_statement_group"
+	KindNodeSwitchRule                                  Kind = "node:switch_rule"
+	KindNodeSwitchLabel                                 Kind = "node:switch_label"
+	KindNodePattern                                     Kind = "node:pattern"
+	KindNodeTypePattern                                 Kind = "node:type_pattern"
+	KindNodeRecordPattern                               Kind = "node:record_pattern"
+	KindNodeRecordPatternBody                           Kind = "node:record_pattern_body"
+	KindNodeRecordPatternComponent                      Kind = "node:record_pattern_component"
+	KindNodeGuard                                       Kind = "node:guard"
+	KindNodeStatement                                   Kind = "node:statement"
+	KindNodeExpressionStatement                         Kind = "node:expression_statement"
+	KindNodeLabeledStatement                            Kind = "node:labeled_statement"
+	KindNodeAssertStatement                             Kind = "node:assert_statement"
+	KindNodeDoStatement                                 Kind = "node:do_statement"
+	KindNodeBreakStatement                              Kind = "node:break_statement"
+	KindNodeContinueStatement                           Kind = "node:continue_statement"
+	KindNodeReturnStatement                             Kind = "node:return_statement"
+	KindNodeYieldStatement                              Kind = "node:yield_statement"
+	KindNodeSynchronizedStatement                       Kind = "node:synchronized_statement"
+	KindNodeThrowStatement                              Kind = "node:throw_statement"
+	KindNodeTryStatement                                Kind = "node:try_statement"
+	KindNodeCatchClause                                 Kind = "node:catch_clause"
+	KindNodeCatchFormalParameter                        Kind = "node:catch_formal_parameter"
+	KindNodeCatchType                                   Kind = "node:catch_type"
+	KindNodeFinallyClause                               Kind = "node:finally_clause"
+	KindNodeTryWithResourcesStatement                   Kind = "node:try_with_resources_statement"
+	KindNodeResourceSpecification                       Kind = "node:resource_specification"
+	KindNodeResource                                    Kind = "node:resource"
+	KindNodeIfStatement                                 Kind = "node:if_statement"
+	KindNodeWhileStatement                              Kind = "node:while_statement"
+	KindNodeForStatement                                Kind = "node:for_statement"
+	KindNodeEnhancedForStatement                        Kind = "node:enhanced_for_statement"
+	KindNodeInternalAnnotation                          Kind = "node:_annotation"
+	KindNodeMarkerAnnotation                            Kind = "node:marker_annotation"
+	KindNodeAnnotation                                  Kind = "node:annotation"
+	KindNodeAnnotationArgumentList                      Kind = "node:annotation_argument_list"
+	KindNodeElementValuePair                            Kind = "node:element_value_pair"
+	KindNodeInternalElementValue                        Kind = "node:_element_value"
+	KindNodeElementValueArrayInitializer                Kind = "node:element_value_array_initializer"
+	KindNodeDeclaration                                 Kind = "node:declaration"
+	KindNodeModuleDeclaration                           Kind = "node:module_declaration"
+	KindNodeModuleBody                                  Kind = "node:module_body"
+	KindNodeModuleDirective                             Kind = "node:module_directive"
+	KindNodeRequiresModuleDirective                     Kind = "node:requires_module_directive"
+	KindNodeRequiresModifier                            Kind = "node:requires_modifier"
+	KindNodeExportsModuleDirective                      Kind = "node:exports_module_directive"
+	KindNodeOpensModuleDirective                        Kind = "node:opens_module_directive"
+	KindNodeUsesModuleDirective                         Kind = "node:uses_module_directive"
+	KindNodeProvidesModuleDirective                     Kind = "node:provides_module_directive"
+	KindNodeModuleImportDeclaration                     Kind = "node:module_import_declaration"
+	KindNodeAsterisk                                    Kind = "node:asterisk"
+	KindNodeModifiers                                   Kind = "node:modifiers"
+	KindNodeTypeParameters                              Kind = "node:type_parameters"
+	KindNodeTypeParameter                               Kind = "node:type_parameter"
+	KindNodeTypeBound                                   Kind = "node:type_bound"
+	KindNodeSuperclass                                  Kind = "node:superclass"
+	KindNodeSuperInterfaces                             Kind = "node:super_interfaces"
+	KindNodeTypeList                                    Kind = "node:type_list"
+	KindNodePermits                                     Kind = "node:permits"
+	KindNodeInternalConstructorDeclarator               Kind = "node:_constructor_declarator"
+	KindNodeExplicitConstructorInvocation               Kind = "node:explicit_constructor_invocation"
+	KindNodeScopedIdentifier                            Kind = "node:scoped_identifier"
+	KindNodeRecordDeclaration                           Kind = "node:record_declaration"
+	KindNodeInternalDefaultValue                        Kind = "node:_default_value"
+	KindNodeExtendsInterfaces                           Kind = "node:extends_interfaces"
+	KindNodeInternalVariableDeclaratorList              Kind = "node:_variable_declarator_list"
+	KindNodeInternalVariableDeclaratorId                Kind = "node:_variable_declarator_id"
+	KindNodeArrayInitializer                            Kind = "node:array_initializer"
+	KindNodeInternalType                                Kind = "node:_type"
+	KindNodeInternalUnannotatedType                     Kind = "node:_unannotated_type"
+	KindNodeAnnotatedType                               Kind = "node:annotated_type"
+	KindNodeScopedTypeIdentifier                        Kind = "node:scoped_type_identifier"
+	KindNodeGenericType                                 Kind = "node:generic_type"
+	KindNodeArrayType                                   Kind = "node:array_type"
+	KindNodeIntegralType                                Kind = "node:integral_type"
+	KindNodeFloatingPointType                           Kind = "node:floating_point_type"
+	KindNodeInternalMethodHeader                        Kind = "node:_method_header"
+	KindNodeInternalMethodDeclarator                    Kind = "node:_method_declarator"
+	KindNodeThrows                                      Kind = "node:throws"
+	KindNodeLocalVariableDeclaration                    Kind = "node:local_variable_declaration"
+	KindNodeCompactConstructorDeclaration               Kind = "node:compact_constructor_declaration"
+	KindNodeInternalReservedIdentifier                  Kind = "node:_reserved_identifier"
+	KindNodeProgramRepeat1                              Kind = "node:program_repeat1"
+	KindNodeInternalStringLiteralRepeat1                Kind = "node:_string_literal_repeat1"
+	KindNodeInternalMultilineStringLiteralRepeat1       Kind = "node:_multiline_string_literal_repeat1"
+	KindNodeCastExpressionRepeat1                       Kind = "node:cast_expression_repeat1"
+	KindNodeInferredParametersRepeat1                   Kind = "node:inferred_parameters_repeat1"
+	KindNodeArrayCreationExpressionRepeat1              Kind = "node:array_creation_expression_repeat1"
+	KindNodeArrayCreationExpressionRepeat2              Kind = "node:array_creation_expression_repeat2"
+	KindNodeArgumentListRepeat1                         Kind = "node:argument_list_repeat1"
+	KindNodeTypeArgumentsRepeat1                        Kind = "node:type_arguments_repeat1"
+	KindNodeDimensionsRepeat1                           Kind = "node:dimensions_repeat1"
+	KindNodeSwitchBlockRepeat1                          Kind = "node:switch_block_repeat1"
+	KindNodeSwitchBlockRepeat2                          Kind = "node:switch_block_repeat2"
+	KindNodeSwitchBlockStatementGroupRepeat1            Kind = "node:switch_block_statement_group_repeat1"
+	KindNodeSwitchBlockStatementGroupRepeat2            Kind = "node:switch_block_statement_group_repeat2"
+	KindNodeRecordPatternBodyRepeat1                    Kind = "node:record_pattern_body_repeat1"
+	KindNodeTryStatementRepeat1                         Kind = "node:try_statement_repeat1"
+	KindNodeCatchTypeRepeat1                            Kind = "node:catch_type_repeat1"
+	KindNodeResourceSpecificationRepeat1                Kind = "node:resource_specification_repeat1"
+	KindNodeForStatementRepeat1                         Kind = "node:for_statement_repeat1"
+	KindNodeForStatementRepeat2                         Kind = "node:for_statement_repeat2"
+	KindNodeAnnotationArgumentListRepeat1               Kind = "node:annotation_argument_list_repeat1"
+	KindNodeElementValueArrayInitializerRepeat1         Kind = "node:element_value_array_initializer_repeat1"
+	KindNodeModuleBodyRepeat1                           Kind = "node:module_body_repeat1"
+	KindNodeRequiresModuleDirectiveRepeat1              Kind = "node:requires_module_directive_repeat1"
+	KindNodeExportsModuleDirectiveRepeat1               Kind = "node:exports_module_directive_repeat1"
+	KindNodeProvidesModuleDirectiveRepeat1              Kind = "node:provides_module_directive_repeat1"
+	KindNodeEnumBodyRepeat1                             Kind = "node:enum_body_repeat1"
+	KindNodeEnumBodyDeclarationsRepeat1                 Kind = "node:enum_body_declarations_repeat1"
+	KindNodeModifiersRepeat1                            Kind = "node:modifiers_repeat1"
+	KindNodeTypeParametersRepeat1                       Kind = "node:type_parameters_repeat1"
+	KindNodeTypeBoundRepeat1                            Kind = "node:type_bound_repeat1"
+	KindNodeTypeListRepeat1                             Kind = "node:type_list_repeat1"
+	KindNodeAnnotationTypeBodyRepeat1                   Kind = "node:annotation_type_body_repeat1"
+	KindNodeInterfaceBodyRepeat1                        Kind = "node:interface_body_repeat1"
+	KindNodeInternalVariableDeclaratorListRepeat1       Kind = "node:_variable_declarator_list_repeat1"
+	KindNodeArrayInitializerRepeat1                     Kind = "node:array_initializer_repeat1"
+	KindNodeFormalParametersRepeat1                     Kind = "node:formal_parameters_repeat1"
+	KindNodeReceiverParameterRepeat1                    Kind = "node:receiver_parameter_repeat1"
+	KindNodeTypeIdentifier                              Kind = "node:type_identifier"
+	KindTokenTypeIdentifier                             Kind = "token:type_identifier"
+	KindTokenMultilineStringFragment                    Kind = "token:multiline_string_fragment"
 )
+
+func (kind Kind) Valid() bool {
+	return kind.Category() != KindCategoryUnknown
+}
+
+func (kind Kind) Category() KindCategory {
+	switch kind {
+	case
+		KindNodeProgram,
+		KindNodePackageDeclaration,
+		KindNodeImportDeclaration,
+		KindNodeClassDeclaration,
+		KindNodeInterfaceDeclaration,
+		KindNodeEnumDeclaration,
+		KindNodeAnnotationTypeDeclaration,
+		KindNodeClassBody,
+		KindNodeInterfaceBody,
+		KindNodeEnumBody,
+		KindNodeEnumBodyDeclarations,
+		KindNodeAnnotationTypeBody,
+		KindNodeFieldDeclaration,
+		KindNodeConstantDeclaration,
+		KindNodeMethodDeclaration,
+		KindNodeConstructorDeclaration,
+		KindNodeStaticInitializer,
+		KindNodeAnnotationTypeElementDeclaration,
+		KindNodeEnumConstant,
+		KindNodeVariableDeclarator,
+		KindNodeFormalParameters,
+		KindNodeFormalParameter,
+		KindNodeSpreadParameter,
+		KindNodeReceiverParameter,
+		KindNodeBlock,
+		KindNodeConstructorBody,
+		KindNodeERROR,
+		KindNodeInternalToplevelStatement,
+		KindNodeInternalLiteral,
+		KindNodeStringLiteral,
+		KindNodeInternalStringLiteral,
+		KindNodeInternalMultilineStringLiteral,
+		KindNodeMultilineStringFragment,
+		KindNodeStringInterpolation,
+		KindNodeInternalEscapeSequence,
+		KindNodeExpression,
+		KindNodeCastExpression,
+		KindNodeAssignmentExpression,
+		KindNodeBinaryExpression,
+		KindNodeInstanceofExpression,
+		KindNodeLambdaExpression,
+		KindNodeInferredParameters,
+		KindNodeTernaryExpression,
+		KindNodeUnaryExpression,
+		KindNodeUpdateExpression,
+		KindNodePrimaryExpression,
+		KindNodeArrayCreationExpression,
+		KindNodeDimensionsExpr,
+		KindNodeParenthesizedExpression,
+		KindNodeClassLiteral,
+		KindNodeObjectCreationExpression,
+		KindNodeInternalUnqualifiedObjectCreationExpression,
+		KindNodeFieldAccess,
+		KindNodeTemplateExpression,
+		KindNodeArrayAccess,
+		KindNodeMethodInvocation,
+		KindNodeArgumentList,
+		KindNodeMethodReference,
+		KindNodeTypeArguments,
+		KindNodeWildcard,
+		KindNodeInternalWildcardBounds,
+		KindNodeDimensions,
+		KindNodeSwitchExpression,
+		KindNodeSwitchBlock,
+		KindNodeSwitchBlockStatementGroup,
+		KindNodeSwitchRule,
+		KindNodeSwitchLabel,
+		KindNodePattern,
+		KindNodeTypePattern,
+		KindNodeRecordPattern,
+		KindNodeRecordPatternBody,
+		KindNodeRecordPatternComponent,
+		KindNodeGuard,
+		KindNodeStatement,
+		KindNodeExpressionStatement,
+		KindNodeLabeledStatement,
+		KindNodeAssertStatement,
+		KindNodeDoStatement,
+		KindNodeBreakStatement,
+		KindNodeContinueStatement,
+		KindNodeReturnStatement,
+		KindNodeYieldStatement,
+		KindNodeSynchronizedStatement,
+		KindNodeThrowStatement,
+		KindNodeTryStatement,
+		KindNodeCatchClause,
+		KindNodeCatchFormalParameter,
+		KindNodeCatchType,
+		KindNodeFinallyClause,
+		KindNodeTryWithResourcesStatement,
+		KindNodeResourceSpecification,
+		KindNodeResource,
+		KindNodeIfStatement,
+		KindNodeWhileStatement,
+		KindNodeForStatement,
+		KindNodeEnhancedForStatement,
+		KindNodeInternalAnnotation,
+		KindNodeMarkerAnnotation,
+		KindNodeAnnotation,
+		KindNodeAnnotationArgumentList,
+		KindNodeElementValuePair,
+		KindNodeInternalElementValue,
+		KindNodeElementValueArrayInitializer,
+		KindNodeDeclaration,
+		KindNodeModuleDeclaration,
+		KindNodeModuleBody,
+		KindNodeModuleDirective,
+		KindNodeRequiresModuleDirective,
+		KindNodeRequiresModifier,
+		KindNodeExportsModuleDirective,
+		KindNodeOpensModuleDirective,
+		KindNodeUsesModuleDirective,
+		KindNodeProvidesModuleDirective,
+		KindNodeModuleImportDeclaration,
+		KindNodeAsterisk,
+		KindNodeModifiers,
+		KindNodeTypeParameters,
+		KindNodeTypeParameter,
+		KindNodeTypeBound,
+		KindNodeSuperclass,
+		KindNodeSuperInterfaces,
+		KindNodeTypeList,
+		KindNodePermits,
+		KindNodeInternalConstructorDeclarator,
+		KindNodeExplicitConstructorInvocation,
+		KindNodeScopedIdentifier,
+		KindNodeRecordDeclaration,
+		KindNodeInternalDefaultValue,
+		KindNodeExtendsInterfaces,
+		KindNodeInternalVariableDeclaratorList,
+		KindNodeInternalVariableDeclaratorId,
+		KindNodeArrayInitializer,
+		KindNodeInternalType,
+		KindNodeInternalUnannotatedType,
+		KindNodeAnnotatedType,
+		KindNodeScopedTypeIdentifier,
+		KindNodeGenericType,
+		KindNodeArrayType,
+		KindNodeIntegralType,
+		KindNodeFloatingPointType,
+		KindNodeInternalMethodHeader,
+		KindNodeInternalMethodDeclarator,
+		KindNodeThrows,
+		KindNodeLocalVariableDeclaration,
+		KindNodeCompactConstructorDeclaration,
+		KindNodeInternalReservedIdentifier,
+		KindNodeProgramRepeat1,
+		KindNodeInternalStringLiteralRepeat1,
+		KindNodeInternalMultilineStringLiteralRepeat1,
+		KindNodeCastExpressionRepeat1,
+		KindNodeInferredParametersRepeat1,
+		KindNodeArrayCreationExpressionRepeat1,
+		KindNodeArrayCreationExpressionRepeat2,
+		KindNodeArgumentListRepeat1,
+		KindNodeTypeArgumentsRepeat1,
+		KindNodeDimensionsRepeat1,
+		KindNodeSwitchBlockRepeat1,
+		KindNodeSwitchBlockRepeat2,
+		KindNodeSwitchBlockStatementGroupRepeat1,
+		KindNodeSwitchBlockStatementGroupRepeat2,
+		KindNodeRecordPatternBodyRepeat1,
+		KindNodeTryStatementRepeat1,
+		KindNodeCatchTypeRepeat1,
+		KindNodeResourceSpecificationRepeat1,
+		KindNodeForStatementRepeat1,
+		KindNodeForStatementRepeat2,
+		KindNodeAnnotationArgumentListRepeat1,
+		KindNodeElementValueArrayInitializerRepeat1,
+		KindNodeModuleBodyRepeat1,
+		KindNodeRequiresModuleDirectiveRepeat1,
+		KindNodeExportsModuleDirectiveRepeat1,
+		KindNodeProvidesModuleDirectiveRepeat1,
+		KindNodeEnumBodyRepeat1,
+		KindNodeEnumBodyDeclarationsRepeat1,
+		KindNodeModifiersRepeat1,
+		KindNodeTypeParametersRepeat1,
+		KindNodeTypeBoundRepeat1,
+		KindNodeTypeListRepeat1,
+		KindNodeAnnotationTypeBodyRepeat1,
+		KindNodeInterfaceBodyRepeat1,
+		KindNodeInternalVariableDeclaratorListRepeat1,
+		KindNodeArrayInitializerRepeat1,
+		KindNodeFormalParametersRepeat1,
+		KindNodeReceiverParameterRepeat1,
+		KindNodeTypeIdentifier:
+		return KindCategoryNode
+	case
+		KindTokenIdentifier,
+		KindTokenERROR,
+		KindTokenEof,
+		KindTokenEnd,
+		KindTokenDecimalIntegerLiteral,
+		KindTokenHexIntegerLiteral,
+		KindTokenOctalIntegerLiteral,
+		KindTokenBinaryIntegerLiteral,
+		KindTokenDecimalFloatingPointLiteral,
+		KindTokenHexFloatingPointLiteral,
+		KindTokenTrue,
+		KindTokenFalse,
+		KindTokenCharacterLiteral,
+		KindTokenDoubleQuote,
+		KindTokenTripleQuote,
+		KindTokenStringFragment,
+		KindTokenInternalMultilineStringFragmentToken1,
+		KindTokenInternalMultilineStringFragmentToken2,
+		KindTokenBackslashLBrace,
+		KindTokenRBrace,
+		KindTokenInternalEscapeSequenceToken1,
+		KindTokenEscapeSequence,
+		KindTokenNullLiteral,
+		KindTokenLParen,
+		KindTokenRParen,
+		KindTokenAmpersand,
+		KindTokenEquals,
+		KindTokenPlusEquals,
+		KindTokenMinusEquals,
+		KindTokenStarEquals,
+		KindTokenSlashEquals,
+		KindTokenAmpersandEquals,
+		KindTokenPipeEquals,
+		KindTokenCaretEquals,
+		KindTokenPercentEquals,
+		KindTokenLShiftEquals,
+		KindTokenRShiftEquals,
+		KindTokenUnsignedRShiftEquals,
+		KindTokenGreaterThan,
+		KindTokenLessThan,
+		KindTokenGreaterThanEquals,
+		KindTokenLessThanEquals,
+		KindTokenEqualsEquals,
+		KindTokenBangEquals,
+		KindTokenAmpersandAmpersand,
+		KindTokenPipePipe,
+		KindTokenPlus,
+		KindTokenMinus,
+		KindTokenStar,
+		KindTokenSlash,
+		KindTokenPipe,
+		KindTokenCaret,
+		KindTokenPercent,
+		KindTokenLShift,
+		KindTokenRShift,
+		KindTokenUnsignedRShift,
+		KindTokenInstanceof,
+		KindTokenFinal,
+		KindTokenArrow,
+		KindTokenComma,
+		KindTokenBackslashQuestion,
+		KindTokenColon,
+		KindTokenBang,
+		KindTokenTilde,
+		KindTokenPlusPlus,
+		KindTokenMinusMinus,
+		KindTokenNew,
+		KindTokenLBracket,
+		KindTokenRBracket,
+		KindTokenDot,
+		KindTokenClass,
+		KindTokenColonColon,
+		KindTokenExtends,
+		KindTokenSwitch,
+		KindTokenLBrace,
+		KindTokenCase,
+		KindTokenDefault,
+		KindTokenUnderscorePattern,
+		KindTokenWhen,
+		KindTokenSemicolon,
+		KindTokenAssert,
+		KindTokenDo,
+		KindTokenWhile,
+		KindTokenBreak,
+		KindTokenContinue,
+		KindTokenReturn,
+		KindTokenYield,
+		KindTokenSynchronized,
+		KindTokenThrow,
+		KindTokenTry,
+		KindTokenCatch,
+		KindTokenFinally,
+		KindTokenIf,
+		KindTokenElse,
+		KindTokenFor,
+		KindTokenAt,
+		KindTokenOpen,
+		KindTokenModule,
+		KindTokenRequires,
+		KindTokenTransitive,
+		KindTokenStatic,
+		KindTokenExports,
+		KindTokenTo,
+		KindTokenOpens,
+		KindTokenUses,
+		KindTokenProvides,
+		KindTokenWith,
+		KindTokenPackage,
+		KindTokenImport,
+		KindTokenEnum,
+		KindTokenPublic,
+		KindTokenProtected,
+		KindTokenPrivate,
+		KindTokenAbstract,
+		KindTokenStrictfp,
+		KindTokenNative,
+		KindTokenTransient,
+		KindTokenVolatile,
+		KindTokenSealed,
+		KindTokenNonSealed,
+		KindTokenImplements,
+		KindTokenPermits,
+		KindTokenRecord,
+		KindTokenAnnotationInterface,
+		KindTokenInterface,
+		KindTokenByte,
+		KindTokenShort,
+		KindTokenInt,
+		KindTokenLong,
+		KindTokenChar,
+		KindTokenFloat,
+		KindTokenDouble,
+		KindTokenBooleanType,
+		KindTokenVoidType,
+		KindTokenEllipsis,
+		KindTokenThrows,
+		KindTokenThis,
+		KindTokenSuper,
+		KindTokenLineComment,
+		KindTokenBlockComment,
+		KindTokenTypeIdentifier,
+		KindTokenMultilineStringFragment:
+		return KindCategoryToken
+	default:
+		return KindCategoryUnknown
+	}
+}
+
+func LookupNodeKind(name string) (Kind, bool) {
+	switch name {
+	case "program":
+		return KindNodeProgram, true
+	case "package_declaration":
+		return KindNodePackageDeclaration, true
+	case "import_declaration":
+		return KindNodeImportDeclaration, true
+	case "class_declaration":
+		return KindNodeClassDeclaration, true
+	case "interface_declaration":
+		return KindNodeInterfaceDeclaration, true
+	case "enum_declaration":
+		return KindNodeEnumDeclaration, true
+	case "annotation_type_declaration":
+		return KindNodeAnnotationTypeDeclaration, true
+	case "class_body":
+		return KindNodeClassBody, true
+	case "interface_body":
+		return KindNodeInterfaceBody, true
+	case "enum_body":
+		return KindNodeEnumBody, true
+	case "enum_body_declarations":
+		return KindNodeEnumBodyDeclarations, true
+	case "annotation_type_body":
+		return KindNodeAnnotationTypeBody, true
+	case "field_declaration":
+		return KindNodeFieldDeclaration, true
+	case "constant_declaration":
+		return KindNodeConstantDeclaration, true
+	case "method_declaration":
+		return KindNodeMethodDeclaration, true
+	case "constructor_declaration":
+		return KindNodeConstructorDeclaration, true
+	case "static_initializer":
+		return KindNodeStaticInitializer, true
+	case "annotation_type_element_declaration":
+		return KindNodeAnnotationTypeElementDeclaration, true
+	case "enum_constant":
+		return KindNodeEnumConstant, true
+	case "variable_declarator":
+		return KindNodeVariableDeclarator, true
+	case "formal_parameters":
+		return KindNodeFormalParameters, true
+	case "formal_parameter":
+		return KindNodeFormalParameter, true
+	case "spread_parameter":
+		return KindNodeSpreadParameter, true
+	case "receiver_parameter":
+		return KindNodeReceiverParameter, true
+	case "block":
+		return KindNodeBlock, true
+	case "constructor_body":
+		return KindNodeConstructorBody, true
+	case "ERROR":
+		return KindNodeERROR, true
+	case "_toplevel_statement":
+		return KindNodeInternalToplevelStatement, true
+	case "_literal":
+		return KindNodeInternalLiteral, true
+	case "string_literal":
+		return KindNodeStringLiteral, true
+	case "_string_literal":
+		return KindNodeInternalStringLiteral, true
+	case "_multiline_string_literal":
+		return KindNodeInternalMultilineStringLiteral, true
+	case "multiline_string_fragment":
+		return KindNodeMultilineStringFragment, true
+	case "string_interpolation":
+		return KindNodeStringInterpolation, true
+	case "_escape_sequence":
+		return KindNodeInternalEscapeSequence, true
+	case "expression":
+		return KindNodeExpression, true
+	case "cast_expression":
+		return KindNodeCastExpression, true
+	case "assignment_expression":
+		return KindNodeAssignmentExpression, true
+	case "binary_expression":
+		return KindNodeBinaryExpression, true
+	case "instanceof_expression":
+		return KindNodeInstanceofExpression, true
+	case "lambda_expression":
+		return KindNodeLambdaExpression, true
+	case "inferred_parameters":
+		return KindNodeInferredParameters, true
+	case "ternary_expression":
+		return KindNodeTernaryExpression, true
+	case "unary_expression":
+		return KindNodeUnaryExpression, true
+	case "update_expression":
+		return KindNodeUpdateExpression, true
+	case "primary_expression":
+		return KindNodePrimaryExpression, true
+	case "array_creation_expression":
+		return KindNodeArrayCreationExpression, true
+	case "dimensions_expr":
+		return KindNodeDimensionsExpr, true
+	case "parenthesized_expression":
+		return KindNodeParenthesizedExpression, true
+	case "class_literal":
+		return KindNodeClassLiteral, true
+	case "object_creation_expression":
+		return KindNodeObjectCreationExpression, true
+	case "_unqualified_object_creation_expression":
+		return KindNodeInternalUnqualifiedObjectCreationExpression, true
+	case "field_access":
+		return KindNodeFieldAccess, true
+	case "template_expression":
+		return KindNodeTemplateExpression, true
+	case "array_access":
+		return KindNodeArrayAccess, true
+	case "method_invocation":
+		return KindNodeMethodInvocation, true
+	case "argument_list":
+		return KindNodeArgumentList, true
+	case "method_reference":
+		return KindNodeMethodReference, true
+	case "type_arguments":
+		return KindNodeTypeArguments, true
+	case "wildcard":
+		return KindNodeWildcard, true
+	case "_wildcard_bounds":
+		return KindNodeInternalWildcardBounds, true
+	case "dimensions":
+		return KindNodeDimensions, true
+	case "switch_expression":
+		return KindNodeSwitchExpression, true
+	case "switch_block":
+		return KindNodeSwitchBlock, true
+	case "switch_block_statement_group":
+		return KindNodeSwitchBlockStatementGroup, true
+	case "switch_rule":
+		return KindNodeSwitchRule, true
+	case "switch_label":
+		return KindNodeSwitchLabel, true
+	case "pattern":
+		return KindNodePattern, true
+	case "type_pattern":
+		return KindNodeTypePattern, true
+	case "record_pattern":
+		return KindNodeRecordPattern, true
+	case "record_pattern_body":
+		return KindNodeRecordPatternBody, true
+	case "record_pattern_component":
+		return KindNodeRecordPatternComponent, true
+	case "guard":
+		return KindNodeGuard, true
+	case "statement":
+		return KindNodeStatement, true
+	case "expression_statement":
+		return KindNodeExpressionStatement, true
+	case "labeled_statement":
+		return KindNodeLabeledStatement, true
+	case "assert_statement":
+		return KindNodeAssertStatement, true
+	case "do_statement":
+		return KindNodeDoStatement, true
+	case "break_statement":
+		return KindNodeBreakStatement, true
+	case "continue_statement":
+		return KindNodeContinueStatement, true
+	case "return_statement":
+		return KindNodeReturnStatement, true
+	case "yield_statement":
+		return KindNodeYieldStatement, true
+	case "synchronized_statement":
+		return KindNodeSynchronizedStatement, true
+	case "throw_statement":
+		return KindNodeThrowStatement, true
+	case "try_statement":
+		return KindNodeTryStatement, true
+	case "catch_clause":
+		return KindNodeCatchClause, true
+	case "catch_formal_parameter":
+		return KindNodeCatchFormalParameter, true
+	case "catch_type":
+		return KindNodeCatchType, true
+	case "finally_clause":
+		return KindNodeFinallyClause, true
+	case "try_with_resources_statement":
+		return KindNodeTryWithResourcesStatement, true
+	case "resource_specification":
+		return KindNodeResourceSpecification, true
+	case "resource":
+		return KindNodeResource, true
+	case "if_statement":
+		return KindNodeIfStatement, true
+	case "while_statement":
+		return KindNodeWhileStatement, true
+	case "for_statement":
+		return KindNodeForStatement, true
+	case "enhanced_for_statement":
+		return KindNodeEnhancedForStatement, true
+	case "_annotation":
+		return KindNodeInternalAnnotation, true
+	case "marker_annotation":
+		return KindNodeMarkerAnnotation, true
+	case "annotation":
+		return KindNodeAnnotation, true
+	case "annotation_argument_list":
+		return KindNodeAnnotationArgumentList, true
+	case "element_value_pair":
+		return KindNodeElementValuePair, true
+	case "_element_value":
+		return KindNodeInternalElementValue, true
+	case "element_value_array_initializer":
+		return KindNodeElementValueArrayInitializer, true
+	case "declaration":
+		return KindNodeDeclaration, true
+	case "module_declaration":
+		return KindNodeModuleDeclaration, true
+	case "module_body":
+		return KindNodeModuleBody, true
+	case "module_directive":
+		return KindNodeModuleDirective, true
+	case "requires_module_directive":
+		return KindNodeRequiresModuleDirective, true
+	case "requires_modifier":
+		return KindNodeRequiresModifier, true
+	case "exports_module_directive":
+		return KindNodeExportsModuleDirective, true
+	case "opens_module_directive":
+		return KindNodeOpensModuleDirective, true
+	case "uses_module_directive":
+		return KindNodeUsesModuleDirective, true
+	case "provides_module_directive":
+		return KindNodeProvidesModuleDirective, true
+	case "module_import_declaration":
+		return KindNodeModuleImportDeclaration, true
+	case "asterisk":
+		return KindNodeAsterisk, true
+	case "modifiers":
+		return KindNodeModifiers, true
+	case "type_parameters":
+		return KindNodeTypeParameters, true
+	case "type_parameter":
+		return KindNodeTypeParameter, true
+	case "type_bound":
+		return KindNodeTypeBound, true
+	case "superclass":
+		return KindNodeSuperclass, true
+	case "super_interfaces":
+		return KindNodeSuperInterfaces, true
+	case "type_list":
+		return KindNodeTypeList, true
+	case "permits":
+		return KindNodePermits, true
+	case "_constructor_declarator":
+		return KindNodeInternalConstructorDeclarator, true
+	case "explicit_constructor_invocation":
+		return KindNodeExplicitConstructorInvocation, true
+	case "scoped_identifier":
+		return KindNodeScopedIdentifier, true
+	case "record_declaration":
+		return KindNodeRecordDeclaration, true
+	case "_default_value":
+		return KindNodeInternalDefaultValue, true
+	case "extends_interfaces":
+		return KindNodeExtendsInterfaces, true
+	case "_variable_declarator_list":
+		return KindNodeInternalVariableDeclaratorList, true
+	case "_variable_declarator_id":
+		return KindNodeInternalVariableDeclaratorId, true
+	case "array_initializer":
+		return KindNodeArrayInitializer, true
+	case "_type":
+		return KindNodeInternalType, true
+	case "_unannotated_type":
+		return KindNodeInternalUnannotatedType, true
+	case "annotated_type":
+		return KindNodeAnnotatedType, true
+	case "scoped_type_identifier":
+		return KindNodeScopedTypeIdentifier, true
+	case "generic_type":
+		return KindNodeGenericType, true
+	case "array_type":
+		return KindNodeArrayType, true
+	case "integral_type":
+		return KindNodeIntegralType, true
+	case "floating_point_type":
+		return KindNodeFloatingPointType, true
+	case "_method_header":
+		return KindNodeInternalMethodHeader, true
+	case "_method_declarator":
+		return KindNodeInternalMethodDeclarator, true
+	case "throws":
+		return KindNodeThrows, true
+	case "local_variable_declaration":
+		return KindNodeLocalVariableDeclaration, true
+	case "compact_constructor_declaration":
+		return KindNodeCompactConstructorDeclaration, true
+	case "_reserved_identifier":
+		return KindNodeInternalReservedIdentifier, true
+	case "program_repeat1":
+		return KindNodeProgramRepeat1, true
+	case "_string_literal_repeat1":
+		return KindNodeInternalStringLiteralRepeat1, true
+	case "_multiline_string_literal_repeat1":
+		return KindNodeInternalMultilineStringLiteralRepeat1, true
+	case "cast_expression_repeat1":
+		return KindNodeCastExpressionRepeat1, true
+	case "inferred_parameters_repeat1":
+		return KindNodeInferredParametersRepeat1, true
+	case "array_creation_expression_repeat1":
+		return KindNodeArrayCreationExpressionRepeat1, true
+	case "array_creation_expression_repeat2":
+		return KindNodeArrayCreationExpressionRepeat2, true
+	case "argument_list_repeat1":
+		return KindNodeArgumentListRepeat1, true
+	case "type_arguments_repeat1":
+		return KindNodeTypeArgumentsRepeat1, true
+	case "dimensions_repeat1":
+		return KindNodeDimensionsRepeat1, true
+	case "switch_block_repeat1":
+		return KindNodeSwitchBlockRepeat1, true
+	case "switch_block_repeat2":
+		return KindNodeSwitchBlockRepeat2, true
+	case "switch_block_statement_group_repeat1":
+		return KindNodeSwitchBlockStatementGroupRepeat1, true
+	case "switch_block_statement_group_repeat2":
+		return KindNodeSwitchBlockStatementGroupRepeat2, true
+	case "record_pattern_body_repeat1":
+		return KindNodeRecordPatternBodyRepeat1, true
+	case "try_statement_repeat1":
+		return KindNodeTryStatementRepeat1, true
+	case "catch_type_repeat1":
+		return KindNodeCatchTypeRepeat1, true
+	case "resource_specification_repeat1":
+		return KindNodeResourceSpecificationRepeat1, true
+	case "for_statement_repeat1":
+		return KindNodeForStatementRepeat1, true
+	case "for_statement_repeat2":
+		return KindNodeForStatementRepeat2, true
+	case "annotation_argument_list_repeat1":
+		return KindNodeAnnotationArgumentListRepeat1, true
+	case "element_value_array_initializer_repeat1":
+		return KindNodeElementValueArrayInitializerRepeat1, true
+	case "module_body_repeat1":
+		return KindNodeModuleBodyRepeat1, true
+	case "requires_module_directive_repeat1":
+		return KindNodeRequiresModuleDirectiveRepeat1, true
+	case "exports_module_directive_repeat1":
+		return KindNodeExportsModuleDirectiveRepeat1, true
+	case "provides_module_directive_repeat1":
+		return KindNodeProvidesModuleDirectiveRepeat1, true
+	case "enum_body_repeat1":
+		return KindNodeEnumBodyRepeat1, true
+	case "enum_body_declarations_repeat1":
+		return KindNodeEnumBodyDeclarationsRepeat1, true
+	case "modifiers_repeat1":
+		return KindNodeModifiersRepeat1, true
+	case "type_parameters_repeat1":
+		return KindNodeTypeParametersRepeat1, true
+	case "type_bound_repeat1":
+		return KindNodeTypeBoundRepeat1, true
+	case "type_list_repeat1":
+		return KindNodeTypeListRepeat1, true
+	case "annotation_type_body_repeat1":
+		return KindNodeAnnotationTypeBodyRepeat1, true
+	case "interface_body_repeat1":
+		return KindNodeInterfaceBodyRepeat1, true
+	case "_variable_declarator_list_repeat1":
+		return KindNodeInternalVariableDeclaratorListRepeat1, true
+	case "array_initializer_repeat1":
+		return KindNodeArrayInitializerRepeat1, true
+	case "formal_parameters_repeat1":
+		return KindNodeFormalParametersRepeat1, true
+	case "receiver_parameter_repeat1":
+		return KindNodeReceiverParameterRepeat1, true
+	case "type_identifier":
+		return KindNodeTypeIdentifier, true
+	default:
+		return KindUnknown, false
+	}
+}
+
+func LookupTokenKind(name string) (Kind, bool) {
+	switch name {
+	case "identifier":
+		return KindTokenIdentifier, true
+	case "ERROR":
+		return KindTokenERROR, true
+	case "eof":
+		return KindTokenEof, true
+	case "end":
+		return KindTokenEnd, true
+	case "decimal_integer_literal":
+		return KindTokenDecimalIntegerLiteral, true
+	case "hex_integer_literal":
+		return KindTokenHexIntegerLiteral, true
+	case "octal_integer_literal":
+		return KindTokenOctalIntegerLiteral, true
+	case "binary_integer_literal":
+		return KindTokenBinaryIntegerLiteral, true
+	case "decimal_floating_point_literal":
+		return KindTokenDecimalFloatingPointLiteral, true
+	case "hex_floating_point_literal":
+		return KindTokenHexFloatingPointLiteral, true
+	case "true":
+		return KindTokenTrue, true
+	case "false":
+		return KindTokenFalse, true
+	case "character_literal":
+		return KindTokenCharacterLiteral, true
+	case "\"":
+		return KindTokenDoubleQuote, true
+	case "\"\"\"":
+		return KindTokenTripleQuote, true
+	case "string_fragment":
+		return KindTokenStringFragment, true
+	case "_multiline_string_fragment_token1":
+		return KindTokenInternalMultilineStringFragmentToken1, true
+	case "_multiline_string_fragment_token2":
+		return KindTokenInternalMultilineStringFragmentToken2, true
+	case "\\{":
+		return KindTokenBackslashLBrace, true
+	case "}":
+		return KindTokenRBrace, true
+	case "_escape_sequence_token1":
+		return KindTokenInternalEscapeSequenceToken1, true
+	case "escape_sequence":
+		return KindTokenEscapeSequence, true
+	case "null_literal":
+		return KindTokenNullLiteral, true
+	case "(":
+		return KindTokenLParen, true
+	case ")":
+		return KindTokenRParen, true
+	case "&":
+		return KindTokenAmpersand, true
+	case "=":
+		return KindTokenEquals, true
+	case "+=":
+		return KindTokenPlusEquals, true
+	case "-=":
+		return KindTokenMinusEquals, true
+	case "*=":
+		return KindTokenStarEquals, true
+	case "/=":
+		return KindTokenSlashEquals, true
+	case "&=":
+		return KindTokenAmpersandEquals, true
+	case "|=":
+		return KindTokenPipeEquals, true
+	case "^=":
+		return KindTokenCaretEquals, true
+	case "%=":
+		return KindTokenPercentEquals, true
+	case "<<=":
+		return KindTokenLShiftEquals, true
+	case ">>=":
+		return KindTokenRShiftEquals, true
+	case ">>>=":
+		return KindTokenUnsignedRShiftEquals, true
+	case ">":
+		return KindTokenGreaterThan, true
+	case "<":
+		return KindTokenLessThan, true
+	case ">=":
+		return KindTokenGreaterThanEquals, true
+	case "<=":
+		return KindTokenLessThanEquals, true
+	case "==":
+		return KindTokenEqualsEquals, true
+	case "!=":
+		return KindTokenBangEquals, true
+	case "&&":
+		return KindTokenAmpersandAmpersand, true
+	case "||":
+		return KindTokenPipePipe, true
+	case "+":
+		return KindTokenPlus, true
+	case "-":
+		return KindTokenMinus, true
+	case "*":
+		return KindTokenStar, true
+	case "/":
+		return KindTokenSlash, true
+	case "|":
+		return KindTokenPipe, true
+	case "^":
+		return KindTokenCaret, true
+	case "%":
+		return KindTokenPercent, true
+	case "<<":
+		return KindTokenLShift, true
+	case ">>":
+		return KindTokenRShift, true
+	case ">>>":
+		return KindTokenUnsignedRShift, true
+	case "instanceof":
+		return KindTokenInstanceof, true
+	case "final":
+		return KindTokenFinal, true
+	case "->":
+		return KindTokenArrow, true
+	case ",":
+		return KindTokenComma, true
+	case "\\?":
+		return KindTokenBackslashQuestion, true
+	case ":":
+		return KindTokenColon, true
+	case "!":
+		return KindTokenBang, true
+	case "~":
+		return KindTokenTilde, true
+	case "++":
+		return KindTokenPlusPlus, true
+	case "--":
+		return KindTokenMinusMinus, true
+	case "new":
+		return KindTokenNew, true
+	case "[":
+		return KindTokenLBracket, true
+	case "]":
+		return KindTokenRBracket, true
+	case ".":
+		return KindTokenDot, true
+	case "class":
+		return KindTokenClass, true
+	case "::":
+		return KindTokenColonColon, true
+	case "extends":
+		return KindTokenExtends, true
+	case "switch":
+		return KindTokenSwitch, true
+	case "{":
+		return KindTokenLBrace, true
+	case "case":
+		return KindTokenCase, true
+	case "default":
+		return KindTokenDefault, true
+	case "underscore_pattern":
+		return KindTokenUnderscorePattern, true
+	case "when":
+		return KindTokenWhen, true
+	case ";":
+		return KindTokenSemicolon, true
+	case "assert":
+		return KindTokenAssert, true
+	case "do":
+		return KindTokenDo, true
+	case "while":
+		return KindTokenWhile, true
+	case "break":
+		return KindTokenBreak, true
+	case "continue":
+		return KindTokenContinue, true
+	case "return":
+		return KindTokenReturn, true
+	case "yield":
+		return KindTokenYield, true
+	case "synchronized":
+		return KindTokenSynchronized, true
+	case "throw":
+		return KindTokenThrow, true
+	case "try":
+		return KindTokenTry, true
+	case "catch":
+		return KindTokenCatch, true
+	case "finally":
+		return KindTokenFinally, true
+	case "if":
+		return KindTokenIf, true
+	case "else":
+		return KindTokenElse, true
+	case "for":
+		return KindTokenFor, true
+	case "@":
+		return KindTokenAt, true
+	case "open":
+		return KindTokenOpen, true
+	case "module":
+		return KindTokenModule, true
+	case "requires":
+		return KindTokenRequires, true
+	case "transitive":
+		return KindTokenTransitive, true
+	case "static":
+		return KindTokenStatic, true
+	case "exports":
+		return KindTokenExports, true
+	case "to":
+		return KindTokenTo, true
+	case "opens":
+		return KindTokenOpens, true
+	case "uses":
+		return KindTokenUses, true
+	case "provides":
+		return KindTokenProvides, true
+	case "with":
+		return KindTokenWith, true
+	case "package":
+		return KindTokenPackage, true
+	case "import":
+		return KindTokenImport, true
+	case "enum":
+		return KindTokenEnum, true
+	case "public":
+		return KindTokenPublic, true
+	case "protected":
+		return KindTokenProtected, true
+	case "private":
+		return KindTokenPrivate, true
+	case "abstract":
+		return KindTokenAbstract, true
+	case "strictfp":
+		return KindTokenStrictfp, true
+	case "native":
+		return KindTokenNative, true
+	case "transient":
+		return KindTokenTransient, true
+	case "volatile":
+		return KindTokenVolatile, true
+	case "sealed":
+		return KindTokenSealed, true
+	case "non-sealed":
+		return KindTokenNonSealed, true
+	case "implements":
+		return KindTokenImplements, true
+	case "permits":
+		return KindTokenPermits, true
+	case "record":
+		return KindTokenRecord, true
+	case "@interface":
+		return KindTokenAnnotationInterface, true
+	case "interface":
+		return KindTokenInterface, true
+	case "byte":
+		return KindTokenByte, true
+	case "short":
+		return KindTokenShort, true
+	case "int":
+		return KindTokenInt, true
+	case "long":
+		return KindTokenLong, true
+	case "char":
+		return KindTokenChar, true
+	case "float":
+		return KindTokenFloat, true
+	case "double":
+		return KindTokenDouble, true
+	case "boolean_type":
+		return KindTokenBooleanType, true
+	case "void_type":
+		return KindTokenVoidType, true
+	case "...":
+		return KindTokenEllipsis, true
+	case "throws":
+		return KindTokenThrows, true
+	case "this":
+		return KindTokenThis, true
+	case "super":
+		return KindTokenSuper, true
+	case "line_comment":
+		return KindTokenLineComment, true
+	case "block_comment":
+		return KindTokenBlockComment, true
+	case "type_identifier":
+		return KindTokenTypeIdentifier, true
+	case "multiline_string_fragment":
+		return KindTokenMultilineStringFragment, true
+	default:
+		return KindUnknown, false
+	}
+}

@@ -1,32 +1,1839 @@
 {
   "schemaVersion": 1,
+  "kinds": [
+    {
+      "element": "node",
+      "name": "program",
+      "goName": "Program"
+    },
+    {
+      "element": "node",
+      "name": "package_declaration",
+      "goName": "PackageDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "import_declaration",
+      "goName": "ImportDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "class_declaration",
+      "goName": "ClassDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "interface_declaration",
+      "goName": "InterfaceDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "enum_declaration",
+      "goName": "EnumDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "annotation_type_declaration",
+      "goName": "AnnotationTypeDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "class_body",
+      "goName": "ClassBody"
+    },
+    {
+      "element": "node",
+      "name": "interface_body",
+      "goName": "InterfaceBody"
+    },
+    {
+      "element": "node",
+      "name": "enum_body",
+      "goName": "EnumBody"
+    },
+    {
+      "element": "node",
+      "name": "enum_body_declarations",
+      "goName": "EnumBodyDeclarations"
+    },
+    {
+      "element": "node",
+      "name": "annotation_type_body",
+      "goName": "AnnotationTypeBody"
+    },
+    {
+      "element": "node",
+      "name": "field_declaration",
+      "goName": "FieldDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "constant_declaration",
+      "goName": "ConstantDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "method_declaration",
+      "goName": "MethodDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "constructor_declaration",
+      "goName": "ConstructorDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "static_initializer",
+      "goName": "StaticInitializer"
+    },
+    {
+      "element": "node",
+      "name": "annotation_type_element_declaration",
+      "goName": "AnnotationTypeElementDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "enum_constant",
+      "goName": "EnumConstant"
+    },
+    {
+      "element": "node",
+      "name": "variable_declarator",
+      "goName": "VariableDeclarator"
+    },
+    {
+      "element": "node",
+      "name": "formal_parameters",
+      "goName": "FormalParameters"
+    },
+    {
+      "element": "node",
+      "name": "formal_parameter",
+      "goName": "FormalParameter"
+    },
+    {
+      "element": "node",
+      "name": "spread_parameter",
+      "goName": "SpreadParameter"
+    },
+    {
+      "element": "node",
+      "name": "receiver_parameter",
+      "goName": "ReceiverParameter"
+    },
+    {
+      "element": "node",
+      "name": "block",
+      "goName": "Block"
+    },
+    {
+      "element": "node",
+      "name": "constructor_body",
+      "goName": "ConstructorBody"
+    },
+    {
+      "element": "token",
+      "name": "identifier",
+      "goName": "Identifier"
+    },
+    {
+      "element": "node",
+      "name": "ERROR",
+      "goName": "ERROR"
+    },
+    {
+      "element": "token",
+      "name": "ERROR",
+      "goName": "ERROR"
+    },
+    {
+      "element": "token",
+      "name": "eof",
+      "goName": "Eof"
+    },
+    {
+      "element": "token",
+      "name": "end",
+      "goName": "End"
+    },
+    {
+      "element": "token",
+      "name": "decimal_integer_literal",
+      "goName": "DecimalIntegerLiteral"
+    },
+    {
+      "element": "token",
+      "name": "hex_integer_literal",
+      "goName": "HexIntegerLiteral"
+    },
+    {
+      "element": "token",
+      "name": "octal_integer_literal",
+      "goName": "OctalIntegerLiteral"
+    },
+    {
+      "element": "token",
+      "name": "binary_integer_literal",
+      "goName": "BinaryIntegerLiteral"
+    },
+    {
+      "element": "token",
+      "name": "decimal_floating_point_literal",
+      "goName": "DecimalFloatingPointLiteral"
+    },
+    {
+      "element": "token",
+      "name": "hex_floating_point_literal",
+      "goName": "HexFloatingPointLiteral"
+    },
+    {
+      "element": "token",
+      "name": "true",
+      "goName": "True"
+    },
+    {
+      "element": "token",
+      "name": "false",
+      "goName": "False"
+    },
+    {
+      "element": "token",
+      "name": "character_literal",
+      "goName": "CharacterLiteral"
+    },
+    {
+      "element": "token",
+      "name": "\"",
+      "goName": "DoubleQuote"
+    },
+    {
+      "element": "token",
+      "name": "\"\"\"",
+      "goName": "TripleQuote"
+    },
+    {
+      "element": "token",
+      "name": "string_fragment",
+      "goName": "StringFragment"
+    },
+    {
+      "element": "token",
+      "name": "_multiline_string_fragment_token1",
+      "goName": "InternalMultilineStringFragmentToken1"
+    },
+    {
+      "element": "token",
+      "name": "_multiline_string_fragment_token2",
+      "goName": "InternalMultilineStringFragmentToken2"
+    },
+    {
+      "element": "token",
+      "name": "\\{",
+      "goName": "BackslashLBrace"
+    },
+    {
+      "element": "token",
+      "name": "}",
+      "goName": "RBrace"
+    },
+    {
+      "element": "token",
+      "name": "_escape_sequence_token1",
+      "goName": "InternalEscapeSequenceToken1"
+    },
+    {
+      "element": "token",
+      "name": "escape_sequence",
+      "goName": "EscapeSequence"
+    },
+    {
+      "element": "token",
+      "name": "null_literal",
+      "goName": "NullLiteral"
+    },
+    {
+      "element": "token",
+      "name": "(",
+      "goName": "LParen"
+    },
+    {
+      "element": "token",
+      "name": ")",
+      "goName": "RParen"
+    },
+    {
+      "element": "token",
+      "name": "\u0026",
+      "goName": "Ampersand"
+    },
+    {
+      "element": "token",
+      "name": "=",
+      "goName": "Equals"
+    },
+    {
+      "element": "token",
+      "name": "+=",
+      "goName": "PlusEquals"
+    },
+    {
+      "element": "token",
+      "name": "-=",
+      "goName": "MinusEquals"
+    },
+    {
+      "element": "token",
+      "name": "*=",
+      "goName": "StarEquals"
+    },
+    {
+      "element": "token",
+      "name": "/=",
+      "goName": "SlashEquals"
+    },
+    {
+      "element": "token",
+      "name": "\u0026=",
+      "goName": "AmpersandEquals"
+    },
+    {
+      "element": "token",
+      "name": "|=",
+      "goName": "PipeEquals"
+    },
+    {
+      "element": "token",
+      "name": "^=",
+      "goName": "CaretEquals"
+    },
+    {
+      "element": "token",
+      "name": "%=",
+      "goName": "PercentEquals"
+    },
+    {
+      "element": "token",
+      "name": "\u003c\u003c=",
+      "goName": "LShiftEquals"
+    },
+    {
+      "element": "token",
+      "name": "\u003e\u003e=",
+      "goName": "RShiftEquals"
+    },
+    {
+      "element": "token",
+      "name": "\u003e\u003e\u003e=",
+      "goName": "UnsignedRShiftEquals"
+    },
+    {
+      "element": "token",
+      "name": "\u003e",
+      "goName": "GreaterThan"
+    },
+    {
+      "element": "token",
+      "name": "\u003c",
+      "goName": "LessThan"
+    },
+    {
+      "element": "token",
+      "name": "\u003e=",
+      "goName": "GreaterThanEquals"
+    },
+    {
+      "element": "token",
+      "name": "\u003c=",
+      "goName": "LessThanEquals"
+    },
+    {
+      "element": "token",
+      "name": "==",
+      "goName": "EqualsEquals"
+    },
+    {
+      "element": "token",
+      "name": "!=",
+      "goName": "BangEquals"
+    },
+    {
+      "element": "token",
+      "name": "\u0026\u0026",
+      "goName": "AmpersandAmpersand"
+    },
+    {
+      "element": "token",
+      "name": "||",
+      "goName": "PipePipe"
+    },
+    {
+      "element": "token",
+      "name": "+",
+      "goName": "Plus"
+    },
+    {
+      "element": "token",
+      "name": "-",
+      "goName": "Minus"
+    },
+    {
+      "element": "token",
+      "name": "*",
+      "goName": "Star"
+    },
+    {
+      "element": "token",
+      "name": "/",
+      "goName": "Slash"
+    },
+    {
+      "element": "token",
+      "name": "|",
+      "goName": "Pipe"
+    },
+    {
+      "element": "token",
+      "name": "^",
+      "goName": "Caret"
+    },
+    {
+      "element": "token",
+      "name": "%",
+      "goName": "Percent"
+    },
+    {
+      "element": "token",
+      "name": "\u003c\u003c",
+      "goName": "LShift"
+    },
+    {
+      "element": "token",
+      "name": "\u003e\u003e",
+      "goName": "RShift"
+    },
+    {
+      "element": "token",
+      "name": "\u003e\u003e\u003e",
+      "goName": "UnsignedRShift"
+    },
+    {
+      "element": "token",
+      "name": "instanceof",
+      "goName": "Instanceof"
+    },
+    {
+      "element": "token",
+      "name": "final",
+      "goName": "Final"
+    },
+    {
+      "element": "token",
+      "name": "-\u003e",
+      "goName": "Arrow"
+    },
+    {
+      "element": "token",
+      "name": ",",
+      "goName": "Comma"
+    },
+    {
+      "element": "token",
+      "name": "\\?",
+      "goName": "BackslashQuestion"
+    },
+    {
+      "element": "token",
+      "name": ":",
+      "goName": "Colon"
+    },
+    {
+      "element": "token",
+      "name": "!",
+      "goName": "Bang"
+    },
+    {
+      "element": "token",
+      "name": "~",
+      "goName": "Tilde"
+    },
+    {
+      "element": "token",
+      "name": "++",
+      "goName": "PlusPlus"
+    },
+    {
+      "element": "token",
+      "name": "--",
+      "goName": "MinusMinus"
+    },
+    {
+      "element": "token",
+      "name": "new",
+      "goName": "New"
+    },
+    {
+      "element": "token",
+      "name": "[",
+      "goName": "LBracket"
+    },
+    {
+      "element": "token",
+      "name": "]",
+      "goName": "RBracket"
+    },
+    {
+      "element": "token",
+      "name": ".",
+      "goName": "Dot"
+    },
+    {
+      "element": "token",
+      "name": "class",
+      "goName": "Class"
+    },
+    {
+      "element": "token",
+      "name": "::",
+      "goName": "ColonColon"
+    },
+    {
+      "element": "token",
+      "name": "extends",
+      "goName": "Extends"
+    },
+    {
+      "element": "token",
+      "name": "switch",
+      "goName": "Switch"
+    },
+    {
+      "element": "token",
+      "name": "{",
+      "goName": "LBrace"
+    },
+    {
+      "element": "token",
+      "name": "case",
+      "goName": "Case"
+    },
+    {
+      "element": "token",
+      "name": "default",
+      "goName": "Default"
+    },
+    {
+      "element": "token",
+      "name": "underscore_pattern",
+      "goName": "UnderscorePattern"
+    },
+    {
+      "element": "token",
+      "name": "when",
+      "goName": "When"
+    },
+    {
+      "element": "token",
+      "name": ";",
+      "goName": "Semicolon"
+    },
+    {
+      "element": "token",
+      "name": "assert",
+      "goName": "Assert"
+    },
+    {
+      "element": "token",
+      "name": "do",
+      "goName": "Do"
+    },
+    {
+      "element": "token",
+      "name": "while",
+      "goName": "While"
+    },
+    {
+      "element": "token",
+      "name": "break",
+      "goName": "Break"
+    },
+    {
+      "element": "token",
+      "name": "continue",
+      "goName": "Continue"
+    },
+    {
+      "element": "token",
+      "name": "return",
+      "goName": "Return"
+    },
+    {
+      "element": "token",
+      "name": "yield",
+      "goName": "Yield"
+    },
+    {
+      "element": "token",
+      "name": "synchronized",
+      "goName": "Synchronized"
+    },
+    {
+      "element": "token",
+      "name": "throw",
+      "goName": "Throw"
+    },
+    {
+      "element": "token",
+      "name": "try",
+      "goName": "Try"
+    },
+    {
+      "element": "token",
+      "name": "catch",
+      "goName": "Catch"
+    },
+    {
+      "element": "token",
+      "name": "finally",
+      "goName": "Finally"
+    },
+    {
+      "element": "token",
+      "name": "if",
+      "goName": "If"
+    },
+    {
+      "element": "token",
+      "name": "else",
+      "goName": "Else"
+    },
+    {
+      "element": "token",
+      "name": "for",
+      "goName": "For"
+    },
+    {
+      "element": "token",
+      "name": "@",
+      "goName": "At"
+    },
+    {
+      "element": "token",
+      "name": "open",
+      "goName": "Open"
+    },
+    {
+      "element": "token",
+      "name": "module",
+      "goName": "Module"
+    },
+    {
+      "element": "token",
+      "name": "requires",
+      "goName": "Requires"
+    },
+    {
+      "element": "token",
+      "name": "transitive",
+      "goName": "Transitive"
+    },
+    {
+      "element": "token",
+      "name": "static",
+      "goName": "Static"
+    },
+    {
+      "element": "token",
+      "name": "exports",
+      "goName": "Exports"
+    },
+    {
+      "element": "token",
+      "name": "to",
+      "goName": "To"
+    },
+    {
+      "element": "token",
+      "name": "opens",
+      "goName": "Opens"
+    },
+    {
+      "element": "token",
+      "name": "uses",
+      "goName": "Uses"
+    },
+    {
+      "element": "token",
+      "name": "provides",
+      "goName": "Provides"
+    },
+    {
+      "element": "token",
+      "name": "with",
+      "goName": "With"
+    },
+    {
+      "element": "token",
+      "name": "package",
+      "goName": "Package"
+    },
+    {
+      "element": "token",
+      "name": "import",
+      "goName": "Import"
+    },
+    {
+      "element": "token",
+      "name": "enum",
+      "goName": "Enum"
+    },
+    {
+      "element": "token",
+      "name": "public",
+      "goName": "Public"
+    },
+    {
+      "element": "token",
+      "name": "protected",
+      "goName": "Protected"
+    },
+    {
+      "element": "token",
+      "name": "private",
+      "goName": "Private"
+    },
+    {
+      "element": "token",
+      "name": "abstract",
+      "goName": "Abstract"
+    },
+    {
+      "element": "token",
+      "name": "strictfp",
+      "goName": "Strictfp"
+    },
+    {
+      "element": "token",
+      "name": "native",
+      "goName": "Native"
+    },
+    {
+      "element": "token",
+      "name": "transient",
+      "goName": "Transient"
+    },
+    {
+      "element": "token",
+      "name": "volatile",
+      "goName": "Volatile"
+    },
+    {
+      "element": "token",
+      "name": "sealed",
+      "goName": "Sealed"
+    },
+    {
+      "element": "token",
+      "name": "non-sealed",
+      "goName": "NonSealed"
+    },
+    {
+      "element": "token",
+      "name": "implements",
+      "goName": "Implements"
+    },
+    {
+      "element": "token",
+      "name": "permits",
+      "goName": "Permits"
+    },
+    {
+      "element": "token",
+      "name": "record",
+      "goName": "Record"
+    },
+    {
+      "element": "token",
+      "name": "@interface",
+      "goName": "AnnotationInterface"
+    },
+    {
+      "element": "token",
+      "name": "interface",
+      "goName": "Interface"
+    },
+    {
+      "element": "token",
+      "name": "byte",
+      "goName": "Byte"
+    },
+    {
+      "element": "token",
+      "name": "short",
+      "goName": "Short"
+    },
+    {
+      "element": "token",
+      "name": "int",
+      "goName": "Int"
+    },
+    {
+      "element": "token",
+      "name": "long",
+      "goName": "Long"
+    },
+    {
+      "element": "token",
+      "name": "char",
+      "goName": "Char"
+    },
+    {
+      "element": "token",
+      "name": "float",
+      "goName": "Float"
+    },
+    {
+      "element": "token",
+      "name": "double",
+      "goName": "Double"
+    },
+    {
+      "element": "token",
+      "name": "boolean_type",
+      "goName": "BooleanType"
+    },
+    {
+      "element": "token",
+      "name": "void_type",
+      "goName": "VoidType"
+    },
+    {
+      "element": "token",
+      "name": "...",
+      "goName": "Ellipsis"
+    },
+    {
+      "element": "token",
+      "name": "throws",
+      "goName": "Throws"
+    },
+    {
+      "element": "token",
+      "name": "this",
+      "goName": "This"
+    },
+    {
+      "element": "token",
+      "name": "super",
+      "goName": "Super"
+    },
+    {
+      "element": "token",
+      "name": "line_comment",
+      "goName": "LineComment"
+    },
+    {
+      "element": "token",
+      "name": "block_comment",
+      "goName": "BlockComment"
+    },
+    {
+      "element": "node",
+      "name": "_toplevel_statement",
+      "goName": "InternalToplevelStatement"
+    },
+    {
+      "element": "node",
+      "name": "_literal",
+      "goName": "InternalLiteral"
+    },
+    {
+      "element": "node",
+      "name": "string_literal",
+      "goName": "StringLiteral"
+    },
+    {
+      "element": "node",
+      "name": "_string_literal",
+      "goName": "InternalStringLiteral"
+    },
+    {
+      "element": "node",
+      "name": "_multiline_string_literal",
+      "goName": "InternalMultilineStringLiteral"
+    },
+    {
+      "element": "node",
+      "name": "multiline_string_fragment",
+      "goName": "MultilineStringFragment"
+    },
+    {
+      "element": "node",
+      "name": "string_interpolation",
+      "goName": "StringInterpolation"
+    },
+    {
+      "element": "node",
+      "name": "_escape_sequence",
+      "goName": "InternalEscapeSequence"
+    },
+    {
+      "element": "node",
+      "name": "expression",
+      "goName": "Expression"
+    },
+    {
+      "element": "node",
+      "name": "cast_expression",
+      "goName": "CastExpression"
+    },
+    {
+      "element": "node",
+      "name": "assignment_expression",
+      "goName": "AssignmentExpression"
+    },
+    {
+      "element": "node",
+      "name": "binary_expression",
+      "goName": "BinaryExpression"
+    },
+    {
+      "element": "node",
+      "name": "instanceof_expression",
+      "goName": "InstanceofExpression"
+    },
+    {
+      "element": "node",
+      "name": "lambda_expression",
+      "goName": "LambdaExpression"
+    },
+    {
+      "element": "node",
+      "name": "inferred_parameters",
+      "goName": "InferredParameters"
+    },
+    {
+      "element": "node",
+      "name": "ternary_expression",
+      "goName": "TernaryExpression"
+    },
+    {
+      "element": "node",
+      "name": "unary_expression",
+      "goName": "UnaryExpression"
+    },
+    {
+      "element": "node",
+      "name": "update_expression",
+      "goName": "UpdateExpression"
+    },
+    {
+      "element": "node",
+      "name": "primary_expression",
+      "goName": "PrimaryExpression"
+    },
+    {
+      "element": "node",
+      "name": "array_creation_expression",
+      "goName": "ArrayCreationExpression"
+    },
+    {
+      "element": "node",
+      "name": "dimensions_expr",
+      "goName": "DimensionsExpr"
+    },
+    {
+      "element": "node",
+      "name": "parenthesized_expression",
+      "goName": "ParenthesizedExpression"
+    },
+    {
+      "element": "node",
+      "name": "class_literal",
+      "goName": "ClassLiteral"
+    },
+    {
+      "element": "node",
+      "name": "object_creation_expression",
+      "goName": "ObjectCreationExpression"
+    },
+    {
+      "element": "node",
+      "name": "_unqualified_object_creation_expression",
+      "goName": "InternalUnqualifiedObjectCreationExpression"
+    },
+    {
+      "element": "node",
+      "name": "field_access",
+      "goName": "FieldAccess"
+    },
+    {
+      "element": "node",
+      "name": "template_expression",
+      "goName": "TemplateExpression"
+    },
+    {
+      "element": "node",
+      "name": "array_access",
+      "goName": "ArrayAccess"
+    },
+    {
+      "element": "node",
+      "name": "method_invocation",
+      "goName": "MethodInvocation"
+    },
+    {
+      "element": "node",
+      "name": "argument_list",
+      "goName": "ArgumentList"
+    },
+    {
+      "element": "node",
+      "name": "method_reference",
+      "goName": "MethodReference"
+    },
+    {
+      "element": "node",
+      "name": "type_arguments",
+      "goName": "TypeArguments"
+    },
+    {
+      "element": "node",
+      "name": "wildcard",
+      "goName": "Wildcard"
+    },
+    {
+      "element": "node",
+      "name": "_wildcard_bounds",
+      "goName": "InternalWildcardBounds"
+    },
+    {
+      "element": "node",
+      "name": "dimensions",
+      "goName": "Dimensions"
+    },
+    {
+      "element": "node",
+      "name": "switch_expression",
+      "goName": "SwitchExpression"
+    },
+    {
+      "element": "node",
+      "name": "switch_block",
+      "goName": "SwitchBlock"
+    },
+    {
+      "element": "node",
+      "name": "switch_block_statement_group",
+      "goName": "SwitchBlockStatementGroup"
+    },
+    {
+      "element": "node",
+      "name": "switch_rule",
+      "goName": "SwitchRule"
+    },
+    {
+      "element": "node",
+      "name": "switch_label",
+      "goName": "SwitchLabel"
+    },
+    {
+      "element": "node",
+      "name": "pattern",
+      "goName": "Pattern"
+    },
+    {
+      "element": "node",
+      "name": "type_pattern",
+      "goName": "TypePattern"
+    },
+    {
+      "element": "node",
+      "name": "record_pattern",
+      "goName": "RecordPattern"
+    },
+    {
+      "element": "node",
+      "name": "record_pattern_body",
+      "goName": "RecordPatternBody"
+    },
+    {
+      "element": "node",
+      "name": "record_pattern_component",
+      "goName": "RecordPatternComponent"
+    },
+    {
+      "element": "node",
+      "name": "guard",
+      "goName": "Guard"
+    },
+    {
+      "element": "node",
+      "name": "statement",
+      "goName": "Statement"
+    },
+    {
+      "element": "node",
+      "name": "expression_statement",
+      "goName": "ExpressionStatement"
+    },
+    {
+      "element": "node",
+      "name": "labeled_statement",
+      "goName": "LabeledStatement"
+    },
+    {
+      "element": "node",
+      "name": "assert_statement",
+      "goName": "AssertStatement"
+    },
+    {
+      "element": "node",
+      "name": "do_statement",
+      "goName": "DoStatement"
+    },
+    {
+      "element": "node",
+      "name": "break_statement",
+      "goName": "BreakStatement"
+    },
+    {
+      "element": "node",
+      "name": "continue_statement",
+      "goName": "ContinueStatement"
+    },
+    {
+      "element": "node",
+      "name": "return_statement",
+      "goName": "ReturnStatement"
+    },
+    {
+      "element": "node",
+      "name": "yield_statement",
+      "goName": "YieldStatement"
+    },
+    {
+      "element": "node",
+      "name": "synchronized_statement",
+      "goName": "SynchronizedStatement"
+    },
+    {
+      "element": "node",
+      "name": "throw_statement",
+      "goName": "ThrowStatement"
+    },
+    {
+      "element": "node",
+      "name": "try_statement",
+      "goName": "TryStatement"
+    },
+    {
+      "element": "node",
+      "name": "catch_clause",
+      "goName": "CatchClause"
+    },
+    {
+      "element": "node",
+      "name": "catch_formal_parameter",
+      "goName": "CatchFormalParameter"
+    },
+    {
+      "element": "node",
+      "name": "catch_type",
+      "goName": "CatchType"
+    },
+    {
+      "element": "node",
+      "name": "finally_clause",
+      "goName": "FinallyClause"
+    },
+    {
+      "element": "node",
+      "name": "try_with_resources_statement",
+      "goName": "TryWithResourcesStatement"
+    },
+    {
+      "element": "node",
+      "name": "resource_specification",
+      "goName": "ResourceSpecification"
+    },
+    {
+      "element": "node",
+      "name": "resource",
+      "goName": "Resource"
+    },
+    {
+      "element": "node",
+      "name": "if_statement",
+      "goName": "IfStatement"
+    },
+    {
+      "element": "node",
+      "name": "while_statement",
+      "goName": "WhileStatement"
+    },
+    {
+      "element": "node",
+      "name": "for_statement",
+      "goName": "ForStatement"
+    },
+    {
+      "element": "node",
+      "name": "enhanced_for_statement",
+      "goName": "EnhancedForStatement"
+    },
+    {
+      "element": "node",
+      "name": "_annotation",
+      "goName": "InternalAnnotation"
+    },
+    {
+      "element": "node",
+      "name": "marker_annotation",
+      "goName": "MarkerAnnotation"
+    },
+    {
+      "element": "node",
+      "name": "annotation",
+      "goName": "Annotation"
+    },
+    {
+      "element": "node",
+      "name": "annotation_argument_list",
+      "goName": "AnnotationArgumentList"
+    },
+    {
+      "element": "node",
+      "name": "element_value_pair",
+      "goName": "ElementValuePair"
+    },
+    {
+      "element": "node",
+      "name": "_element_value",
+      "goName": "InternalElementValue"
+    },
+    {
+      "element": "node",
+      "name": "element_value_array_initializer",
+      "goName": "ElementValueArrayInitializer"
+    },
+    {
+      "element": "node",
+      "name": "declaration",
+      "goName": "Declaration"
+    },
+    {
+      "element": "node",
+      "name": "module_declaration",
+      "goName": "ModuleDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "module_body",
+      "goName": "ModuleBody"
+    },
+    {
+      "element": "node",
+      "name": "module_directive",
+      "goName": "ModuleDirective"
+    },
+    {
+      "element": "node",
+      "name": "requires_module_directive",
+      "goName": "RequiresModuleDirective"
+    },
+    {
+      "element": "node",
+      "name": "requires_modifier",
+      "goName": "RequiresModifier"
+    },
+    {
+      "element": "node",
+      "name": "exports_module_directive",
+      "goName": "ExportsModuleDirective"
+    },
+    {
+      "element": "node",
+      "name": "opens_module_directive",
+      "goName": "OpensModuleDirective"
+    },
+    {
+      "element": "node",
+      "name": "uses_module_directive",
+      "goName": "UsesModuleDirective"
+    },
+    {
+      "element": "node",
+      "name": "provides_module_directive",
+      "goName": "ProvidesModuleDirective"
+    },
+    {
+      "element": "node",
+      "name": "module_import_declaration",
+      "goName": "ModuleImportDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "asterisk",
+      "goName": "Asterisk"
+    },
+    {
+      "element": "node",
+      "name": "modifiers",
+      "goName": "Modifiers"
+    },
+    {
+      "element": "node",
+      "name": "type_parameters",
+      "goName": "TypeParameters"
+    },
+    {
+      "element": "node",
+      "name": "type_parameter",
+      "goName": "TypeParameter"
+    },
+    {
+      "element": "node",
+      "name": "type_bound",
+      "goName": "TypeBound"
+    },
+    {
+      "element": "node",
+      "name": "superclass",
+      "goName": "Superclass"
+    },
+    {
+      "element": "node",
+      "name": "super_interfaces",
+      "goName": "SuperInterfaces"
+    },
+    {
+      "element": "node",
+      "name": "type_list",
+      "goName": "TypeList"
+    },
+    {
+      "element": "node",
+      "name": "permits",
+      "goName": "Permits"
+    },
+    {
+      "element": "node",
+      "name": "_constructor_declarator",
+      "goName": "InternalConstructorDeclarator"
+    },
+    {
+      "element": "node",
+      "name": "explicit_constructor_invocation",
+      "goName": "ExplicitConstructorInvocation"
+    },
+    {
+      "element": "node",
+      "name": "scoped_identifier",
+      "goName": "ScopedIdentifier"
+    },
+    {
+      "element": "node",
+      "name": "record_declaration",
+      "goName": "RecordDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "_default_value",
+      "goName": "InternalDefaultValue"
+    },
+    {
+      "element": "node",
+      "name": "extends_interfaces",
+      "goName": "ExtendsInterfaces"
+    },
+    {
+      "element": "node",
+      "name": "_variable_declarator_list",
+      "goName": "InternalVariableDeclaratorList"
+    },
+    {
+      "element": "node",
+      "name": "_variable_declarator_id",
+      "goName": "InternalVariableDeclaratorId"
+    },
+    {
+      "element": "node",
+      "name": "array_initializer",
+      "goName": "ArrayInitializer"
+    },
+    {
+      "element": "node",
+      "name": "_type",
+      "goName": "InternalType"
+    },
+    {
+      "element": "node",
+      "name": "_unannotated_type",
+      "goName": "InternalUnannotatedType"
+    },
+    {
+      "element": "node",
+      "name": "annotated_type",
+      "goName": "AnnotatedType"
+    },
+    {
+      "element": "node",
+      "name": "scoped_type_identifier",
+      "goName": "ScopedTypeIdentifier"
+    },
+    {
+      "element": "node",
+      "name": "generic_type",
+      "goName": "GenericType"
+    },
+    {
+      "element": "node",
+      "name": "array_type",
+      "goName": "ArrayType"
+    },
+    {
+      "element": "node",
+      "name": "integral_type",
+      "goName": "IntegralType"
+    },
+    {
+      "element": "node",
+      "name": "floating_point_type",
+      "goName": "FloatingPointType"
+    },
+    {
+      "element": "node",
+      "name": "_method_header",
+      "goName": "InternalMethodHeader"
+    },
+    {
+      "element": "node",
+      "name": "_method_declarator",
+      "goName": "InternalMethodDeclarator"
+    },
+    {
+      "element": "node",
+      "name": "throws",
+      "goName": "Throws"
+    },
+    {
+      "element": "node",
+      "name": "local_variable_declaration",
+      "goName": "LocalVariableDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "compact_constructor_declaration",
+      "goName": "CompactConstructorDeclaration"
+    },
+    {
+      "element": "node",
+      "name": "_reserved_identifier",
+      "goName": "InternalReservedIdentifier"
+    },
+    {
+      "element": "node",
+      "name": "program_repeat1",
+      "goName": "ProgramRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "_string_literal_repeat1",
+      "goName": "InternalStringLiteralRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "_multiline_string_literal_repeat1",
+      "goName": "InternalMultilineStringLiteralRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "cast_expression_repeat1",
+      "goName": "CastExpressionRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "inferred_parameters_repeat1",
+      "goName": "InferredParametersRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "array_creation_expression_repeat1",
+      "goName": "ArrayCreationExpressionRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "array_creation_expression_repeat2",
+      "goName": "ArrayCreationExpressionRepeat2"
+    },
+    {
+      "element": "node",
+      "name": "argument_list_repeat1",
+      "goName": "ArgumentListRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "type_arguments_repeat1",
+      "goName": "TypeArgumentsRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "dimensions_repeat1",
+      "goName": "DimensionsRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "switch_block_repeat1",
+      "goName": "SwitchBlockRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "switch_block_repeat2",
+      "goName": "SwitchBlockRepeat2"
+    },
+    {
+      "element": "node",
+      "name": "switch_block_statement_group_repeat1",
+      "goName": "SwitchBlockStatementGroupRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "switch_block_statement_group_repeat2",
+      "goName": "SwitchBlockStatementGroupRepeat2"
+    },
+    {
+      "element": "node",
+      "name": "record_pattern_body_repeat1",
+      "goName": "RecordPatternBodyRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "try_statement_repeat1",
+      "goName": "TryStatementRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "catch_type_repeat1",
+      "goName": "CatchTypeRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "resource_specification_repeat1",
+      "goName": "ResourceSpecificationRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "for_statement_repeat1",
+      "goName": "ForStatementRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "for_statement_repeat2",
+      "goName": "ForStatementRepeat2"
+    },
+    {
+      "element": "node",
+      "name": "annotation_argument_list_repeat1",
+      "goName": "AnnotationArgumentListRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "element_value_array_initializer_repeat1",
+      "goName": "ElementValueArrayInitializerRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "module_body_repeat1",
+      "goName": "ModuleBodyRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "requires_module_directive_repeat1",
+      "goName": "RequiresModuleDirectiveRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "exports_module_directive_repeat1",
+      "goName": "ExportsModuleDirectiveRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "provides_module_directive_repeat1",
+      "goName": "ProvidesModuleDirectiveRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "enum_body_repeat1",
+      "goName": "EnumBodyRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "enum_body_declarations_repeat1",
+      "goName": "EnumBodyDeclarationsRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "modifiers_repeat1",
+      "goName": "ModifiersRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "type_parameters_repeat1",
+      "goName": "TypeParametersRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "type_bound_repeat1",
+      "goName": "TypeBoundRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "type_list_repeat1",
+      "goName": "TypeListRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "annotation_type_body_repeat1",
+      "goName": "AnnotationTypeBodyRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "interface_body_repeat1",
+      "goName": "InterfaceBodyRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "_variable_declarator_list_repeat1",
+      "goName": "InternalVariableDeclaratorListRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "array_initializer_repeat1",
+      "goName": "ArrayInitializerRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "formal_parameters_repeat1",
+      "goName": "FormalParametersRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "receiver_parameter_repeat1",
+      "goName": "ReceiverParameterRepeat1"
+    },
+    {
+      "element": "node",
+      "name": "type_identifier",
+      "goName": "TypeIdentifier"
+    },
+    {
+      "element": "token",
+      "name": "type_identifier",
+      "goName": "TypeIdentifier"
+    },
+    {
+      "element": "token",
+      "name": "multiline_string_fragment",
+      "goName": "MultilineStringFragment"
+    }
+  ],
   "nodes": [
-    {"type": "CompilationUnit", "kind": "program"},
-    {"type": "PackageDeclaration", "kind": "package_declaration"},
-    {"type": "ImportDeclaration", "kind": "import_declaration"},
-    {"type": "ClassDeclaration", "kind": "class_declaration"},
-    {"type": "InterfaceDeclaration", "kind": "interface_declaration"},
-    {"type": "EnumDeclaration", "kind": "enum_declaration"},
-    {"type": "AnnotationTypeDeclaration", "kind": "annotation_type_declaration"},
-    {"type": "ClassBody", "kind": "class_body"},
-    {"type": "InterfaceBody", "kind": "interface_body"},
-    {"type": "EnumBody", "kind": "enum_body"},
-    {"type": "EnumBodyDeclarations", "kind": "enum_body_declarations"},
-    {"type": "AnnotationTypeBody", "kind": "annotation_type_body"},
-    {"type": "FieldDeclaration", "kind": "field_declaration"},
-    {"type": "ConstantDeclaration", "kind": "constant_declaration"},
-    {"type": "MethodDeclaration", "kind": "method_declaration"},
-    {"type": "ConstructorDeclaration", "kind": "constructor_declaration"},
-    {"type": "StaticInitializer", "kind": "static_initializer"},
-    {"type": "AnnotationTypeElementDeclaration", "kind": "annotation_type_element_declaration"},
-    {"type": "EnumConstant", "kind": "enum_constant"},
-    {"type": "VariableDeclarator", "kind": "variable_declarator"},
-    {"type": "FormalParameters", "kind": "formal_parameters"},
-    {"type": "FormalParameter", "kind": "formal_parameter"},
-    {"type": "SpreadParameter", "kind": "spread_parameter"},
-    {"type": "ReceiverParameter", "kind": "receiver_parameter"},
-    {"type": "Block", "kind": "block"},
-    {"type": "ConstructorBody", "kind": "constructor_body"}
+    {
+      "type": "CompilationUnit",
+      "kind": "program"
+    },
+    {
+      "type": "PackageDeclaration",
+      "kind": "package_declaration"
+    },
+    {
+      "type": "ImportDeclaration",
+      "kind": "import_declaration"
+    },
+    {
+      "type": "ClassDeclaration",
+      "kind": "class_declaration"
+    },
+    {
+      "type": "InterfaceDeclaration",
+      "kind": "interface_declaration"
+    },
+    {
+      "type": "EnumDeclaration",
+      "kind": "enum_declaration"
+    },
+    {
+      "type": "AnnotationTypeDeclaration",
+      "kind": "annotation_type_declaration"
+    },
+    {
+      "type": "ClassBody",
+      "kind": "class_body"
+    },
+    {
+      "type": "InterfaceBody",
+      "kind": "interface_body"
+    },
+    {
+      "type": "EnumBody",
+      "kind": "enum_body"
+    },
+    {
+      "type": "EnumBodyDeclarations",
+      "kind": "enum_body_declarations"
+    },
+    {
+      "type": "AnnotationTypeBody",
+      "kind": "annotation_type_body"
+    },
+    {
+      "type": "FieldDeclaration",
+      "kind": "field_declaration"
+    },
+    {
+      "type": "ConstantDeclaration",
+      "kind": "constant_declaration"
+    },
+    {
+      "type": "MethodDeclaration",
+      "kind": "method_declaration"
+    },
+    {
+      "type": "ConstructorDeclaration",
+      "kind": "constructor_declaration"
+    },
+    {
+      "type": "StaticInitializer",
+      "kind": "static_initializer"
+    },
+    {
+      "type": "AnnotationTypeElementDeclaration",
+      "kind": "annotation_type_element_declaration"
+    },
+    {
+      "type": "EnumConstant",
+      "kind": "enum_constant"
+    },
+    {
+      "type": "VariableDeclarator",
+      "kind": "variable_declarator"
+    },
+    {
+      "type": "FormalParameters",
+      "kind": "formal_parameters"
+    },
+    {
+      "type": "FormalParameter",
+      "kind": "formal_parameter"
+    },
+    {
+      "type": "SpreadParameter",
+      "kind": "spread_parameter"
+    },
+    {
+      "type": "ReceiverParameter",
+      "kind": "receiver_parameter"
+    },
+    {
+      "type": "Block",
+      "kind": "block"
+    },
+    {
+      "type": "ConstructorBody",
+      "kind": "constructor_body"
+    },
+    {
+      "type": "Modifiers",
+      "kind": "modifiers"
+    },
+    {
+      "type": "ScopedIdentifier",
+      "kind": "scoped_identifier"
+    },
+    {
+      "type": "MarkerAnnotation",
+      "kind": "marker_annotation"
+    },
+    {
+      "type": "Annotation",
+      "kind": "annotation"
+    },
+    {
+      "type": "AnnotationArgumentList",
+      "kind": "annotation_argument_list"
+    },
+    {
+      "type": "TypeParameters",
+      "kind": "type_parameters"
+    },
+    {
+      "type": "TypeParameter",
+      "kind": "type_parameter"
+    },
+    {
+      "type": "TypeBound",
+      "kind": "type_bound"
+    },
+    {
+      "type": "Superclass",
+      "kind": "superclass"
+    },
+    {
+      "type": "SuperInterfaces",
+      "kind": "super_interfaces"
+    },
+    {
+      "type": "ExtendsInterfaces",
+      "kind": "extends_interfaces"
+    },
+    {
+      "type": "TypeList",
+      "kind": "type_list"
+    },
+    {
+      "type": "ScopedTypeIdentifier",
+      "kind": "scoped_type_identifier"
+    },
+    {
+      "type": "GenericType",
+      "kind": "generic_type"
+    },
+    {
+      "type": "TypeArguments",
+      "kind": "type_arguments"
+    },
+    {
+      "type": "Wildcard",
+      "kind": "wildcard"
+    },
+    {
+      "type": "ArrayType",
+      "kind": "array_type"
+    },
+    {
+      "type": "AnnotatedType",
+      "kind": "annotated_type"
+    },
+    {
+      "type": "IntegralType",
+      "kind": "integral_type"
+    },
+    {
+      "type": "FloatingPointType",
+      "kind": "floating_point_type"
+    },
+    {
+      "type": "Dimensions",
+      "kind": "dimensions"
+    },
+    {
+      "type": "Throws",
+      "kind": "throws"
+    },
+    {
+      "type": "Asterisk",
+      "kind": "asterisk"
+    }
   ],
   "unions": [
     {
@@ -62,40 +1869,636 @@
       ]
     }
   ],
+  "elementUnions": [
+    {
+      "type": "Name",
+      "nodes": [
+        "scoped_identifier"
+      ],
+      "tokens": [
+        "identifier"
+      ]
+    },
+    {
+      "type": "AnnotationUse",
+      "nodes": [
+        "marker_annotation",
+        "annotation"
+      ]
+    },
+    {
+      "type": "Modifier",
+      "nodes": [
+        "marker_annotation",
+        "annotation"
+      ],
+      "tokens": [
+        "public",
+        "protected",
+        "private",
+        "abstract",
+        "static",
+        "final",
+        "strictfp",
+        "native",
+        "synchronized",
+        "transient",
+        "volatile",
+        "default"
+      ]
+    },
+    {
+      "type": "Type",
+      "nodes": [
+        "annotated_type",
+        "scoped_type_identifier",
+        "generic_type",
+        "array_type",
+        "integral_type",
+        "floating_point_type"
+      ],
+      "tokens": [
+        "type_identifier",
+        "byte",
+        "short",
+        "int",
+        "long",
+        "char",
+        "float",
+        "double",
+        "boolean_type"
+      ]
+    },
+    {
+      "type": "ReturnType",
+      "nodes": [
+        "annotated_type",
+        "scoped_type_identifier",
+        "generic_type",
+        "array_type",
+        "integral_type",
+        "floating_point_type"
+      ],
+      "tokens": [
+        "type_identifier",
+        "byte",
+        "short",
+        "int",
+        "long",
+        "char",
+        "float",
+        "double",
+        "boolean_type",
+        "void_type"
+      ]
+    },
+    {
+      "type": "TypeArgument",
+      "nodes": [
+        "wildcard",
+        "annotated_type",
+        "scoped_type_identifier",
+        "generic_type",
+        "array_type",
+        "integral_type",
+        "floating_point_type"
+      ],
+      "tokens": [
+        "type_identifier",
+        "byte",
+        "short",
+        "int",
+        "long",
+        "char",
+        "float",
+        "double",
+        "boolean_type"
+      ]
+    }
+  ],
   "accessors": [
-    {"owner": "CompilationUnit", "name": "Package", "target": "PackageDeclaration", "cardinality": "optional"},
-    {"owner": "CompilationUnit", "name": "Imports", "target": "ImportDeclaration", "cardinality": "many"},
-    {"owner": "CompilationUnit", "name": "Types", "target": "TypeDeclaration", "cardinality": "many"},
-
-    {"owner": "ClassDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-    {"owner": "ClassDeclaration", "name": "Body", "target": "ClassBody", "cardinality": "optional"},
-    {"owner": "InterfaceDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-    {"owner": "InterfaceDeclaration", "name": "Body", "target": "InterfaceBody", "cardinality": "optional"},
-    {"owner": "EnumDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-    {"owner": "EnumDeclaration", "name": "Body", "target": "EnumBody", "cardinality": "optional"},
-    {"owner": "AnnotationTypeDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-    {"owner": "AnnotationTypeDeclaration", "name": "Body", "target": "AnnotationTypeBody", "cardinality": "optional"},
-
-    {"owner": "ClassBody", "name": "Members", "target": "MemberDeclaration", "cardinality": "many"},
-    {"owner": "InterfaceBody", "name": "Members", "target": "MemberDeclaration", "cardinality": "many"},
-    {"owner": "AnnotationTypeBody", "name": "Members", "target": "MemberDeclaration", "cardinality": "many"},
-    {"owner": "EnumBody", "name": "Constants", "target": "EnumConstant", "cardinality": "many"},
-    {"owner": "EnumBody", "name": "Declarations", "target": "EnumBodyDeclarations", "cardinality": "optional"},
-    {"owner": "EnumBodyDeclarations", "name": "Members", "target": "MemberDeclaration", "cardinality": "many"},
-
-    {"owner": "MethodDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-    {"owner": "MethodDeclaration", "name": "Parameters", "target": "FormalParameters", "cardinality": "optional"},
-    {"owner": "MethodDeclaration", "name": "Body", "target": "Block", "cardinality": "optional"},
-    {"owner": "ConstructorDeclaration", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-    {"owner": "ConstructorDeclaration", "name": "Parameters", "target": "FormalParameters", "cardinality": "optional"},
-    {"owner": "ConstructorDeclaration", "name": "Body", "target": "ConstructorBody", "cardinality": "optional"},
-    {"owner": "VariableDeclarator", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-    {"owner": "FormalParameter", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-    {"owner": "SpreadParameter", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-    {"owner": "ReceiverParameter", "name": "Name", "target": "identifier", "element": "token", "cardinality": "optional"},
-
-    {"owner": "FieldDeclaration", "name": "Declarators", "target": "VariableDeclarator", "cardinality": "many"},
-    {"owner": "ConstantDeclaration", "name": "Declarators", "target": "VariableDeclarator", "cardinality": "many"},
-    {"owner": "FormalParameters", "name": "Items", "target": "Parameter", "cardinality": "many"}
+    {
+      "owner": "CompilationUnit",
+      "name": "Package",
+      "target": "PackageDeclaration",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "CompilationUnit",
+      "name": "Imports",
+      "target": "ImportDeclaration",
+      "cardinality": "many"
+    },
+    {
+      "owner": "CompilationUnit",
+      "name": "Types",
+      "target": "TypeDeclaration",
+      "cardinality": "many"
+    },
+    {
+      "owner": "ClassDeclaration",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ClassDeclaration",
+      "name": "Body",
+      "target": "ClassBody",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "InterfaceDeclaration",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "InterfaceDeclaration",
+      "name": "Body",
+      "target": "InterfaceBody",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "EnumDeclaration",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "EnumDeclaration",
+      "name": "Body",
+      "target": "EnumBody",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "AnnotationTypeDeclaration",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "AnnotationTypeDeclaration",
+      "name": "Body",
+      "target": "AnnotationTypeBody",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ClassBody",
+      "name": "Members",
+      "target": "MemberDeclaration",
+      "cardinality": "many"
+    },
+    {
+      "owner": "InterfaceBody",
+      "name": "Members",
+      "target": "MemberDeclaration",
+      "cardinality": "many"
+    },
+    {
+      "owner": "AnnotationTypeBody",
+      "name": "Members",
+      "target": "MemberDeclaration",
+      "cardinality": "many"
+    },
+    {
+      "owner": "EnumBody",
+      "name": "Constants",
+      "target": "EnumConstant",
+      "cardinality": "many"
+    },
+    {
+      "owner": "EnumBody",
+      "name": "Declarations",
+      "target": "EnumBodyDeclarations",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "EnumBodyDeclarations",
+      "name": "Members",
+      "target": "MemberDeclaration",
+      "cardinality": "many"
+    },
+    {
+      "owner": "MethodDeclaration",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "MethodDeclaration",
+      "name": "Parameters",
+      "target": "FormalParameters",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "MethodDeclaration",
+      "name": "Body",
+      "target": "Block",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ConstructorDeclaration",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ConstructorDeclaration",
+      "name": "Parameters",
+      "target": "FormalParameters",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ConstructorDeclaration",
+      "name": "Body",
+      "target": "ConstructorBody",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "VariableDeclarator",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "FormalParameter",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "SpreadParameter",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ReceiverParameter",
+      "name": "Name",
+      "target": "identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "FieldDeclaration",
+      "name": "Declarators",
+      "target": "VariableDeclarator",
+      "cardinality": "many"
+    },
+    {
+      "owner": "ConstantDeclaration",
+      "name": "Declarators",
+      "target": "VariableDeclarator",
+      "cardinality": "many"
+    },
+    {
+      "owner": "FormalParameters",
+      "name": "Items",
+      "target": "Parameter",
+      "cardinality": "many"
+    },
+    {
+      "owner": "PackageDeclaration",
+      "name": "Annotations",
+      "target": "AnnotationUse",
+      "cardinality": "many"
+    },
+    {
+      "owner": "PackageDeclaration",
+      "name": "Name",
+      "target": "Name",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ImportDeclaration",
+      "name": "Static",
+      "target": "static",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ImportDeclaration",
+      "name": "Name",
+      "target": "Name",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ImportDeclaration",
+      "name": "Wildcard",
+      "target": "Asterisk",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ClassDeclaration",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ClassDeclaration",
+      "name": "TypeParameters",
+      "target": "TypeParameters",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ClassDeclaration",
+      "name": "Superclass",
+      "target": "Superclass",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ClassDeclaration",
+      "name": "Interfaces",
+      "target": "SuperInterfaces",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "InterfaceDeclaration",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "InterfaceDeclaration",
+      "name": "TypeParameters",
+      "target": "TypeParameters",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "InterfaceDeclaration",
+      "name": "Interfaces",
+      "target": "ExtendsInterfaces",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "EnumDeclaration",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "AnnotationTypeDeclaration",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "FieldDeclaration",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "FieldDeclaration",
+      "name": "Type",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ConstantDeclaration",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ConstantDeclaration",
+      "name": "Type",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "MethodDeclaration",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "MethodDeclaration",
+      "name": "TypeParameters",
+      "target": "TypeParameters",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "MethodDeclaration",
+      "name": "Result",
+      "target": "ReturnType",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "MethodDeclaration",
+      "name": "Throws",
+      "target": "Throws",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ConstructorDeclaration",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ConstructorDeclaration",
+      "name": "TypeParameters",
+      "target": "TypeParameters",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ConstructorDeclaration",
+      "name": "Throws",
+      "target": "Throws",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "AnnotationTypeElementDeclaration",
+      "name": "Type",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "FormalParameter",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "FormalParameter",
+      "name": "Type",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "SpreadParameter",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "SpreadParameter",
+      "name": "Type",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ReceiverParameter",
+      "name": "Modifiers",
+      "target": "Modifiers",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ReceiverParameter",
+      "name": "Type",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "Modifiers",
+      "name": "Items",
+      "target": "Modifier",
+      "cardinality": "many"
+    },
+    {
+      "owner": "MarkerAnnotation",
+      "name": "Name",
+      "target": "Name",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "Annotation",
+      "name": "Name",
+      "target": "Name",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "Annotation",
+      "name": "Arguments",
+      "target": "AnnotationArgumentList",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "TypeParameters",
+      "name": "Items",
+      "target": "TypeParameter",
+      "cardinality": "many"
+    },
+    {
+      "owner": "TypeParameter",
+      "name": "Name",
+      "target": "type_identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "TypeParameter",
+      "name": "Bound",
+      "target": "TypeBound",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "TypeBound",
+      "name": "Types",
+      "target": "Type",
+      "cardinality": "many"
+    },
+    {
+      "owner": "Superclass",
+      "name": "Type",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "SuperInterfaces",
+      "name": "Types",
+      "target": "TypeList",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ExtendsInterfaces",
+      "name": "Types",
+      "target": "TypeList",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "TypeList",
+      "name": "Items",
+      "target": "Type",
+      "cardinality": "many"
+    },
+    {
+      "owner": "ScopedTypeIdentifier",
+      "name": "Scope",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ScopedTypeIdentifier",
+      "name": "Name",
+      "target": "type_identifier",
+      "element": "token",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "GenericType",
+      "name": "Name",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "GenericType",
+      "name": "Arguments",
+      "target": "TypeArguments",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "TypeArguments",
+      "name": "Items",
+      "target": "TypeArgument",
+      "cardinality": "many"
+    },
+    {
+      "owner": "Wildcard",
+      "name": "Bound",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ArrayType",
+      "name": "ElementType",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "ArrayType",
+      "name": "Dimensions",
+      "target": "Dimensions",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "AnnotatedType",
+      "name": "Annotations",
+      "target": "AnnotationUse",
+      "cardinality": "many"
+    },
+    {
+      "owner": "AnnotatedType",
+      "name": "Type",
+      "target": "Type",
+      "cardinality": "optional"
+    },
+    {
+      "owner": "Throws",
+      "name": "Types",
+      "target": "Type",
+      "cardinality": "many"
+    }
   ]
 }

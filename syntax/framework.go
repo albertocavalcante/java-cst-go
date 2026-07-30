@@ -8,10 +8,19 @@ import (
 
 // Kind is a repository-owned Java syntax kind.
 //
-// During the staged M2 schema migration, kinds retain their stable prefixed
-// spelling. Public consumers should use the generated KindNode... and
-// KindToken... constants rather than constructing values.
+// Its stable prefixed value is independent of backend numeric symbols. Public
+// consumers should use the generated KindNode... and KindToken... constants
+// rather than constructing values.
 type Kind string
+
+// KindCategory classifies a stable kind as a node or token.
+type KindCategory uint8
+
+const (
+	KindCategoryUnknown KindCategory = iota
+	KindCategoryNode
+	KindCategoryToken
+)
 
 // TriviaKind is a repository-owned Java trivia kind.
 type TriviaKind uint8
@@ -47,20 +56,25 @@ type (
 	GreenNode    = cst.GreenNode[Kind, TriviaKind, TokenData]
 	GreenElement = cst.GreenElement[Kind, TriviaKind, TokenData]
 	Builder      = cst.Builder[Kind, TriviaKind, TokenData]
+	Element      = cst.RedElement[Kind, TriviaKind, TokenData]
 	Node         = cst.RedNode[Kind, TriviaKind, TokenData]
 	RedNode      = cst.RedNode[Kind, TriviaKind, TokenData]
 	RedToken     = cst.RedToken[Kind, TriviaKind, TokenData]
 	CoreTree     = cst.Tree[Kind, TriviaKind, TokenData, DiagnosticCode]
 )
 
-// NodeKind maps one backend-neutral grammar name into the M0 node namespace.
+// NodeKind maps a registered backend-neutral grammar name to its stable node
+// kind. Unknown names return KindUnknown.
 func NodeKind(name string) Kind {
-	return Kind("node:" + name)
+	kind, _ := LookupNodeKind(name)
+	return kind
 }
 
-// TokenKind maps one backend-neutral grammar name into the M0 token namespace.
+// TokenKind maps a registered backend-neutral grammar name to its stable token
+// kind. Unknown names return KindUnknown.
 func TokenKind(name string) Kind {
-	return Kind("token:" + name)
+	kind, _ := LookupTokenKind(name)
+	return kind
 }
 
 // NewTrivia constructs immutable Java trivia.

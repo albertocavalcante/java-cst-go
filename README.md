@@ -9,7 +9,10 @@ Java grammar tables, then converts its backend-neutral snapshot into immutable
 `cst-go` green/red trees. M1 is complete against the signed `cst-go` v0.3.0
 release. M2 is underway: its first generated typed views cover Java 8
 compilation units, top-level types, class/interface/enum members, parameters,
-and declaration names without constructing a second AST.
+names, modifiers, annotations, imports, type parameters, Java 8 types, and
+throws clauses without constructing a second AST. The complete selected
+grammar kind catalog is repository-owned and independent of backend numeric
+symbol IDs.
 
 The spike targets Java release modeling from 8 through 26, including exact
 Java 21-26 preview boundaries. It does not yet advertise any Java release as
@@ -67,11 +70,14 @@ node/depth bounds apply while publishing the detached CST. Use
 
 ```sh
 just generate
+just sync-grammar-kinds
 just check
 ```
 
 `schema/java-syntax.json` is the source of generated syntax kinds and typed
-views. The test gate rejects stale generated files.
+views. `just sync-grammar-kinds` append-syncs any newly selected grammar kinds
+before regenerating; it preserves the spelling and ordering of existing stable
+kinds. The test gate rejects stale generated files.
 
 The module is library-first. Reporting commands are thin measurement drivers;
 backend implementation types and selection remain internal.

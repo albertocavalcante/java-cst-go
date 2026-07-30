@@ -8,6 +8,10 @@ build:
 generate:
     go generate ./ast
 
+sync-grammar-kinds:
+    go run ./cmd/syntaxgen -schema schema/java-syntax.json -sync-grammar-kinds
+    go generate ./ast
+
 test:
     go tool -modfile=tools.go.mod gotestsum --format pkgname-and-test-fails -- ./...
 

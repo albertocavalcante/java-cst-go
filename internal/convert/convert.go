@@ -135,8 +135,15 @@ func convert(input conversionInput, snapshot backend.Result) (Result, error) {
 		if elementErr != nil {
 			return Result{}, fmt.Errorf("convert EOF token: %w", elementErr)
 		}
+		rootKind, ok := syntax.LookupNodeKind(snapshot.Root.Kind)
+		if !ok {
+			return Result{}, fmt.Errorf(
+				"convert trivia-only root: unknown node kind %q",
+				snapshot.Root.Kind,
+			)
+		}
 		root, err = cst.NewGreenNode(
-			syntax.NodeKind(snapshot.Root.Kind),
+			rootKind,
 			[]syntax.GreenElement{element},
 		)
 		if err != nil {
@@ -237,8 +244,14 @@ func buildTokenModels(
 		if err != nil {
 			return nil, 0, err
 		}
+		eofKind, ok := syntax.LookupTokenKind("eof")
+		if !ok {
+			return nil, 0, errors.New(
+				"convert backend snapshot: EOF token kind is not registered",
+			)
+		}
 		return []tokenModel{{
-			kind:    syntax.TokenKind("eof"),
+			kind:    eofKind,
 			leading: trivia,
 		}}, len(trivia), nil
 	}
@@ -248,7 +261,14 @@ func buildTokenModels(
 	var cursor uint32
 	previousSourceToken := -1
 	for index, leaf := range syntaxLeaves {
-		models[index].kind = syntax.TokenKind(leaf.Kind)
+		kind, ok := syntax.LookupTokenKind(leaf.Kind)
+		if !ok {
+			return nil, 0, fmt.Errorf(
+				"convert backend snapshot: unknown token kind %q",
+				leaf.Kind,
+			)
+		}
+		models[index].kind = kind
 		models[index].missing = leaf.Missing
 		if leaf.Missing {
 			if leaf.StartByte != leaf.EndByte {
@@ -396,7 +416,14 @@ func convertNode(
 		return syntax.GreenElement{}, false, nil
 	}
 
-	green, err := cst.NewGreenNode(syntax.NodeKind(node.Kind), children)
+	kind, ok := syntax.LookupNodeKind(node.Kind)
+	if !ok {
+		return syntax.GreenElement{}, false, fmt.Errorf(
+			"convert backend snapshot: unknown node kind %q",
+			node.Kind,
+		)
+	}
+	green, err := cst.NewGreenNode(kind, children)
 	if err != nil {
 		return syntax.GreenElement{}, false, fmt.Errorf(
 			"convert node %q: %w",
