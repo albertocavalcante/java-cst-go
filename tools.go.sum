@@ -73,8 +73,8 @@ github.com/MirrexOne/unqueryvet v1.5.4 h1:38QOxShO7JmMWT+eCdDMbcUgGCOeJphVkzzRgy
 github.com/MirrexOne/unqueryvet v1.5.4/go.mod h1:fs9Zq6eh1LRIhsDIsxf9PONVUjYdFHdtkHIgZdJnyPU=
 github.com/OpenPeeDeeP/depguard/v2 v2.2.1 h1:vckeWVESWp6Qog7UZSARNqfu/cZqvki8zsuj3piCMx4=
 github.com/OpenPeeDeeP/depguard/v2 v2.2.1/go.mod h1:q4DKzC4UcVaAvcfd41CZh0PWpGgzrVxUYBlgKNGquUo=
-github.com/albertocavalcante/cst-go v0.2.1-0.20260727192650-0dd634a2fbae h1:YT7D67RTYDBogTS0Yt8nsFAtiUxa+huaX8tlNdf/c6s=
-github.com/albertocavalcante/cst-go v0.2.1-0.20260727192650-0dd634a2fbae/go.mod h1:HExK7FQSt887O72MHy3xV7staVnIQqF932Fng6zE0kw=
+github.com/albertocavalcante/cst-go v0.3.0 h1:239vlG13QoZ2gZMhjtqUA1ivq640ZmtFzTVYRyzCN68=
+github.com/albertocavalcante/cst-go v0.3.0/go.mod h1:HExK7FQSt887O72MHy3xV7staVnIQqF932Fng6zE0kw=
 github.com/alecthomas/assert/v2 v2.11.0 h1:2Q9r3ki8+JYXvGsDyBXwH3LcJ+WK5D0gc5E8vS6K3D0=
 github.com/alecthomas/assert/v2 v2.11.0/go.mod h1:Bze95FyfUr7x34QZrjL+XP+0qgp/zg8yS+TtBj1WA3k=
 github.com/alecthomas/chroma/v2 v2.24.1 h1:m5ffpfZbIb++k8AqFEKy9uVgY12xIQtBsQlc6DfZJQM=

@@ -3,8 +3,8 @@ package java25
 const (
 	// SharedCSTVersion and SharedCSTCommit identify the hardened red/green
 	// substrate used by the Java conversion pipeline.
-	SharedCSTVersion = "v0.2.1-0.20260727192650-0dd634a2fbae"
-	SharedCSTCommit  = "0dd634a2fbae8201cb1c521b7f05c3cc5bc6aac2"
+	SharedCSTVersion = "v0.3.0"
+	SharedCSTCommit  = "8efd13ee1a625127880353e3b422f83c0f4aba13"
 
 	// RuntimeVersion and RuntimeCommit identify the pure-Go runtime used by
 	// this generated grammar package.

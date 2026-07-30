@@ -6,8 +6,8 @@
 implementation-dependent M1 parser-foundation work. The selected internal
 parser uses the pure-Go `treesitter-go` runtime with repository-owned patched
 Java grammar tables, then converts its backend-neutral snapshot into immutable
-`cst-go` green/red trees. The final M1 dependency-release gate awaits an
-explicit `cst-go` v0.3.0 tag decision.
+`cst-go` green/red trees. M1 is complete against the signed `cst-go` v0.3.0
+release.
 
 The spike targets Java release modeling from 8 through 26, including exact
 Java 21-26 preview boundaries. It does not yet advertise any Java release as

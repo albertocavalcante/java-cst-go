@@ -1,4 +1,4 @@
-github.com/albertocavalcante/cst-go v0.2.1-0.20260727192650-0dd634a2fbae h1:YT7D67RTYDBogTS0Yt8nsFAtiUxa+huaX8tlNdf/c6s=
-github.com/albertocavalcante/cst-go v0.2.1-0.20260727192650-0dd634a2fbae/go.mod h1:HExK7FQSt887O72MHy3xV7staVnIQqF932Fng6zE0kw=
+github.com/albertocavalcante/cst-go v0.3.0 h1:239vlG13QoZ2gZMhjtqUA1ivq640ZmtFzTVYRyzCN68=
+github.com/albertocavalcante/cst-go v0.3.0/go.mod h1:HExK7FQSt887O72MHy3xV7staVnIQqF932Fng6zE0kw=
 github.com/dcosson/treesitter-go v0.1.0 h1:E+tXGxZTJT7wPlAAANLMbejaNhreemIKiZgxj4oXV5I=
 github.com/dcosson/treesitter-go v0.1.0/go.mod h1:ROuyUNRSakznobALBQA2dhJXIEn9JvfG9CGSg6utrpE=

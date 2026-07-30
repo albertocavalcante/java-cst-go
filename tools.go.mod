@@ -9,7 +9,7 @@ tool (
 
 require (
 	git.alberto.engineer/alberto/java-cst-go v0.0.0
-	github.com/albertocavalcante/cst-go v0.2.1-0.20260727192650-0dd634a2fbae
+	github.com/albertocavalcante/cst-go v0.3.0
 	github.com/dcosson/treesitter-go v0.1.0
 )
 
