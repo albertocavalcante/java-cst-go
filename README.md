@@ -18,8 +18,8 @@ The spike targets Java release modeling from 8 through 26, including exact
 Java 21-26 preview boundaries. It does not yet advertise any Java release as
 supported, and its syntax API is not frozen.
 
-The normative design and executable spike plan live in the sibling
-[`jvm-cst-plan`](../jvm-cst-plan/) workspace.
+The normative design and executable spike plan live in
+`~/dev/plans/jvm-cst-plan/`.
 
 ## Usage
 
