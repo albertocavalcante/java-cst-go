@@ -202,6 +202,7 @@ func parseSnapshot(
 		project,
 		limits,
 		0,
+		newFieldTracker(javaLanguage),
 		&counts,
 	)
 	if err != nil {
@@ -234,6 +235,7 @@ func snapshotCursor(
 	project rangeProjector,
 	limits backend.Limits,
 	depth int,
+	fields *fieldTracker,
 	counts *snapshotCounts,
 ) (backend.Node, error) {
 	if counts.nodes&1023 == 0 {
@@ -282,7 +284,7 @@ func snapshotCursor(
 
 	snapshot := backend.Node{
 		Kind:             node.Type(),
-		Field:            currentField(cursor, javaLanguage),
+		Field:            fields.sync(cursor),
 		StartByte:        rawStart,
 		EndByte:          rawEnd,
 		LogicalStartByte: node.StartByte(),
@@ -305,6 +307,7 @@ func snapshotCursor(
 			project,
 			limits,
 			depth+1,
+			fields,
 			counts,
 		)
 		if err != nil {
@@ -325,34 +328,80 @@ func snapshotCursor(
 	return snapshot, nil
 }
 
-func currentField(cursor *dts.TreeCursor, javaLanguage *dts.Language) string {
-	if cursor == nil || cursor.Tree == nil || len(cursor.Stack) < 2 {
+// fieldStep folds stack entry index into field, which is the field state
+// accumulated for entries [0, index). It is the single-step form of the
+// original whole-stack walk, so callers can carry state incrementally.
+func fieldStep(
+	cursor *dts.TreeCursor,
+	javaLanguage *dts.Language,
+	index int,
+	field string,
+) string {
+	arena := cursor.Tree.Arena()
+	parent := cursor.Stack[index-1]
+	child := cursor.Stack[index]
+
+	if dts.IsVisible(parent.Subtree, arena) {
+		field = ""
+	}
+	if dts.IsExtra(child.Subtree, arena) {
 		return ""
 	}
 
-	arena := cursor.Tree.Arena()
-	field := ""
-	for index := 1; index < len(cursor.Stack); index++ {
-		parent := cursor.Stack[index-1]
-		child := cursor.Stack[index]
-
-		if dts.IsVisible(parent.Subtree, arena) {
-			field = ""
-		}
-		if dts.IsExtra(child.Subtree, arena) {
-			field = ""
-			continue
-		}
-
-		production := dts.GetProductionID(parent.Subtree, arena)
-		entries := javaLanguage.FieldMapForProduction(production)
-		for _, entry := range entries {
-			if !entry.Inherited &&
-				entry.ChildIndex == uint16(child.StructuralChildIndex) {
-				field = javaLanguage.FieldName(entry.FieldID)
-				break
-			}
+	production := dts.GetProductionID(parent.Subtree, arena)
+	for _, entry := range javaLanguage.FieldMapForProduction(production) {
+		if !entry.Inherited &&
+			entry.ChildIndex == uint16(child.StructuralChildIndex) {
+			return javaLanguage.FieldName(entry.FieldID)
 		}
 	}
 	return field
+}
+
+// fieldTracker caches the field state for every entry of the cursor stack so
+// that, after a cursor move, only the entries that changed are re-folded.
+// Hidden repeat nodes can make the stack O(members) deep, so recomputing the
+// whole stack per node is quadratic.
+type fieldTracker struct {
+	language *dts.Language
+	entries  []dts.TreeCursorEntry
+	fields   []string // fields[i] is the folded state after entry i
+}
+
+func newFieldTracker(language *dts.Language) *fieldTracker {
+	return &fieldTracker{language: language}
+}
+
+// sync returns the field of the cursor's current node.
+func (t *fieldTracker) sync(cursor *dts.TreeCursor) string {
+	stack := cursor.Stack
+	n := len(stack)
+	if n < 2 {
+		return ""
+	}
+	// Cursor moves pop to some ancestor and push anew, so the unchanged
+	// prefix is found by scanning down from the top until entries match.
+	if len(t.entries) == 0 {
+		t.entries = append(t.entries, stack[0])
+		t.fields = append(t.fields, "")
+	}
+	keep := len(t.entries)
+	if n < keep {
+		keep = n
+	}
+	for keep > 1 && t.entries[keep-1] != stack[keep-1] {
+		keep--
+	}
+	t.entries = append(t.entries[:keep], stack[keep:]...)
+	t.fields = t.fields[:keep]
+	for index := keep; index < n; index++ {
+		t.fields = append(t.fields, fieldStep(cursor, t.language, index, t.fields[index-1]))
+	}
+	return t.fields[n-1]
+}
+
+// currentField computes the field of the cursor's node from scratch. It is
+// kept as the simple form for tests; the snapshot walk uses fieldTracker.
+func currentField(cursor *dts.TreeCursor, javaLanguage *dts.Language) string {
+	return newFieldTracker(javaLanguage).sync(cursor)
 }
