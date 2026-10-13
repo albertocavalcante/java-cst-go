@@ -113,3 +113,8 @@ func TestCurrentFieldFromScratchMatchesReference(t *testing.T) {
 		}
 	}
 }
+
+// currentField computes the field of the cursor's node from scratch.
+func currentField(cursor *dts.TreeCursor, javaLanguage *dts.Language) string {
+	return newFieldTracker(javaLanguage).sync(cursor)
+}

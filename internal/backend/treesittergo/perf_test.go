@@ -11,6 +11,12 @@ import (
 )
 
 func TestParseLongMemberListIsNearLinear(t *testing.T) {
+	if testing.Short() {
+		t.Skip("wall-clock scaling test skipped in -short mode")
+	}
+	if raceEnabled {
+		t.Skip("wall-clock scaling test skipped under the race detector")
+	}
 	level := language.Level{Release: language.Release21}
 	parse := func(n int) time.Duration {
 		src := []byte("class A{" + strings.Repeat("int x=1;\n", n) + "}")

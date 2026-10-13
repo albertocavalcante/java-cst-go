@@ -373,6 +373,12 @@ func newFieldTracker(language *dts.Language) *fieldTracker {
 }
 
 // sync returns the field of the cursor's current node.
+//
+// It relies on depth-first cursor order: between two calls the cursor must
+// have made at most one GotoFirstChild, GotoNextSibling, or GotoParent
+// followed by GotoNextSibling. The cached prefix is validated only by
+// comparing stack entries from the top down, so it is not valid for arbitrary
+// cursor jumps (use a fresh tracker after any other kind of move).
 func (t *fieldTracker) sync(cursor *dts.TreeCursor) string {
 	stack := cursor.Stack
 	n := len(stack)
@@ -398,10 +404,4 @@ func (t *fieldTracker) sync(cursor *dts.TreeCursor) string {
 		t.fields = append(t.fields, fieldStep(cursor, t.language, index, t.fields[index-1]))
 	}
 	return t.fields[n-1]
-}
-
-// currentField computes the field of the cursor's node from scratch. It is
-// kept as the simple form for tests; the snapshot walk uses fieldTracker.
-func currentField(cursor *dts.TreeCursor, javaLanguage *dts.Language) string {
-	return newFieldTracker(javaLanguage).sync(cursor)
 }
